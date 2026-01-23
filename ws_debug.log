@@ -1,0 +1,251 @@
+2026-01-21 22:50:38,652 - pybit._websocket_stream - INFO - WebSocket Unified V5 (Auth) attempting connection...
+2026-01-21 22:50:38,861 - websocket - DEBUG - --- request header ---
+2026-01-21 22:50:38,892 - websocket - DEBUG - GET /v5/private HTTP/1.1
+Upgrade: websocket
+Host: stream.bybit.com
+Origin: https://stream.bybit.com
+Sec-WebSocket-Key: zl8YGNNx93wBUvfZGoS2GA==
+Sec-WebSocket-Version: 13
+Connection: Upgrade
+
+
+2026-01-21 22:50:38,922 - websocket - DEBUG - -----------------------
+2026-01-21 22:50:38,954 - websocket - DEBUG - --- response header ---
+2026-01-21 22:50:39,032 - websocket - DEBUG - HTTP/1.1 101 Switching Protocols
+2026-01-21 22:50:39,077 - websocket - DEBUG - Connection: upgrade
+2026-01-21 22:50:39,217 - websocket - DEBUG - Date: Wed, 21 Jan 2026 14:50:40 GMT
+2026-01-21 22:50:39,263 - websocket - DEBUG - Server: fasthttp
+2026-01-21 22:50:39,434 - websocket - DEBUG - Upgrade: websocket
+2026-01-21 22:50:39,543 - websocket - DEBUG - Sec-Websocket-Accept: 1jc/GVlxVafJQviJ2e7a09uF5cs=
+2026-01-21 22:50:39,558 - websocket - DEBUG - X-Cache: Miss from cloudfront
+2026-01-21 22:50:39,855 - websocket - DEBUG - Via: 1.1 7067d99a7d3a7a94e3770670ce590928.cloudfront.net (CloudFront)
+2026-01-21 22:50:39,901 - websocket - DEBUG - X-Amz-Cf-Pop: TPE54-P1
+2026-01-21 22:50:40,102 - websocket - DEBUG - X-Amz-Cf-Id: R6EawFr3_ntjGjJPUzUyF4KpfWENAet0GmNTknN-KtzskKAxRktLGA==
+2026-01-21 22:50:40,149 - websocket - DEBUG - -----------------------
+2026-01-21 22:50:40,180 - pybit._websocket_stream - INFO - WebSocket Unified V5 (Auth) connected
+2026-01-21 22:50:40,180 - websocket - INFO - Websocket connected
+2026-01-21 22:50:40,180 - websocket - DEBUG - ++Sent raw: b'\x81\xfe\x00\x81b\x1a=Q\x198R!@ \x1ds\x03oI9@6\x1ds\x03hZ"@ \x1d\n@kH\x1cRpn \x0fJP\'SW\x0b&\nr[sN:\x0cfT#\raU*\t`S"\r}B8\x083W,Ye\x07~X2P~\rbU-\ne\x03"^2\x04|\x057[{\x0bdP+[7\x06~^4[|\x0ff[.\\5\x06x\t4\x07~[`W-_bSx[b\x06#\x1f\x0c\x1f'
+2026-01-21 22:50:40,181 - websocket - DEBUG - ++Sent decoded: fin=1 opcode=1 data=b'{"op": "auth", "args": ["quM0jSqmPmv1M6whhf", 1769007041180, "5b56d4edec2d037774a8ccff8f9a6521ffddce9f2794addb4eedf157b31bf3d9"]}'
+2026-01-21 22:50:40,181 - pybit._websocket_stream - DEBUG - WebSocket Unified V5 (Auth) opened.
+2026-01-21 22:50:40,181 - websocket - DEBUG - ++Sent raw: b'\x81\xdb\xdc\xbd\xe2\x1c\xa7\x9f\x8dl\xfe\x87\xc2>\xaf\xc8\x80o\xbf\xcf\x8b~\xb9\x9f\xce<\xfe\xcf\x87m\x83\xd4\x86>\xe6\x9d\xc0~\xe9\xd8\xd7}\xba\x85\xda1\xbd\x88\xd2/\xf1\x89\xd3$\xbe\x90\x80\x7f\xe9\xd8\xcf-\xba\xde\x84z\xec\xd9\x83*\xba\x8e\xd0>\xf0\x9d\xc0}\xae\xda\x91>\xe6\x9d\xb9>\xac\xd2\x91u\xa8\xd4\x8dr\xfe\xe0\x9f'
+2026-01-21 22:50:40,181 - websocket - DEBUG - ++Sent decoded: fin=1 opcode=1 data=b'{"op": "subscribe", "req_id": "b5e5af88-a503-418b-bc5e-1fcff0da6f32", "args": ["position"]}'
+2026-01-21 22:50:40,230 - websocket - DEBUG - ++Rcv raw: b'\x81^{"success":false,"ret_msg":"Params Error","op":"auth","conn_id":"d2k4lmb84lk8r2qenlcg-2zfd4g"}'
+2026-01-21 22:50:40,230 - websocket - DEBUG - ++Rcv decoded: fin=1 opcode=1 data=b'{"success":false,"ret_msg":"Params Error","op":"auth","conn_id":"d2k4lmb84lk8r2qenlcg-2zfd4g"}'
+2026-01-21 22:50:40,230 - websocket - ERROR - error from callback <function _WebSocketManager._connect.<locals>.<lambda> at 0x0000021FD3A5D8A0>: Authorization for Unified V5 (Auth) failed. Please check your API keys and resync your system time. Raw error: {'success': False, 'ret_msg': 'Params Error', 'op': 'auth', 'conn_id': 'd2k4lmb84lk8r2qenlcg-2zfd4g'}
+2026-01-21 22:50:40,230 - websocket - DEBUG - ++Sent raw: b'\x88\x82\xdf\xdb\xaa\x1d\xdc3'
+2026-01-21 22:50:40,231 - websocket - DEBUG - ++Sent decoded: fin=1 opcode=8 data=b'\x03\xe8'
+2026-01-21 22:50:40,282 - websocket - ERROR - error from callback <function _WebSocketManager._connect.<locals>.<lambda> at 0x0000021FD3A5D940>: Authorization for Unified V5 (Auth) failed. Please check your API keys and resync your system time. Raw error: {'success': False, 'ret_msg': 'Params Error', 'op': 'auth', 'conn_id': 'd2k4lmb84lk8r2qenlcg-2zfd4g'}
+2026-01-21 22:50:40,282 - websocket - ERROR - Authorization for Unified V5 (Auth) failed. Please check your API keys and resync your system time. Raw error: {'success': False, 'ret_msg': 'Params Error', 'op': 'auth', 'conn_id': 'd2k4lmb84lk8r2qenlcg-2zfd4g'} - goodbye
+2026-01-21 22:50:40,282 - pybit._websocket_stream - DEBUG - WebSocket Unified V5 (Auth) closed.
+2026-01-21 22:54:58,959 - pybit._http_manager - DEBUG - Initializing HTTP session.
+2026-01-21 22:54:58,960 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): api.bybit.com:443
+2026-01-21 22:54:59,240 - urllib3.connectionpool - DEBUG - https://api.bybit.com:443 "GET /v5/market/time HTTP/1.1" 200 134
+2026-01-21 22:54:59,241 - pybit._websocket_stream - INFO - WebSocket Unified V5 (Auth) attempting connection...
+2026-01-21 22:54:59,438 - websocket - DEBUG - --- request header ---
+2026-01-21 22:54:59,469 - websocket - DEBUG - GET /v5/private HTTP/1.1
+Upgrade: websocket
+Host: stream.bybit.com
+Origin: https://stream.bybit.com
+Sec-WebSocket-Key: fUKUF27zIw2gzF0lnUh1rQ==
+Sec-WebSocket-Version: 13
+Connection: Upgrade
+
+
+2026-01-21 22:54:59,499 - websocket - DEBUG - -----------------------
+2026-01-21 22:54:59,530 - websocket - DEBUG - --- response header ---
+2026-01-21 22:54:59,734 - websocket - DEBUG - HTTP/1.1 101 Switching Protocols
+2026-01-21 22:54:59,826 - websocket - DEBUG - Connection: upgrade
+2026-01-21 22:54:59,998 - websocket - DEBUG - Date: Wed, 21 Jan 2026 14:55:01 GMT
+2026-01-21 22:55:00,044 - websocket - DEBUG - Server: fasthttp
+2026-01-21 22:55:00,152 - websocket - DEBUG - Upgrade: websocket
+2026-01-21 22:55:00,259 - websocket - DEBUG - Sec-Websocket-Accept: x6rWQoJV0GWiQ2fTUJaf+o5VcNc=
+2026-01-21 22:55:00,459 - websocket - DEBUG - X-Cache: Miss from cloudfront
+2026-01-21 22:55:00,677 - websocket - DEBUG - Via: 1.1 c95d8aeab95a18b7ee86e48d10337394.cloudfront.net (CloudFront)
+2026-01-21 22:55:00,894 - websocket - DEBUG - X-Amz-Cf-Pop: TPE54-P1
+2026-01-21 22:55:01,156 - websocket - DEBUG - X-Amz-Cf-Id: mnAy9Piy21fKvzHx5kHyDvyx76WFwNWWk00_-HKss6nLf_-eNef6Tg==
+2026-01-21 22:55:01,202 - websocket - DEBUG - -----------------------
+2026-01-21 22:55:01,234 - pybit._websocket_stream - INFO - WebSocket Unified V5 (Auth) connected
+2026-01-21 22:55:01,234 - websocket - INFO - Websocket connected
+2026-01-21 22:55:01,234 - websocket - DEBUG - ++Sent raw: b'\x81\xfe\x00\x81j\x03\xe0\xd6\x11!\x8f\xa6H9\xc0\xf4\x0bv\x94\xbeH/\xc0\xf4\x0bq\x87\xa5H9\xc0\x8dHr\x95\x9bZi\xb3\xa7\x07S\x8d\xa0[N\xd6\xa1\x02k\x86\xf4F#\xd1\xe1\\:\xd0\xe6]0\xd0\xe4X0\xd4\xfaJ!\xd6\xb2\x0f7\x86\xb0Y5\x84\xb4\\3\x85\xe5\x0e0\x84\xe2\x0ef\xd0\xee^7\xd8\xb4\x0f2\xd7\xb0[:\xd2\xefSf\x85\xb4Y2\xd0\xe1\x0cb\x86\xe6\x0e3\x82\xe2Ye\xd2\xe3Y;\x82\xef_;\x83\xe1\\7\xc2\x8b\x17'
+2026-01-21 22:55:01,234 - pybit._websocket_stream - DEBUG - WebSocket Unified V5 (Auth) opened.
+2026-01-21 22:55:01,234 - websocket - DEBUG - ++Sent decoded: fin=1 opcode=1 data=b'{"op": "auth", "args": ["quM0jSqmPmv1M6whhf", 1769007302234, "6de4ff36db60e3d3d4de08448be17f19299eeb3107faf0d0b43f2538b958c764"]}'
+2026-01-21 22:55:01,235 - websocket - DEBUG - ++Sent raw: b"\x81\xdb\\\xac\x8aN'\x8e\xe5>~\x96\xaal/\xd9\xe8=?\xde\xe3,9\x8e\xa6n~\xde\xef?\x03\xc5\xeelf\x8c\xa8(h\xc8\xbd-h\x9f\xeech\xc8\xefvq\x98\xbcz=\x81\xb3-?\xcd\xa7xe\x9d\xe8+h\x98\xbc+m\x99\xeflp\x8c\xa8/.\xcb\xf9lf\x8c\xd1l,\xc3\xf9'(\xc5\xe5 ~\xf1\xf7"
+2026-01-21 22:55:01,235 - websocket - DEBUG - ++Sent decoded: fin=1 opcode=1 data=b'{"op": "subscribe", "req_id": "f4d7c43d-4de8-464a-9cca-691be446e15e", "args": ["position"]}'
+2026-01-21 22:55:01,283 - websocket - DEBUG - ++Rcv raw: b'\x81]{"success":false,"ret_msg":"Params Error","op":"auth","conn_id":"d5e7pd0f2tdtql5rp5n0-dqdym"}'
+2026-01-21 22:55:01,283 - websocket - DEBUG - ++Rcv decoded: fin=1 opcode=1 data=b'{"success":false,"ret_msg":"Params Error","op":"auth","conn_id":"d5e7pd0f2tdtql5rp5n0-dqdym"}'
+2026-01-21 22:55:01,284 - websocket - ERROR - error from callback <function _WebSocketManager._connect.<locals>.<lambda> at 0x00000179E37F23E0>: Authorization for Unified V5 (Auth) failed. Please check your API keys and resync your system time. Raw error: {'success': False, 'ret_msg': 'Params Error', 'op': 'auth', 'conn_id': 'd5e7pd0f2tdtql5rp5n0-dqdym'}
+2026-01-21 22:55:01,284 - websocket - DEBUG - ++Sent raw: b'\x88\x82Zy\xddoY\x91'
+2026-01-21 22:55:01,284 - websocket - DEBUG - ++Sent decoded: fin=1 opcode=8 data=b'\x03\xe8'
+2026-01-21 22:55:01,333 - websocket - ERROR - error from callback <function _WebSocketManager._connect.<locals>.<lambda> at 0x00000179E37F2660>: Authorization for Unified V5 (Auth) failed. Please check your API keys and resync your system time. Raw error: {'success': False, 'ret_msg': 'Params Error', 'op': 'auth', 'conn_id': 'd5e7pd0f2tdtql5rp5n0-dqdym'}
+2026-01-21 22:55:01,334 - websocket - ERROR - Authorization for Unified V5 (Auth) failed. Please check your API keys and resync your system time. Raw error: {'success': False, 'ret_msg': 'Params Error', 'op': 'auth', 'conn_id': 'd5e7pd0f2tdtql5rp5n0-dqdym'} - goodbye
+2026-01-21 22:55:01,334 - pybit._websocket_stream - DEBUG - WebSocket Unified V5 (Auth) closed.
+2026-01-21 22:55:34,058 - pybit._http_manager - DEBUG - Initializing HTTP session.
+2026-01-21 22:55:34,059 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): api.bybit.com:443
+2026-01-21 22:55:34,373 - urllib3.connectionpool - DEBUG - https://api.bybit.com:443 "GET /v5/market/time HTTP/1.1" 200 134
+2026-01-21 22:55:34,374 - pybit._websocket_stream - INFO - WebSocket Unified V5 (Auth) attempting connection...
+2026-01-21 22:55:34,542 - websocket - DEBUG - --- request header ---
+2026-01-21 22:55:34,572 - websocket - DEBUG - GET /v5/private HTTP/1.1
+Upgrade: websocket
+Host: stream.bybit.com
+Origin: https://stream.bybit.com
+Sec-WebSocket-Key: 7uy9OdUY748o2faNs4HNoA==
+Sec-WebSocket-Version: 13
+Connection: Upgrade
+
+
+2026-01-21 22:55:34,604 - websocket - DEBUG - -----------------------
+2026-01-21 22:55:34,634 - websocket - DEBUG - --- response header ---
+2026-01-21 22:55:34,899 - websocket - DEBUG - HTTP/1.1 101 Switching Protocols
+2026-01-21 22:55:34,961 - websocket - DEBUG - Connection: upgrade
+2026-01-21 22:55:35,289 - websocket - DEBUG - Date: Wed, 21 Jan 2026 14:55:36 GMT
+2026-01-21 22:55:35,320 - websocket - DEBUG - Server: fasthttp
+2026-01-21 22:55:35,443 - websocket - DEBUG - Upgrade: websocket
+2026-01-21 22:55:35,660 - websocket - DEBUG - Sec-Websocket-Accept: 8J0bX7vIq9gzsGOtWS6k9eFAVqg=
+2026-01-21 22:55:35,736 - websocket - DEBUG - X-Cache: Miss from cloudfront
+2026-01-21 22:55:36,140 - websocket - DEBUG - Via: 1.1 8f4b41abab133d7fa806120d7f23d218.cloudfront.net (CloudFront)
+2026-01-21 22:55:36,233 - websocket - DEBUG - X-Amz-Cf-Pop: TPE54-P1
+2026-01-21 22:55:36,699 - websocket - DEBUG - X-Amz-Cf-Id: -EDDqdBe48CqJMdRAKlAiod4tzdGNKbucrgGM0IerStE7-sUEuEltQ==
+2026-01-21 22:55:36,761 - websocket - DEBUG - -----------------------
+2026-01-21 22:55:36,793 - pybit._websocket_stream - INFO - WebSocket Unified V5 (Auth) connected
+2026-01-21 22:55:36,793 - websocket - INFO - Websocket connected
+2026-01-21 22:55:36,793 - websocket - DEBUG - ++Sent raw: b'\x81\xfe\x00\x81g\xe9/\xf8\x1c\xcb@\x88E\xd3\x0f\xda\x06\x9c[\x90E\xc5\x0f\xda\x06\x9bH\x8bE\xd3\x0f\xa3E\x98Z\xb5W\x83|\x89\n\xb9B\x8eV\xa4\x19\x8f\x0f\x81I\xdaK\xc9\x1e\xcfQ\xd0\x1f\xc8P\xda\x1c\xcfP\xd0\x1c\xd4G\xcb\x1b\xcb\x06\x8d\x1c\xc8\x02\xdaL\x9b\x02\xd0\x16\xc1\x02\xdbM\x9d_\x8d\x18\xc1_\x8fI\x9e^\xd1\x1a\x9aU\xdfM\x9b^\xda\x1f\xcc\x01\xde\x1d\xc8T\xdeJ\xceT\xdd\x1f\xceP\x8a\x1c\x9eQ\xdaL\x99\x05\xd0\x16\xc9U\x88\r\xa5\x1a'
+2026-01-21 22:55:36,793 - pybit._websocket_stream - DEBUG - WebSocket Unified V5 (Auth) opened.
+2026-01-21 22:55:36,793 - websocket - DEBUG - ++Sent decoded: fin=1 opcode=1 data=b'{"op": "auth", "args": ["quM0jSqmPmv1M6whhf", 1769007337793, "43ad30e3cce999e2be8d798fff985b26bc9304f72037e634067c3f63cab9912a"]}'
+2026-01-21 22:55:36,794 - websocket - DEBUG - ++Sent raw: b'\x81\xdb\xe6\xa7\xba\xb0\x9d\x85\xd5\xc0\xc4\x9d\x9a\x92\x95\xd2\xd8\xc3\x85\xd5\xd3\xd2\x83\x85\x96\x90\xc4\xd5\xdf\xc1\xb9\xce\xde\x92\xdc\x87\x98\x85\xd3\x93\x8e\x88\x84\xc6\xde\x9d\xd6\xc2\x82\xd2\xcb\x93\xd9\xd2\x83\x8a\x83\x80\x83\x94\x97\xd4\x85\x9f\x8a\x81\xd1\xc6\x83\x85\xdf\x9f\xdb\x92\xca\x87\x98\xd1\x94\xc0\xc9\x92\xdc\x87\xe1\x92\x96\xc8\xc9\xd9\x92\xce\xd5\xde\xc4\xfa\xc7'
+2026-01-21 22:55:36,794 - websocket - DEBUG - ++Sent decoded: fin=1 opcode=1 data=b'{"op": "subscribe", "req_id": "55448bad-0e8b-4cbe-90e3-dc8017a9598a", "args": ["position"]}'
+2026-01-21 22:55:36,844 - websocket - DEBUG - ++Rcv raw: b'\x81]{"success":false,"ret_msg":"Params Error","op":"auth","conn_id":"d5eajicfnonu7k424uqg-dm324"}'
+2026-01-21 22:55:36,844 - websocket - DEBUG - ++Rcv decoded: fin=1 opcode=1 data=b'{"success":false,"ret_msg":"Params Error","op":"auth","conn_id":"d5eajicfnonu7k424uqg-dm324"}'
+2026-01-21 22:55:36,844 - websocket - ERROR - error from callback <function _WebSocketManager._connect.<locals>.<lambda> at 0x00000198A9C923E0>: Authorization for Unified V5 (Auth) failed. Please check your API keys and resync your system time. Raw error: {'success': False, 'ret_msg': 'Params Error', 'op': 'auth', 'conn_id': 'd5eajicfnonu7k424uqg-dm324'}
+2026-01-21 22:55:36,844 - websocket - DEBUG - ++Sent raw: b'\x88\x82\xd9\x8b\xf0\xab\xdac'
+2026-01-21 22:55:36,844 - websocket - DEBUG - ++Sent decoded: fin=1 opcode=8 data=b'\x03\xe8'
+2026-01-21 22:55:36,893 - websocket - ERROR - error from callback <function _WebSocketManager._connect.<locals>.<lambda> at 0x00000198A9C92660>: Authorization for Unified V5 (Auth) failed. Please check your API keys and resync your system time. Raw error: {'success': False, 'ret_msg': 'Params Error', 'op': 'auth', 'conn_id': 'd5eajicfnonu7k424uqg-dm324'}
+2026-01-21 22:55:36,893 - websocket - ERROR - Authorization for Unified V5 (Auth) failed. Please check your API keys and resync your system time. Raw error: {'success': False, 'ret_msg': 'Params Error', 'op': 'auth', 'conn_id': 'd5eajicfnonu7k424uqg-dm324'} - goodbye
+2026-01-21 22:55:36,893 - pybit._websocket_stream - DEBUG - WebSocket Unified V5 (Auth) closed.
+2026-01-21 22:56:29,082 - pybit._http_manager - DEBUG - Initializing HTTP session.
+2026-01-21 22:56:29,084 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): api.bybit.com:443
+2026-01-21 22:56:29,391 - urllib3.connectionpool - DEBUG - https://api.bybit.com:443 "GET /v5/market/time HTTP/1.1" 200 134
+2026-01-21 22:56:29,392 - pybit._websocket_stream - INFO - WebSocket Unified V5 (Auth) attempting connection...
+2026-01-21 22:56:29,603 - websocket - DEBUG - --- request header ---
+2026-01-21 22:56:29,634 - websocket - DEBUG - GET /v5/private HTTP/1.1
+Upgrade: websocket
+Host: stream.bybit.com
+Origin: https://stream.bybit.com
+Sec-WebSocket-Key: xRe052P0sWATP+JAiW9znA==
+Sec-WebSocket-Version: 13
+Connection: Upgrade
+
+
+2026-01-21 22:56:29,666 - websocket - DEBUG - -----------------------
+2026-01-21 22:56:29,696 - websocket - DEBUG - --- response header ---
+2026-01-21 22:56:29,882 - websocket - DEBUG - HTTP/1.1 101 Switching Protocols
+2026-01-21 22:56:29,913 - websocket - DEBUG - Connection: upgrade
+2026-01-21 22:56:30,021 - websocket - DEBUG - Date: Wed, 21 Jan 2026 14:56:31 GMT
+2026-01-21 22:56:30,082 - websocket - DEBUG - Server: fasthttp
+2026-01-21 22:56:30,114 - websocket - DEBUG - Upgrade: websocket
+2026-01-21 22:56:30,268 - websocket - DEBUG - Sec-Websocket-Accept: sXP5PRn3DT4n8J8g+rXBFP0m0BU=
+2026-01-21 22:56:30,407 - websocket - DEBUG - X-Cache: Miss from cloudfront
+2026-01-21 22:56:30,486 - websocket - DEBUG - Via: 1.1 3c8be9297a43f45a4d7083ec511385e4.cloudfront.net (CloudFront)
+2026-01-21 22:56:30,608 - websocket - DEBUG - X-Amz-Cf-Pop: TPE53-P2
+2026-01-21 22:56:30,639 - websocket - DEBUG - X-Amz-Cf-Id: tbmmlVzm3JjyM1AuNqbe1Mte2XlqtcGe21sg_DUgnN4Kwcuo-n92Mw==
+2026-01-21 22:56:30,701 - websocket - DEBUG - -----------------------
+2026-01-21 22:56:30,717 - pybit._websocket_stream - INFO - WebSocket Unified V5 (Auth) connected
+2026-01-21 22:56:30,717 - websocket - INFO - Websocket connected
+2026-01-21 22:56:30,717 - websocket - DEBUG - ++Sent raw: b'\x81\xfe\x00\x81\x97\xbb0\x83\xec\x99_\xf3\xb5\x81\x10\xa1\xf6\xceD\xeb\xb5\x97\x10\xa1\xf6\xc9W\xf0\xb5\x81\x10\xd8\xb5\xcaE\xce\xa7\xd1c\xf2\xfa\xeb]\xf5\xa6\xf6\x06\xf4\xff\xd3V\xa1\xbb\x9b\x01\xb4\xa1\x82\x00\xb3\xa0\x88\t\xb2\xa0\x8a\x07\xaf\xb7\x99T\xb5\xa0\x89\x03\xba\xa1\xde\x03\xb5\xa7\x88\x00\xe2\xf6\x82U\xb6\xae\xd8\x06\xe5\xf3\x88\x02\xb6\xf2\xdd\x04\xba\xa6\x8e\t\xe2\xa3\xd8\x08\xb1\xa5\x8f\x07\xe6\xf2\xde\x03\xb5\xa4\xdeT\xb7\xa0\x8dR\xb4\xf3\x8a\x02\xe5\xa2\xd8\x02\xb5\xae\xde\x12\xde\xea'
+2026-01-21 22:56:30,718 - websocket - DEBUG - ++Sent decoded: fin=1 opcode=1 data=b'{"op": "auth", "args": ["quM0jSqmPmv1M6whhf", 1769007391717, "d672396e36030aa9e59c6fd325ef49159a4c82247eee363ed476b7d12f5c269e"]}'
+2026-01-21 22:56:30,718 - pybit._websocket_stream - DEBUG - WebSocket Unified V5 (Auth) opened.
+2026-01-21 22:56:30,718 - websocket - DEBUG - ++Sent raw: b"\x81\xdb8`E\xc7CB*\xb7\x1aZe\xe5K\x15'\xb4[\x12,\xa5]Bi\xe7\x1a\x12 \xb6g\t!\xe5\x02@g\xf2\rRv\xf2\x0eYr\xea\x0c\x06p\xa4\x15T&\xffYM'\xf5\x08\x03h\xf0YP \xf4[W$\xa3]Wu\xe5\x14@g\xa6J\x076\xe5\x02@\x1e\xe5H\x0f6\xaeL\t*\xa9\x1a=8"
+2026-01-21 22:56:30,718 - websocket - DEBUG - ++Sent decoded: fin=1 opcode=1 data=b'{"op": "subscribe", "req_id": "55235697-4f5c-4c8a-b20c-7a0e3c7ade70", "args": ["position"]}'
+2026-01-21 22:56:30,768 - websocket - DEBUG - ++Rcv raw: b'\x81]{"success":false,"ret_msg":"Params Error","op":"auth","conn_id":"d59mr3vavkfdupub01rg-jm1ne"}'
+2026-01-21 22:56:30,768 - websocket - DEBUG - ++Rcv decoded: fin=1 opcode=1 data=b'{"success":false,"ret_msg":"Params Error","op":"auth","conn_id":"d59mr3vavkfdupub01rg-jm1ne"}'
+2026-01-21 22:56:30,768 - websocket - ERROR - error from callback <function _WebSocketManager._connect.<locals>.<lambda> at 0x000001E6CB2C23E0>: Authorization for Unified V5 (Auth) failed. Please check your API keys and resync your system time. Raw error: {'success': False, 'ret_msg': 'Params Error', 'op': 'auth', 'conn_id': 'd59mr3vavkfdupub01rg-jm1ne'}
+2026-01-21 22:56:30,768 - websocket - DEBUG - ++Sent raw: b'\x88\x82\x17\xfb Y\x14\x13'
+2026-01-21 22:56:30,768 - websocket - DEBUG - ++Sent decoded: fin=1 opcode=8 data=b'\x03\xe8'
+2026-01-21 22:56:30,816 - websocket - ERROR - error from callback <function _WebSocketManager._connect.<locals>.<lambda> at 0x000001E6CB2C2660>: Authorization for Unified V5 (Auth) failed. Please check your API keys and resync your system time. Raw error: {'success': False, 'ret_msg': 'Params Error', 'op': 'auth', 'conn_id': 'd59mr3vavkfdupub01rg-jm1ne'}
+2026-01-21 22:56:30,816 - websocket - ERROR - Authorization for Unified V5 (Auth) failed. Please check your API keys and resync your system time. Raw error: {'success': False, 'ret_msg': 'Params Error', 'op': 'auth', 'conn_id': 'd59mr3vavkfdupub01rg-jm1ne'} - goodbye
+2026-01-21 22:56:30,816 - pybit._websocket_stream - DEBUG - WebSocket Unified V5 (Auth) closed.
+2026-01-21 22:57:02,300 - pybit._http_manager - DEBUG - Initializing HTTP session.
+2026-01-21 22:57:02,301 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): api.bybit.com:443
+2026-01-21 22:57:02,603 - urllib3.connectionpool - DEBUG - https://api.bybit.com:443 "GET /v5/market/time HTTP/1.1" 200 134
+2026-01-21 22:57:02,676 - urllib3.connectionpool - DEBUG - https://api.bybit.com:443 "GET /v5/account/wallet-balance?accountType=UNIFIED HTTP/1.1" 200 None
+2026-01-21 22:57:02,678 - pybit._websocket_stream - INFO - WebSocket Unified V5 (Auth) attempting connection...
+2026-01-21 22:57:02,850 - websocket - DEBUG - --- request header ---
+2026-01-21 22:57:02,881 - websocket - DEBUG - GET /v5/private HTTP/1.1
+Upgrade: websocket
+Host: stream.bybit.com
+Origin: https://stream.bybit.com
+Sec-WebSocket-Key: TbDgBrA1wd/q4pVgkoD+Eg==
+Sec-WebSocket-Version: 13
+Connection: Upgrade
+
+
+2026-01-21 22:57:02,912 - websocket - DEBUG - -----------------------
+2026-01-21 22:57:02,944 - websocket - DEBUG - --- response header ---
+2026-01-21 22:57:03,036 - websocket - DEBUG - HTTP/1.1 101 Switching Protocols
+2026-01-21 22:57:03,052 - websocket - DEBUG - Connection: upgrade
+2026-01-21 22:57:03,270 - websocket - DEBUG - Date: Wed, 21 Jan 2026 14:57:04 GMT
+2026-01-21 22:57:03,392 - websocket - DEBUG - Server: fasthttp
+2026-01-21 22:57:03,423 - websocket - DEBUG - Upgrade: websocket
+2026-01-21 22:57:03,624 - websocket - DEBUG - Sec-Websocket-Accept: qDXJbTGyQRhuG8QgEq6J9iywZE0=
+2026-01-21 22:57:03,841 - websocket - DEBUG - X-Cache: Miss from cloudfront
+2026-01-21 22:57:03,950 - websocket - DEBUG - Via: 1.1 3c8be9297a43f45a4d7083ec511385e4.cloudfront.net (CloudFront)
+2026-01-21 22:57:03,981 - websocket - DEBUG - X-Amz-Cf-Pop: TPE53-P2
+2026-01-21 22:57:04,153 - websocket - DEBUG - X-Amz-Cf-Id: FIzGibTRwIRg_VnVTLwXQjT9-VsfrhcCqTpA-Qu2miOjxhwboQIkTQ==
+2026-01-21 22:57:04,199 - websocket - DEBUG - -----------------------
+2026-01-21 22:57:04,231 - pybit._websocket_stream - INFO - WebSocket Unified V5 (Auth) connected
+2026-01-21 22:57:04,231 - websocket - INFO - Websocket connected
+2026-01-21 22:57:04,231 - websocket - DEBUG - ++Sent raw: b'\x81\xfe\x00\x81X\xda\xbf\xa3#\xf8\xd0\xd3z\xe0\x9f\x819\xaf\xcb\xcbz\xf6\x9f\x819\xa8\xd8\xd0z\xe0\x9f\xf8z\xab\xca\xeeh\xb0\xec\xd25\x8a\xd2\xd5i\x97\x89\xd40\xb2\xd9\x81t\xfa\x8e\x94n\xe3\x8f\x93o\xee\x8d\x96j\xe9\x8e\x8fx\xf8\x8f\xc5a\xed\xda\x91a\xec\x8c\x9al\xbf\x88\x96;\xe9\xde\x909\xe9\xdc\x9ao\xbf\x8d\x95h\xed\x86\x91k\xe8\x87\xc0i\xbf\x89\xc7h\xb8\xd9\xc1>\xea\x8b\x91m\xb9\x8f\x9b`\xbb\x87\xc1`\xb9\x87\x95a\xeb\xdb\x96h\xe8\x9d\xfe%'
+2026-01-21 22:57:04,231 - pybit._websocket_stream - DEBUG - WebSocket Unified V5 (Auth) opened.
+2026-01-21 22:57:04,231 - websocket - DEBUG - ++Sent decoded: fin=1 opcode=1 data=b'{"op": "auth", "args": ["quM0jSqmPmv1M6whhf", 1769007425231, "0f97e296394e75c3a3a3c97e260792328c1e6d0bfbf0425c088a8b8c8691d502"]}'
+2026-01-21 22:57:04,232 - websocket - DEBUG - ++Sent raw: b'\x81\xdb\x9al\xe6\xc4\xe1N\x89\xb4\xb8V\xc6\xe6\xe9\x19\x84\xb7\xf9\x1e\x8f\xa6\xffN\xca\xe4\xb8\x1e\x83\xb5\xc5\x05\x82\xe6\xa0L\xc4\xf2\xab\x08\xdf\xf2\xfcZ\xde\xe9\xaa\r\xd1\xa1\xb7X\xd6\xf2\xadA\xde\xf2\xac\\\xcb\xfd\xac^\xd0\xf1\xae^\x80\xa7\xfe\x0f\xdf\xe6\xb6L\xc4\xa5\xe8\x0b\x95\xe6\xa0L\xbd\xe6\xea\x03\x95\xad\xee\x05\x89\xaa\xb81\x9b'
+2026-01-21 22:57:04,232 - websocket - DEBUG - ++Sent decoded: fin=1 opcode=1 data=b'{"op": "subscribe", "req_id": "61d96f68-0a7e-4067-8660-9626542fcdc9", "args": ["position"]}'
+2026-01-21 22:57:04,278 - websocket - DEBUG - ++Rcv raw: b'\x81^{"success":false,"ret_msg":"Params Error","op":"auth","conn_id":"d2k4lmh7jh9ov15d4tv0-2zfl2s"}'
+2026-01-21 22:57:04,278 - websocket - DEBUG - ++Rcv decoded: fin=1 opcode=1 data=b'{"success":false,"ret_msg":"Params Error","op":"auth","conn_id":"d2k4lmh7jh9ov15d4tv0-2zfl2s"}'
+2026-01-21 22:57:04,278 - websocket - ERROR - error from callback <function _WebSocketManager._connect.<locals>.<lambda> at 0x0000023465BE23E0>: Authorization for Unified V5 (Auth) failed. Please check your API keys and resync your system time. Raw error: {'success': False, 'ret_msg': 'Params Error', 'op': 'auth', 'conn_id': 'd2k4lmh7jh9ov15d4tv0-2zfl2s'}
+2026-01-21 22:57:04,278 - websocket - DEBUG - ++Sent raw: b'\x88\x82\xca\xeez>\xc9\x06'
+2026-01-21 22:57:04,278 - websocket - DEBUG - ++Sent decoded: fin=1 opcode=8 data=b'\x03\xe8'
+2026-01-21 22:57:04,326 - websocket - ERROR - error from callback <function _WebSocketManager._connect.<locals>.<lambda> at 0x0000023465BE25C0>: Authorization for Unified V5 (Auth) failed. Please check your API keys and resync your system time. Raw error: {'success': False, 'ret_msg': 'Params Error', 'op': 'auth', 'conn_id': 'd2k4lmh7jh9ov15d4tv0-2zfl2s'}
+2026-01-21 22:57:04,326 - websocket - ERROR - Authorization for Unified V5 (Auth) failed. Please check your API keys and resync your system time. Raw error: {'success': False, 'ret_msg': 'Params Error', 'op': 'auth', 'conn_id': 'd2k4lmh7jh9ov15d4tv0-2zfl2s'} - goodbye
+2026-01-21 22:57:04,326 - pybit._websocket_stream - DEBUG - WebSocket Unified V5 (Auth) closed.
+2026-01-21 22:59:48,042 - pybit._http_manager - DEBUG - Initializing HTTP session.
+2026-01-21 22:59:48,043 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): api.bybit.com:443
+2026-01-21 22:59:48,328 - urllib3.connectionpool - DEBUG - https://api.bybit.com:443 "GET /v5/market/time HTTP/1.1" 200 134
+2026-01-21 22:59:48,393 - urllib3.connectionpool - DEBUG - https://api.bybit.com:443 "GET /v5/account/wallet-balance?accountType=UNIFIED HTTP/1.1" 200 None
+2026-01-21 22:59:48,393 - pybit._websocket_stream - INFO - WebSocket Unified V5 (Auth) attempting connection...
+2026-01-21 22:59:48,645 - websocket - DEBUG - --- request header ---
+2026-01-21 22:59:48,676 - websocket - DEBUG - GET /v5/private HTTP/1.1
+Upgrade: websocket
+Host: stream.bybit.com
+Origin: https://stream.bybit.com
+Sec-WebSocket-Key: MoF8G9Kgo/ECFZmSFBGcLQ==
+Sec-WebSocket-Version: 13
+Connection: Upgrade
+
+
+2026-01-21 22:59:48,707 - websocket - DEBUG - -----------------------
+2026-01-21 22:59:48,738 - websocket - DEBUG - --- response header ---
+2026-01-21 22:59:48,952 - websocket - DEBUG - HTTP/1.1 101 Switching Protocols
+2026-01-21 22:59:49,138 - websocket - DEBUG - Connection: upgrade
+2026-01-21 22:59:49,418 - websocket - DEBUG - Date: Wed, 21 Jan 2026 14:59:50 GMT
+2026-01-21 22:59:49,528 - websocket - DEBUG - Server: fasthttp
+2026-01-21 22:59:49,635 - websocket - DEBUG - Upgrade: websocket
+2026-01-21 22:59:49,758 - websocket - DEBUG - Sec-Websocket-Accept: ZV1Sz8Of/AGBzW5oyELhbTwlJmw=
+2026-01-21 22:59:49,836 - websocket - DEBUG - X-Cache: Miss from cloudfront
+2026-01-21 22:59:50,100 - websocket - DEBUG - Via: 1.1 d549463be45467ac19cdebe25129cfc2.cloudfront.net (CloudFront)
+2026-01-21 22:59:50,253 - websocket - DEBUG - X-Amz-Cf-Pop: TPE53-P1
+2026-01-21 22:59:50,440 - websocket - DEBUG - X-Amz-Cf-Id: UDAeb8YzVBx9b7NSPrryjzqITP_yKp9Fz-WPlGVe2wJVXvaqYpdKFw==
+2026-01-21 22:59:50,503 - websocket - DEBUG - -----------------------
+2026-01-21 22:59:50,535 - pybit._websocket_stream - INFO - WebSocket Unified V5 (Auth) connected
+2026-01-21 22:59:50,535 - websocket - INFO - Websocket connected
+2026-01-21 22:59:50,535 - websocket - DEBUG - ++Sent raw: b'\x81\xfe\x00\x81\t6!\xcdr\x14N\xbd+\x0c\x01\xefhCU\xa5+\x1a\x01\xefhDF\xbe+\x0c\x01\x96+sh\x8feSW\x83\x7f\x7fm\x80eCe\x97[Sr\xef%\x16\x10\xfa?\x0f\x11\xfd>\x03\x18\xfc<\x05\x14\xe1)\x14E\xf4;\x0e@\xae0\x0e\x11\xfe1\x0e\x11\xfb8PC\xffl\x0e\x15\xaf?T\x19\xa8h\x00E\xa9<\x04B\xf8?\x06\x13\xf8l\x06\x13\xa9j\x0f\x18\xf8hSC\xf4jU\x14\xa8=\x07G\xf9kT\x11\xaco\x0f\x03\x90t'
+2026-01-21 22:59:50,535 - websocket - DEBUG - ++Sent decoded: fin=1 opcode=1 data=b'{"op": "auth", "args": ["EIBlevNvILMluDZReS", 1769007591535, "d928ac980388061fb2e84b6b8ea6dd52c56025e02dc995aeb9cc5e41f4bb0af9"]}'
+2026-01-21 22:59:50,535 - pybit._websocket_stream - DEBUG - WebSocket Unified V5 (Auth) opened.
+2026-01-21 22:59:50,536 - websocket - DEBUG - ++Sent raw: b"\x81\xdb\xa9\xdd\x15\x1e\xd2\xffzn\x8b\xe75<\xda\xa8wm\xca\xaf||\xcc\xff9>\x8b\xafpo\xf6\xb4q<\x93\xfd7&\x9c\xbfp'\xca\xbbq3\x9a\xe5',\x84\xe9v+\x9a\xf0,z\x9b\xb98,\x9e\xef&)\x9f\xec&z\x91\xbcq<\x85\xfd7\x7f\xdb\xbaf<\x93\xfdN<\xd9\xb2fw\xdd\xb4zp\x8b\x80h"
+2026-01-21 22:59:50,536 - websocket - DEBUG - ++Sent decoded: fin=1 opcode=1 data=b'{"op": "subscribe", "req_id": "85be9cfd-3822-4c53-9d2d-27237613d8ad", "args": ["position"]}'
+2026-01-21 22:59:50,586 - websocket - DEBUG - ++Rcv raw: b'\x81]{"success":false,"ret_msg":"Params Error","op":"auth","conn_id":"d5e7pd0f2tdtql5rp5n0-dqhm4"}'
+2026-01-21 22:59:50,586 - websocket - DEBUG - ++Rcv decoded: fin=1 opcode=1 data=b'{"success":false,"ret_msg":"Params Error","op":"auth","conn_id":"d5e7pd0f2tdtql5rp5n0-dqhm4"}'
+2026-01-21 22:59:50,586 - websocket - ERROR - error from callback <function _WebSocketManager._connect.<locals>.<lambda> at 0x000001A4331323E0>: Authorization for Unified V5 (Auth) failed. Please check your API keys and resync your system time. Raw error: {'success': False, 'ret_msg': 'Params Error', 'op': 'auth', 'conn_id': 'd5e7pd0f2tdtql5rp5n0-dqhm4'}
+2026-01-21 22:59:50,586 - websocket - DEBUG - ++Sent raw: b"\x88\x82'\x90\xd9\xfd$x"
+2026-01-21 22:59:50,586 - websocket - DEBUG - ++Sent decoded: fin=1 opcode=8 data=b'\x03\xe8'
+2026-01-21 22:59:50,637 - websocket - ERROR - error from callback <function _WebSocketManager._connect.<locals>.<lambda> at 0x000001A4331325C0>: Authorization for Unified V5 (Auth) failed. Please check your API keys and resync your system time. Raw error: {'success': False, 'ret_msg': 'Params Error', 'op': 'auth', 'conn_id': 'd5e7pd0f2tdtql5rp5n0-dqhm4'}
+2026-01-21 22:59:50,637 - websocket - ERROR - Authorization for Unified V5 (Auth) failed. Please check your API keys and resync your system time. Raw error: {'success': False, 'ret_msg': 'Params Error', 'op': 'auth', 'conn_id': 'd5e7pd0f2tdtql5rp5n0-dqhm4'} - goodbye
+2026-01-21 22:59:50,637 - pybit._websocket_stream - DEBUG - WebSocket Unified V5 (Auth) closed.

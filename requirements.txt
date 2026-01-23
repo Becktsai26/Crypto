@@ -1,0 +1,6 @@
+requests
+notion-client
+python-dotenv
+pandas
+openpyxl
+pybit
