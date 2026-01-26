@@ -16,11 +16,12 @@ class SyncService:
         self.exchange = exchange_adapter
         self.notion = notion_client
 
-    def run_sync(self):
+    def run_sync(self, silent: bool = False):
         """
         Runs the main synchronization logic with support for multi-window fetching.
+        :param silent: If True, suppresses external notifications (prepared for future use if SyncService triggers alerts independently)
         """
-        log.info("Starting synchronization process...")
+        log.info(f"Starting synchronization process... (Silent Mode: {silent})")
         
         # 1. Determine the time window
         last_sync_ms = self.notion.get_last_sync_timestamp()

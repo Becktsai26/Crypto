@@ -26,6 +26,12 @@ class BybitMonitor:
         self.last_position_update = {}
         # TRACKING STATE for TP/SL changes (Symbol -> {tp, sl})
         self.last_position_state = {} 
+        # DEBOUNCE TIMERS for position updates (Symbol -> Timer)
+        self.position_update_timers = {}
+        # CACHE for Order Stop Types (OrderId -> Type) to correlate Execution events
+        self.order_stop_types = {}
+        self.UPDATE_COOLDOWN = 3600 # 60 minutes
+        self.UPDATE_COOLDOWN = 3600 # 60 minutes 
         self.UPDATE_COOLDOWN = 3600 # 60 minutes
         
         # POSITIONS CACHE (Symbol -> Position Data Dict)
@@ -156,6 +162,15 @@ class BybitMonitor:
             order_id = order.get("orderId")
             symbol = order.get("symbol")
             stop_order_type = order.get("stopOrderType", "")
+            if stop_order_type:
+                self.order_stop_types[order_id] = stop_order_type
+                
+                # SUPPRESSION LOGIC:
+                # If this is a TP/SL order update, IGNORE it. 
+                # We rely on _on_position_update (debounced) to report TP/SL changes.
+                if stop_order_type in ["TakeProfit", "StopLoss", "TrailingStop"]:
+                    # log.info(f"Suppressing Order Update for {stop_order_type} (handled by Position Stream)")
+                    continue
             
             # Retrieve cached position for footer
             current_position = self.positions.get(symbol)
@@ -163,13 +178,25 @@ class BybitMonitor:
             # Check for Closing Order Indicators
             is_reduce_only = order.get("reduceOnly", False)
             is_close_on_trigger = order.get("closeOnTrigger", False)
-            is_conditional = stop_order_type in ["TakeProfit", "StopLoss", "TrailingStop"]
+            is_conditional = stop_order_type in ["TakeProfit", "StopLoss", "TrailingStop"] # Re-eval if needed, but we essentially skipped above.
             
-            # Identify if this is a modification (existing order or partial update)
+            # 1. Handle Final States First (Strict Check)
+            if status in ["Cancelled", "Deactivated", "Filled"]:
+                if order_id in self.active_orders:
+                    self.active_orders.remove(order_id)
+                
+                if status in ["Cancelled", "Deactivated"]:
+                    self.notifier.send_order_cancel(order, positions=self.positions)
+                
+                # Stop processing. Do NOT fall through to 'Modified' check.
+                continue
+
+            # 2. Identify Modification (Status=None means update to existing order)
             if status is None:
                 self.notifier.send_order_modified(order, positions=self.positions)
                 continue
             
+            # 3. New Orders
             if status in ["New", "Untriggered"]:
                 # Check for Closing/Conditional Orders (e.g., TP/SL set on position)
                 if is_reduce_only or is_close_on_trigger or is_conditional:
@@ -183,13 +210,6 @@ class BybitMonitor:
                 else:
                     # Existing Order Update -> Modification
                     self.notifier.send_order_modified(order, positions=self.positions)
-                    
-            elif status in ["Cancelled", "Deactivated", "Filled"]:
-                if order_id in self.active_orders:
-                    self.active_orders.remove(order_id)
-                
-                if status in ["Cancelled", "Deactivated"]:
-                    self.notifier.send_order_cancel(order, positions=self.positions)
 
     def _on_execution_update(self, message):
         """Callback for execution stream (trades)."""
@@ -244,16 +264,44 @@ class BybitMonitor:
             del self.execution_buffer[order_id]
             
             symbol = trade_data.get("symbol")
+            exec_type = trade_data.get("execType")
+            
+            # Try to get stopOrderType from trade data OR cached order data
+            stop_order_type = trade_data.get("stopOrderType") or self.order_stop_types.get(order_id, "")
+            
+            # Cleanup cache
+            if order_id in self.order_stop_types:
+                del self.order_stop_types[order_id]
+            
+            # 1. Retry Logic for PnL (Fix 0 PnL issue)
             pnl = None
             if self.stats_service:
-                pnl = self.stats_service.get_closed_pnl_by_order(symbol, order_id)
+                # Try up to 3 times (0s, 2s, 4s delay effectively)
+                for attempt in range(1, 4):
+                    pnl = self.stats_service.get_closed_pnl_by_order(symbol, order_id)
+                    if pnl is not None:
+                         break
+                    if attempt < 3:
+                        log.warning(f"PnL not ready for {symbol} (Attempt {attempt}/3). Retrying in 2s...")
+                        time.sleep(2.0)
             
-            self.notifier.send_order_filled(trade_data, pnl=pnl, positions=self.positions)
+            # 2. Determine Close Type
+            close_type = None
+            if stop_order_type == "TakeProfit": 
+                close_type = "TakeProfit"
+            elif stop_order_type == "StopLoss": 
+                close_type = "StopLoss"
+            elif stop_order_type == "TrailingStop":
+                close_type = "TrailingStop"
+            elif exec_type == "BustTrade": 
+                close_type = "Liquidation"
+            
+            self.notifier.send_order_filled(trade_data, pnl=pnl, positions=self.positions, close_type=close_type)
 
     def _run_sync_delayed(self):
         time.sleep(3) 
         try:
-            self.sync_service.run_sync()
+            self.sync_service.run_sync(silent=False)
         except Exception as e:
             log.error(f"Auto-Sync failed: {e}")
 
@@ -304,9 +352,9 @@ class BybitMonitor:
                 if changed_tp or changed_sl:
                     log.info(f"Position TP/SL Changed for {symbol}: TP {last_tp}->{current_tp}, SL {last_sl}->{current_sl}")
                     
-                    self.last_position_state[symbol] = {"tp": current_tp, "sl": current_sl}
+                    # Do NOT update last_position_state immediately (wait for debounce)
+                    # This prevents transient glitches (A->B->A) from triggering a B->A notification
                     
-                    # Only alert if position is OPEN
                     if size > 0:
                         mod_data = {
                             "symbol": symbol,
@@ -317,10 +365,42 @@ class BybitMonitor:
                             "stopLoss": current_sl,
                             "triggerPrice": f"{current_sl} (SL) / {current_tp} (TP)" 
                         }
-                        # Pass ALL positions
-                        self.notifier.send_order_modified(mod_data, positions=self.positions)
+                        
+                        # Implement Debounce: Cancel existing timer, start new one
+                        if symbol in self.position_update_timers:
+                             self.position_update_timers[symbol].cancel()
+                        
+                        # Define the delayed send function
+                        def delayed_send():
+                             log.info(f"Sending Debounced TP/SL Alert for {symbol}")
+                             
+                             # Commit state ONLY when actually sending
+                             self.last_position_state[symbol] = {"tp": current_tp, "sl": current_sl}
+                             # Suppress redundant PnL update
+                             self.last_position_update[symbol] = time.time()
+                             
+                             self.notifier.send_order_modified(mod_data, positions=self.positions)
+                             # Cleanup timer ref
+                             if symbol in self.position_update_timers:
+                                 del self.position_update_timers[symbol]
+                        
+                        # Start 5s Timer
+                        timer = threading.Timer(5.0, delayed_send)
+                        self.position_update_timers[symbol] = timer
+                        timer.start()
+                        
+                        # NOTE: removed immediate self.last_position_update setting here
+                        
                     else:
                         log.info(f"Suppressed TP/SL Alert for {symbol} because position is closed (Size=0).")
+
+                else:
+                    # No change detected vs Last Committed State.
+                    # If a timer is running, it means a transient change occurred but Reverted (A -> B -> A).
+                    if symbol in self.position_update_timers:
+                        log.info(f"TP/SL for {symbol} reverted to original state. Cancelling debounce timer.")
+                        self.position_update_timers[symbol].cancel()
+                        del self.position_update_timers[symbol]
             
             # PnL Throttling Logic
             last_time = self.last_position_update.get(symbol, 0)
@@ -362,9 +442,25 @@ class BybitMonitor:
                         "tp": pos.get("takeProfit", "") or "", 
                         "sl": pos.get("stopLoss", "") or ""
                     }
+                    
+                    # Initialize PnL cooldown to prevent immediate spam on restart
+                    self.last_position_update[symbol] = time.time()
+                    
             log.info(f"Total {len(self.positions)} active positions loaded.")
+            
+            # Prefetch Active Orders to prevent Ghost Signals
+            log.info("Fetching active orders to prevent ghost signals...")
+            active_orders_linear = self.bybit_adapter.get_active_orders(category="linear")
+            active_orders_inverse = self.bybit_adapter.get_active_orders(category="inverse")
+            
+            all_active = active_orders_linear + active_orders_inverse
+            for order in all_active:
+                self.active_orders.add(order.get("orderId"))
+            
+            log.info(f"Loaded {len(self.active_orders)} active orders to ignore.")
+            
         except Exception as e:
-            log.error(f"Failed to fetch initial positions: {e}")
+            log.error(f"Failed to fetch initial state: {e}")
             
         self.ws = websocket.WebSocketApp(
             self.ws_url,

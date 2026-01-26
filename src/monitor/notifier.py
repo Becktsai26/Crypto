@@ -155,7 +155,7 @@ class DiscordNotifier:
         
         self._send({"embeds": [embed]})
 
-    def send_order_filled(self, order_data: dict, pnl: float = None, positions: dict = None):
+    def send_order_filled(self, order_data: dict, pnl: float = None, positions: dict = None, close_type: str = None):
         """
         Sends notification for filled orders.
         """
@@ -166,17 +166,31 @@ class DiscordNotifier:
         
         if pnl is not None:
             # Closing Trade
-            action = "平倉離場"
-            emoji = "💰" if pnl >= 0 else "💸"
+            if close_type == "TakeProfit":
+                action = "止盈出場 (Take Profit)"
+                emoji = "💰"
+            elif close_type == "StopLoss":
+                action = "止損出場 (Stop Loss)"
+                emoji = "🛑"
+            elif close_type == "TrailingStop":
+                action = "追蹤止損 (Trailing Stop)"
+                emoji = "📉"
+            elif close_type == "Liquidation":
+                action = "強制平倉 (Liquidation)"
+                emoji = "🌊"
+            else:
+                action = "平倉離場 (Closed)"
+                emoji = "💰" if pnl >= 0 else "💸"
+                
             color = 0x00FF00 if pnl >= 0 else 0xFF0000
             pnl_str = f"**{pnl:+.2f} U**"
         else:
             # Opening Trade
-            action = "訊號成交" if "Open" in str(side) or float(qty) > 0 else "平倉出場"
+            action = "訊號成交 (Open)" if "Open" in str(side) or float(qty) > 0 else "平倉出場"
             emoji = "🚀"
             color = 0x00FF00 if side == "Buy" else 0xFF0000
             pnl_str = None
-
+            
         embed = {
             "title": f"{emoji} {action}: {symbol}",
             "color": color,
@@ -286,5 +300,62 @@ class DiscordNotifier:
             "footer": {"text": "Bybit 訊號群 • 日報統計"}
         }
         
+        target_url = self.pnl_webhook_url
+        self._send({"embeds": [embed]}, webhook_url=target_url)
+
+    def send_pnl_dashboard(self, realized_data: dict, open_positions: list):
+        """
+        Sends a comprehensive PnL Dashboard (Realized + Unrealized).
+        """
+        daily_pnl = realized_data.get("daily_pnl", 0)
+        daily_wins = realized_data.get("daily_wins", 0)
+        daily_losses = realized_data.get("daily_losses", 0)
+        
+        # Calculate Unrealized PnL
+        total_unrealized = 0
+        pos_lines = []
+        
+        for pos in open_positions:
+            symbol = pos.get("symbol")
+            u_pnl = float(pos.get("unrealisedPnl", 0))
+            size = float(pos.get("size", 0))
+            side = pos.get("side")
+            
+            if size > 0:
+                total_unrealized += u_pnl
+                icon = "🟢" if u_pnl >= 0 else "🔴"
+                pos_lines.append(f"{icon} **{symbol}** ({side}): `{u_pnl:+.2f} U`")
+        
+        total_equity_change = daily_pnl + total_unrealized
+        
+        # Color based on Total Equity Change
+        color = 0xFFD700 if total_equity_change >= 0 else 0xFF0000
+        
+        embed = {
+            "title": "📊 帳戶盈虧儀表板 (PnL Dashboard)",
+            "description": f"截至 {datetime.now().strftime('%Y-%m-%d %H:%M')}",
+            "color": color,
+            "fields": [
+                {"name": "💰 今日已實現 (Realized)", "value": f"**{daily_pnl:+.2f} U**", "inline": True},
+                {"name": "📉 當前未實現 (Unrealized)", "value": f"**{total_unrealized:+.2f} U**", "inline": True},
+                {"name": "🏆 今日總結 (Total Change)", "value": f"**{total_equity_change:+.2f} U**", "inline": True},
+                {"name": "----------------", "value": "----------------", "inline": False},
+            ],
+            "footer": {"text": "Bybit 訊號群 • 財務報表"}
+        }
+        
+        if pos_lines:
+            embed["fields"].append({
+                "name": "📝 持倉明細 (Open Positions)",
+                "value": "\n".join(pos_lines),
+                "inline": False
+            })
+        else:
+            embed["fields"].append({
+                "name": "📝 持倉明細",
+                "value": "無持倉 (No Open Positions)",
+                "inline": False
+            })
+
         target_url = self.pnl_webhook_url
         self._send({"embeds": [embed]}, webhook_url=target_url)
