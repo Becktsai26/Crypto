@@ -30,35 +30,42 @@ def main():
         run_sync()
 
 def run_sync():
-    """Runs the data synchronization process."""
+    """Runs the data synchronization process for all configured accounts."""
     log.info("-----------------------------------------")
     log.info("--- Bybit to Notion Sync Service ---")
     log.info("-----------------------------------------")
-    try:
-        log.info("Initializing Bybit and Notion clients for sync...")
-        bybit_adapter = BybitAdapter(
-            api_key=settings["bybit_api_key"],
-            api_secret=settings["bybit_api_secret"]
-        )
-        notion_client = NotionClient(
-            token=settings["notion_token"],
-            database_id=settings["notion_db_id"]
-        )
-        sync_service = SyncService(
-            exchange_adapter=bybit_adapter,
-            notion_client=notion_client
-        )
-        sync_service.run_sync()
-    except (ApiException, NotionApiException) as e:
-        error_message = f"An API error occurred during synchronization: {e}"
-        log.error(error_message)
-        send_discord_alert(settings.get("discord_webhook_url"), error_message)
-        sys.exit(1)
-    except Exception as e:
-        error_message = f"An unexpected error occurred: {e}"
-        log.critical(error_message, exc_info=True)
-        send_discord_alert(settings.get("discord_webhook_url"), error_message)
-        sys.exit(1)
+
+    accounts = settings.get("bybit_accounts", [])
+
+    for acc in accounts:
+        name = acc["name"]
+        log.info(f">>> Starting Sync for Account: {name} <<<")
+        try:
+            log.info(f"Initializing Bybit client for {name}...")
+            bybit_adapter = BybitAdapter(
+                api_key=acc["api_key"],
+                api_secret=acc["api_secret"]
+            )
+            notion_client = NotionClient(
+                token=settings["notion_token"],
+                database_id=settings["notion_db_id"]
+            )
+            sync_service = SyncService(
+                exchange_adapter=bybit_adapter,
+                notion_client=notion_client,
+                account_name=name
+            )
+            sync_service.run_sync()
+        except (ApiException, NotionApiException) as e:
+            error_message = f"An API error occurred during synchronization for {name}: {e}"
+            log.error(error_message)
+            send_discord_alert(settings.get("discord_webhook_url"), error_message)
+            # We continue to the next account instead of exiting
+        except Exception as e:
+            error_message = f"An unexpected error occurred for {name}: {e}"
+            log.critical(error_message, exc_info=True)
+            send_discord_alert(settings.get("discord_webhook_url"), error_message)
+            # We continue to the next account instead of exiting
 
 def run_reporter(output_format: str):
     """Runs the report generation process."""

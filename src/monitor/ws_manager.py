@@ -14,10 +14,13 @@ from ..services.sync import SyncService
 from ..services.stats import StatsService
 
 class BybitMonitor:
-    def __init__(self):
+    def __init__(self, api_key=None, api_secret=None, account_name="Main"):
         self.notifier = DiscordNotifier()
-        self.api_key = settings["bybit_api_key"]
-        self.api_secret = settings["bybit_api_secret"]
+        # Fallback to settings if arguments not provided (backward compatibility)
+        self.api_key = api_key or settings.get("bybit_api_key")
+        self.api_secret = api_secret or settings.get("bybit_api_secret")
+        self.account_name = account_name
+
         self.ws_url = "wss://stream.bybit.com/v5/private"
         self.ws = None
         self.keep_running = True
@@ -55,7 +58,8 @@ class BybitMonitor:
             )
             self.sync_service = SyncService(
                 exchange_adapter=self.bybit_adapter,
-                notion_client=self.notion_client
+                notion_client=self.notion_client,
+                account_name=self.account_name
             )
             self.stats_service = StatsService(exchange_adapter=self.bybit_adapter)
             log.info("Services (Sync, Stats) initialized successfully.")
@@ -417,7 +421,7 @@ class BybitMonitor:
                 self.last_position_update[symbol] = now
 
     def start(self):
-        log.info("Starting Bybit Monitor (Custom WebSocket)...")
+        log.info(f"Starting Bybit Monitor for [{self.account_name}] (Custom WebSocket)...")
         
         # Prefetch Initial Positions via REST API to warm the cache
         try:

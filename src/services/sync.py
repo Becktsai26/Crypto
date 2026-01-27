@@ -12,9 +12,10 @@ class SyncService:
     Orchestrates the synchronization process between an exchange and Notion.
     """
 
-    def __init__(self, exchange_adapter: BaseExchangeAdapter, notion_client: NotionClient):
+    def __init__(self, exchange_adapter: BaseExchangeAdapter, notion_client: NotionClient, account_name: str = "Main"):
         self.exchange = exchange_adapter
         self.notion = notion_client
+        self.account_name = account_name
 
     def run_sync(self, silent: bool = False):
         """
@@ -40,7 +41,7 @@ class SyncService:
         end_time_ms = int(datetime.now(timezone.utc).timestamp() * 1000)
 
         # 2. Skip subaccount notice for brevity
-        log.warning("Note: Syncing main account only.")
+        # log.warning(f"Note: Syncing account: {self.account_name}")
 
         # 3. Fetch data from Bybit in 7-day chunks (API limit)
         all_transactions = []
@@ -140,7 +141,7 @@ class SyncService:
                 "fee": agg["fee"],
                 "pnl": final_pnl,
                 "timestamp": agg["timestamp"],
-                "subaccount": "Main Account",
+                "subaccount": self.account_name,
                 "id": agg["id"] 
             }
             notion_records.append(record)

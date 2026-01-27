@@ -215,16 +215,31 @@ class DiscordNotifier:
         """
         symbol = order_data.get("symbol")
         side = order_data.get("side")
-        price = order_data.get("price", "N/A")
+        qty = order_data.get("qty", "Unknown")
+        order_type = order_data.get("orderType", "Limit")
         
+        # Enhanced Price Logic
+        price = order_data.get("price")
+        if not price or float(price or 0) == 0:
+            price = order_data.get("triggerPrice") or "Market"
+
         direction = "做多 LONG" if side == "Buy" else "做空 SHORT"
         
+        # Context Heuristic
+        user_context = "取消掛單"
+        if order_type == "Limit":
+             user_context = "取消限價單"
+        elif "Stop" in order_type:
+             user_context = "取消止損/條件單"
+
         embed = {
-            "title": f"⚠️ 掛單取消: {symbol}",
+            "title": f"❌ Order Cancelled: {symbol}",
+            "description": f"**{direction}** ({order_type})",
             "color": 0x95a5a6, # Grey
             "fields": [
-                {"name": "方向 (Side)", "value": direction, "inline": True},
-                {"name": "掛單價格 (Price)", "value": f"`{price}`", "inline": True}
+                {"name": "價格 (Price)", "value": f"`{price}`", "inline": True},
+                {"name": "數量 (Qty)", "value": f"`{qty}`", "inline": True},
+                {"name": "User Context", "value": user_context, "inline": False}
             ]
         }
         

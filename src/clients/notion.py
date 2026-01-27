@@ -198,7 +198,7 @@ class NotionClient:
             "PnL": {"number": record.get("pnl")},
             "Timestamp": {"date": {"start": timestamp_iso}},
             "Subaccount": {
-                "rich_text": [{"type": "text", "text": {"content": record.get("subaccount", "Main Account")}}]
+                "select": {"name": record.get("subaccount", "Main")}
             },
             "Transaction ID": {
                 "rich_text": [{"type": "text", "text": {"content": record.get("id", "")}}]

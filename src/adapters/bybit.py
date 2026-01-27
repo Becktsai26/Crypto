@@ -189,3 +189,14 @@ class BybitAdapter(BaseExchangeAdapter):
             params["coin"] = coin
             
         return self._request("GET", endpoint, params)
+
+    def get_active_orders(self, category: str, limit: int = 50) -> List[Dict[str, Any]]:
+        """
+        Fetches active (open) orders.
+        """
+        endpoint = "/v5/order/realtime"
+        params = {
+            "category": category,
+            "limit": limit
+        }
+        return self._paginated_fetch(endpoint, params)
