@@ -91,7 +91,7 @@ class BybitMonitor:
         # DO NOT Clear Position State - We want to remember TP/SL across reconnects
 
         # Start Heartbeat Loop
-        threading.Thread(target=self.heartbeat, daemon=True).start()
+        threading.Thread(target=self.heartbeat, args=(ws,), daemon=True).start()
 
     def send_daily_report(self):
         if self.stats_service:
@@ -146,10 +146,10 @@ class BybitMonitor:
         self.ws.send(json.dumps(sub_msg))
         log.info(f"Subscribing to topics: {topics}")
 
-    def heartbeat(self):
-        while self.keep_running and self.ws and self.ws.sock and self.ws.sock.connected:
+    def heartbeat(self, ws_instance):
+        while self.keep_running and ws_instance and ws_instance.sock and ws_instance.sock.connected:
             try:
-                self.ws.send(json.dumps({"op": "ping"}))
+                ws_instance.send(json.dumps({"op": "ping"}))
                 time.sleep(20)
             except Exception:
                 break
@@ -157,6 +157,14 @@ class BybitMonitor:
     def _on_order_update(self, message):
         """Callback for order stream."""
         data = message.get("data", [])
+
+        # Handle Snapshot (Initial Load) - Suppress Notifications
+        if message.get("type") == "snapshot":
+            for order in data:
+                self.active_orders.add(order.get("orderId"))
+            log.info(f"Processed Order Snapshot: {len(data)} orders added to active tracking.")
+            return
+
         for order in data:
             status = order.get("orderStatus") # Might be None in delta update
             order_id = order.get("orderId")
@@ -462,16 +470,15 @@ class BybitMonitor:
         except Exception as e:
             log.error(f"Failed to fetch initial state: {e}")
             
-        self.ws = websocket.WebSocketApp(
-            self.ws_url,
-            on_open=self.on_open,
-            on_message=self.on_message,
-            on_error=self.on_error,
-            on_close=self.on_close
-        )
-        
         while self.keep_running:
             try:
+                self.ws = websocket.WebSocketApp(
+                    self.ws_url,
+                    on_open=self.on_open,
+                    on_message=self.on_message,
+                    on_error=self.on_error,
+                    on_close=self.on_close
+                )
                 self.ws.run_forever()
                 log.info("Reconnecting in 5 seconds...")
                 time.sleep(5)

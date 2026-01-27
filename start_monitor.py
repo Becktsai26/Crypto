@@ -5,16 +5,18 @@ import time
 def start_monitor():
     log.info("--- Starting Bybit Real-time Monitor ---")
     
-    # Initialize Monitor (WebSocket + Sync + Webhook)
-    monitor = BybitMonitor()
-    
-    try:
-        monitor.start()
-    except KeyboardInterrupt:
-        log.info("Monitor stopped by user.")
-    except Exception as e:
-        log.error(f"Monitor crashed: {e}")
-        time.sleep(5) # Prevent tight loop on crash
+    while True:
+        try:
+            # Initialize Monitor (WebSocket + Sync + Webhook)
+            monitor = BybitMonitor()
+            monitor.start()
+        except KeyboardInterrupt:
+            log.info("Monitor stopped by user.")
+            break
+        except Exception as e:
+            log.error(f"Monitor crashed: {e}")
+            log.info("Restarting monitor in 5 seconds...")
+            time.sleep(5) # Prevent tight loop on crash
 
 if __name__ == "__main__":
     start_monitor()
