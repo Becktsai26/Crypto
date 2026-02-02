@@ -71,3 +71,63 @@ class NotionClient:
         except Exception as e:
             logger.error(f"Failed to save snapshot to Notion: {e}")
             # 快照失敗通常不影響主同步，所以我們只記錄 log，不拋出致命錯誤
+
+    def query_daily_trades(self, target_date: str) -> list[dict]:
+        """
+        查詢特定日期的交易紀錄。
+        target_date: ISO date string YYYY-MM-DD
+        """
+        try:
+            # Filter by Date
+            response = self.client.databases.query(
+                database_id=self.trade_db_id,
+                filter={
+                    "property": settings.NOTION_FIELD_DATE,
+                    "date": {
+                        "equals": target_date
+                    }
+                }
+            )
+            results = response.get("results", [])
+            trades = []
+            for page in results:
+                props = page.get("properties", {})
+
+                # Helper to extract value safely
+                def get_prop(name):
+                    p = props.get(name, {})
+                    p_type = p.get("type")
+                    if not p_type:
+                        return None
+
+                    if p_type == "date":
+                        return p.get("date", {}).get("start")
+                    elif p_type == "select":
+                        return p.get("select", {}).get("name")
+                    elif p_type == "number":
+                        return p.get("number")
+                    elif p_type == "rich_text":
+                        t = p.get("rich_text", [])
+                        return t[0].get("plain_text") if t else ""
+                    elif p_type == "title":
+                         t = p.get("title", [])
+                         return t[0].get("plain_text") if t else ""
+                    return None
+
+                trade = {
+                    "date": get_prop(settings.NOTION_FIELD_DATE),
+                    "pair": get_prop(settings.NOTION_FIELD_PAIR),
+                    "direction": get_prop(settings.NOTION_FIELD_DIRECTION),
+                    "r": get_prop(settings.NOTION_FIELD_RESULT_R),
+                    "note": get_prop(settings.NOTION_FIELD_NOTE),
+                }
+
+                # Basic validation: r is required for stats
+                if trade["r"] is not None:
+                     trades.append(trade)
+
+            return trades
+
+        except Exception as e:
+            logger.error(f"Failed to query daily trades: {e}")
+            return []

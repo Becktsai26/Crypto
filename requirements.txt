@@ -5,3 +5,5 @@ pandas
 openpyxl
 pybit
 pydantic-settings
+google-generativeai
+pytest

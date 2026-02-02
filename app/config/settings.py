@@ -21,6 +21,21 @@ class Settings(BaseSettings):
     # Discord 設定 (Optional)
     DISCORD_WEBHOOK_URL: Optional[str] = None
     DISCORD_PNL_WEBHOOK_URL: Optional[str] = None
+
+    # Gemini & Line Notify (Daily Report)
+    GEMINI_API_KEY: Optional[str] = None
+    LINE_NOTIFY_TOKEN: Optional[str] = None
+
+    # Notion Field Mapping (Daily Report)
+    NOTION_FIELD_DATE: str = "Date"
+    NOTION_FIELD_PAIR: str = "pair"
+    NOTION_FIELD_DIRECTION: str = "direction"
+    NOTION_FIELD_RESULT_R: str = "result_r"
+    NOTION_FIELD_NOTE: str = "note"
+
+    # Environment
+    TZ: str = "Asia/Taipei"
+    DRY_RUN: bool = False
     
     # 應用程式行為
     LOG_LEVEL: str = "INFO"
