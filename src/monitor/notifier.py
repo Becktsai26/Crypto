@@ -33,7 +33,6 @@ class DiscordNotifier:
         """
         Helper to format ALL active positions in the account.
         """
-        # Header
         header = f"----------------------------------------------------\n"
         header += f"**當前持倉狀態 (Account Positions)**"
         
@@ -49,7 +48,6 @@ class DiscordNotifier:
         if not active_positions:
             return f"{header}\n無 (Empty)"
             
-        # Format each position
         lines = [header]
         for pos in active_positions:
             symbol = pos.get("symbol", "UNKNOWN")
@@ -67,7 +65,6 @@ class DiscordNotifier:
             
             side_emoji = "🟢" if side == "Buy" else "🔴"
             
-            # Compact block for each position
             p_line = f"\n**{symbol} {side} {side_emoji}** (Size: {size})\n"
             p_line += f"Price: `{entry_price}`  TP: `{tp}`  SL: `{sl}`\n"
             p_line += f"PnL: `{pnl_str}`"
@@ -76,50 +73,42 @@ class DiscordNotifier:
         return "".join(lines)
 
     def send_order_modified(self, order_data: dict, positions: dict = None):
-        """
-        Triggered when an order is modified (e.g. TP/SL change).
-        """
         symbol = order_data.get("symbol")
         side = order_data.get("side")
         order_type = order_data.get("orderType")
-        price = order_data.get("price")
-        trigger_price = order_data.get("triggerPrice")
         
+        # New simplified logic: Entry (from position check?), New TP, New SL
+        # We need to find the entry price from the positions if possible, or use order price if relevant.
+        # But for TP/SL modification on a position, the entry price is in the position data.
+        
+        entry_price = "N/A"
+        if positions and symbol in positions:
+            pos = positions[symbol]
+            entry_price = pos.get("avgPrice") or pos.get("entryPrice") or "N/A"
+        elif order_data.get("price"):
+             entry_price = order_data.get("price")
+
         tp = order_data.get("takeProfit", "")
         sl = order_data.get("stopLoss", "")
         
         color = 0xFFA500 
         direction = "做多 LONG" if side == "Buy" else "做空 SHORT"
-        
-        if trigger_price and str(trigger_price).strip() != "":
-             price_label = "觸發價格 (Trigger)"
-             price_val = f"`{trigger_price}`"
-        else:
-             price_label = "最新價格 (New Price)"
-             price_val = f"`{price}`" if float(price or 0) > 0 else "N/A"
 
         embed = {
             "title": f"📝 訂單/TP-SL 修改: {symbol}",
             "description": f"**{direction}** {order_type}",
             "color": color,
             "fields": [
-                {"name": price_label, "value": price_val, "inline": True},
+                {"name": "入場價格 (Entry)", "value": f"`{entry_price}`", "inline": True},
                 {"name": "最新止盈 (New TP)", "value": f"`{tp}`" if tp else "未設定", "inline": True},
                 {"name": "最新止損 (New SL)", "value": f"`{sl}`" if sl else "未設定", "inline": True},
             ]
         }
         
-        # Add All Positions Footer
-        footer_text = self._format_all_positions_footer(positions)
-        if footer_text:
-             embed["fields"].append({"name": "Status", "value": footer_text, "inline": False})
-        
+        # User requested NO footer for modification
         self._send({"embeds": [embed]})
 
     def send_order_new(self, order_data: dict, positions: dict = None):
-        """
-        Triggered when a NEW order is placed.
-        """
         symbol = order_data.get("symbol")
         side = order_data.get("side")
         order_type = order_data.get("orderType")
@@ -148,7 +137,6 @@ class DiscordNotifier:
             ]
         }
         
-        # Add All Positions Footer
         footer_text = self._format_all_positions_footer(positions)
         if footer_text:
              embed["fields"].append({"name": "Status", "value": footer_text, "inline": False})
@@ -156,16 +144,12 @@ class DiscordNotifier:
         self._send({"embeds": [embed]})
 
     def send_order_filled(self, order_data: dict, pnl: float = None, positions: dict = None, close_type: str = None):
-        """
-        Sends notification for filled orders.
-        """
         symbol = order_data.get("symbol")
         side = order_data.get("side")
         price = order_data.get("execPrice")
         qty = order_data.get("execQty")
         
         if pnl is not None:
-            # Closing Trade
             if close_type == "TakeProfit":
                 action = "止盈出場 (Take Profit)"
                 emoji = "💰"
@@ -185,7 +169,6 @@ class DiscordNotifier:
             color = 0x00FF00 if pnl >= 0 else 0xFF0000
             pnl_str = f"**{pnl:+.2f} U**"
         else:
-            # Opening Trade
             action = "訊號成交 (Open)" if "Open" in str(side) or float(qty) > 0 else "平倉出場"
             emoji = "🚀"
             color = 0x00FF00 if side == "Buy" else 0xFF0000
@@ -202,7 +185,6 @@ class DiscordNotifier:
         if pnl_str:
              embed["fields"].append({"name": "已實現盈虧", "value": pnl_str, "inline": True})
              
-        # Add All Positions Footer
         footer_text = self._format_all_positions_footer(positions)
         if footer_text:
              embed["fields"].append({"name": "Status", "value": footer_text, "inline": False})
@@ -210,9 +192,6 @@ class DiscordNotifier:
         self._send({"embeds": [embed]})
 
     def send_order_cancel(self, order_data: dict, positions: dict = None):
-        """
-        Triggered when an order is cancelled.
-        """
         symbol = order_data.get("symbol")
         side = order_data.get("side")
         price = order_data.get("price", "N/A")
@@ -221,28 +200,20 @@ class DiscordNotifier:
         
         embed = {
             "title": f"⚠️ 掛單取消: {symbol}",
-            "color": 0x95a5a6, # Grey
+            "color": 0x95a5a6, 
             "fields": [
                 {"name": "方向 (Side)", "value": direction, "inline": True},
                 {"name": "掛單價格 (Price)", "value": f"`{price}`", "inline": True}
             ]
         }
         
-        # Add All Positions Footer
-        footer_text = self._format_all_positions_footer(positions)
-        if footer_text:
-             embed["fields"].append({"name": "Status", "value": footer_text, "inline": False})
-        
+        # User requested NO footer for Cancel
         self._send({"embeds": [embed]})
 
     def send_position_update(self, pos_data: dict):
-        """
-        Sends snapshot of current position pnl.
-        """
         symbol = pos_data.get("symbol")
         side = pos_data.get("side")
         size = pos_data.get("size")
-        # Bybit V5 can use 'avgPrice' or 'entryPrice' depending on context
         entry_price = pos_data.get("avgPrice") or pos_data.get("entryPrice") or "Unknown"
         unrealized_pnl = float(pos_data.get("unrealisedPnl", 0))
         
@@ -251,7 +222,6 @@ class DiscordNotifier:
             
         emoji = "💰" if unrealized_pnl >= 0 else "🔻"
         color = 0x00FF00 if unrealized_pnl >= 0 else 0xFF0000
-        
         direction = "由於持倉" if side == "Buy" else "空頭持倉"
         
         embed = {
@@ -268,9 +238,6 @@ class DiscordNotifier:
         self._send({"embeds": [embed]}, webhook_url=target_url)
 
     def send_daily_report(self, report_data: dict):
-        """
-        Sends the daily PnL report (Simplified).
-        """
         daily_pnl = report_data.get("daily_pnl", 0)
         daily_wins = report_data.get("daily_wins", 0)
         daily_losses = report_data.get("daily_losses", 0)
@@ -280,10 +247,7 @@ class DiscordNotifier:
         daily_total = daily_wins + daily_losses
         daily_win_rate = (daily_wins / daily_total * 100) if daily_total > 0 else 0.0
         
-        # Color: Gold if positive daily PnL, else Grey or Red
         color = 0xFFD700 if daily_pnl >= 0 else 0x95a5a6
-        
-        # Format PnL with Emoji
         d_emoji = "🔥" if daily_pnl >= 0 else "❄️"
         
         embed = {
@@ -303,7 +267,7 @@ class DiscordNotifier:
         target_url = self.pnl_webhook_url
         self._send({"embeds": [embed]}, webhook_url=target_url)
 
-    def send_pnl_dashboard(self, realized_data: dict, open_positions: list):
+    def send_pnl_dashboard(self, realized_data: dict, open_positions: list, multi_day_stats: dict = None):
         """
         Sends a comprehensive PnL Dashboard (Realized + Unrealized).
         """
@@ -311,7 +275,6 @@ class DiscordNotifier:
         daily_wins = realized_data.get("daily_wins", 0)
         daily_losses = realized_data.get("daily_losses", 0)
         
-        # Calculate Unrealized PnL
         total_unrealized = 0
         pos_lines = []
         
@@ -327,20 +290,40 @@ class DiscordNotifier:
                 pos_lines.append(f"{icon} **{symbol}** ({side}): `{u_pnl:+.2f} U`")
         
         total_equity_change = daily_pnl + total_unrealized
-        
-        # Color based on Total Equity Change
         color = 0xFFD700 if total_equity_change >= 0 else 0xFF0000
+        
+        fields = [
+            {"name": "💰 今日已實現 (Realized)", "value": f"**{daily_pnl:+.2f} U**", "inline": True},
+            {"name": "📉 當前未實現 (Unrealized)", "value": f"**{total_unrealized:+.2f} U**", "inline": True},
+            {"name": "🏆 今日總結 (Total Change)", "value": f"**{total_equity_change:+.2f} U**", "inline": True},
+        ]
+
+        if multi_day_stats and "daily_groups" in multi_day_stats:
+            stats_lines = []
+            sorted_dates = sorted(multi_day_stats["daily_groups"].keys(), reverse=True)
+            for date_str in sorted_dates:
+                pnl = multi_day_stats["daily_groups"][date_str]
+                icon = "🟢" if pnl >= 0 else "🔴"
+                stats_lines.append(f"{icon} {date_str}: `{pnl:+.2f} U`")
+            
+            total_pnl = multi_day_stats.get("total_period_pnl", 0)
+            total_icon = "💰" if total_pnl >= 0 else "💸"
+            stats_lines.append(f"----------------\n{total_icon} **7日累計: {total_pnl:+.2f} U**")
+            
+            fields.append({"name": "----------------", "value": "----------------", "inline": False})
+            fields.append({
+                "name": "📅 近7日盈虧統計 (Last 7 Days)",
+                "value": "\n".join(stats_lines),
+                "inline": False
+            })
+
+        fields.append({"name": "----------------", "value": "----------------", "inline": False})
         
         embed = {
             "title": "📊 帳戶盈虧儀表板 (PnL Dashboard)",
             "description": f"截至 {datetime.now().strftime('%Y-%m-%d %H:%M')}",
             "color": color,
-            "fields": [
-                {"name": "💰 今日已實現 (Realized)", "value": f"**{daily_pnl:+.2f} U**", "inline": True},
-                {"name": "📉 當前未實現 (Unrealized)", "value": f"**{total_unrealized:+.2f} U**", "inline": True},
-                {"name": "🏆 今日總結 (Total Change)", "value": f"**{total_equity_change:+.2f} U**", "inline": True},
-                {"name": "----------------", "value": "----------------", "inline": False},
-            ],
+            "fields": fields,
             "footer": {"text": "Bybit 訊號群 • 財務報表"}
         }
         

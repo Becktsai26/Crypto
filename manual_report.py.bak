@@ -1,4 +1,4 @@
-﻿
+
 from src.adapters.bybit import BybitAdapter
 from src.services.stats import StatsService
 from src.monitor.notifier import DiscordNotifier
@@ -21,18 +21,15 @@ def main():
         log.info("Fetching account data from Bybit...")
         report_data = stats.get_daily_report_data()
         
-        # log.info("Fetching multi-day stats...")
-        # multi_day_stats = stats.get_multi_day_stats(days=7)
-        
         # Fetch Open Positions for Unrealized PnL
         log.info("Fetching open positions...")
         open_positions = adapter.get_positions(category="linear")
         
         # Send PnL Dashboard (Realized + Unrealized)
         log.info("Sending PnL Dashboard to Discord...")
-        notifier.send_pnl_dashboard(report_data, open_positions, multi_day_stats=None)
+        notifier.send_pnl_dashboard(report_data, open_positions)
         
-        log.info("Reports sent successfully!")
+        log.info("✅ Reports sent successfully!")
         
     except Exception as e:
         log.error(f"Failed to generate report: {e}")

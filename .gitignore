@@ -20,3 +20,4 @@ pip-delete-this-directory.txt
 .vscode/
 .idea/
 monitor.log
+*.log

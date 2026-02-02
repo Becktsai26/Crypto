@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  bybit-monitor:
+    build: .
+    container_name: bybit-monitor
+    restart: unless-stopped
+    volumes:
+      # Mount source code for live development
+      - ./src:/app/src
+      - ./data:/app/data
+      - ./sync.log:/app/sync.log
+    env_file:
+      - .env
+    environment:
+      - PYTHONUNBUFFERED=1
+    # Keep container running and log to stdout
+    command: python start_monitor.py
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  # Service for manual PnL reports
+  pnl-report:
+    build: .
+    container_name: bybit-pnl-report
+    profiles:
+      - manual
+    volumes:
+      - ./src:/app/src
+      - ./data:/app/data
+    env_file:
+      - .env
+    command: python manual_report.py

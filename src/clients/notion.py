@@ -123,24 +123,59 @@ class NotionClient:
         if not records:
             return
 
-        # Deduplication Step 1: Fetch recent IDs from Notion to avoid duplicates
-        # We fetch the last 100 records (enough for most overlapping sync windows)
+        # Deduplication Step 1: Check specifically for the IDs we are about to write.
+        # We process this in chunks to avoid hitting filter size limits (Notion limit is ~100 filters, we stay safe with 50).
+        
+        candidate_ids = [r.get("id") for r in records if r.get("id")]
+        # Remove duplicates within the batch itself
+        candidate_ids = list(set(candidate_ids))
+        
         existing_ids = set()
-        try:
-            response = self._query_database(
-                sorts=[{"property": "Timestamp", "direction": "descending"}],
-                page_size=100
-            )
-            for page in response.get("results", []):
-                try:
-                    # Extract Rich Text content safely
-                    id_prop = page["properties"].get("Transaction ID", {}).get("rich_text", [])
-                    if id_prop:
-                        existing_ids.add(id_prop[0]["plain_text"])
-                except (KeyError, IndexError):
-                    continue
-        except APIResponseError as e:
-            log.warning(f"Failed to fetch existing IDs for deduplication: {e}. Proceeding without deduplication.")
+        
+        # Helper to chunk list
+        def chunk_list(lst, n):
+            for i in range(0, len(lst), n):
+                yield lst[i:i + n]
+                
+        # Query matching IDs from Notion
+        for id_chunk in chunk_list(candidate_ids, 50):
+            if not id_chunk:
+                continue
+                
+            try:
+                # Construct OR filter for this chunk
+                or_filters = []
+                for tid in id_chunk:
+                    or_filters.append({
+                        "property": "Transaction ID",
+                        "rich_text": {
+                            "equals": tid
+                        }
+                    })
+                
+                # Query Notion
+                response = self._query_database(
+                    filter={"or": or_filters},
+                    page_size=100  # Should be enough for the chunk size
+                )
+                
+                # Collect found IDs
+                for page in response.get("results", []):
+                    try:
+                        # Extract Transaction ID
+                        id_prop = page["properties"].get("Transaction ID", {}).get("rich_text", [])
+                        if id_prop:
+                            found_id = id_prop[0]["plain_text"]
+                            existing_ids.add(found_id)
+                    except (KeyError, IndexError):
+                        continue
+                        
+                # Rate limit respect
+                time.sleep(NOTION_REQUEST_DELAY)
+                
+            except APIResponseError as e:
+                log.warning(f"Failed to query existing IDs matching chunk: {e}. Duplicates may occur.")
+
         
         # Deduplication Step 2: Filter input records
         unique_records = [r for r in records if r.get("id") and r.get("id") not in existing_ids]
@@ -203,6 +238,9 @@ class NotionClient:
             "Transaction ID": {
                 "rich_text": [{"type": "text", "text": {"content": record.get("id", "")}}]
             },
+            "Trade": {
+                "title": [{"type": "text", "text": {"content": f"{record.get('symbol')} {record.get('side')}"}}]
+            }
         }
         # Notion API does not accept None for number fields.
         # We filter out any properties where the number value is None.

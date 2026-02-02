@@ -296,7 +296,20 @@ class BybitMonitor:
             elif exec_type == "BustTrade": 
                 close_type = "Liquidation"
             
+            # --- FORCE REFRESH POSITIONS ---
+            try:
+                log.info("Refreshing positions via REST to ensure Footer accuracy...")
+                # Fetch fresh linear positions
+                fresh_positions = self.bybit_adapter.get_positions(category="linear")
+                if fresh_positions:
+                    for pos in fresh_positions:
+                        self.positions[pos.get("symbol")] = pos
+            except Exception as e:
+                log.error(f"Failed to refresh positions during execution flush: {e}")
+            # -------------------------------
+
             self.notifier.send_order_filled(trade_data, pnl=pnl, positions=self.positions, close_type=close_type)
+
 
     def _run_sync_delayed(self):
         time.sleep(3) 
@@ -411,15 +424,24 @@ class BybitMonitor:
     def start(self):
         log.info("Starting Bybit Monitor (Custom WebSocket)...")
         
+        # Auto-Sync on Startup
+        if self.sync_service:
+             log.info("Triggering background sync to catch up on any missing records...")
+             threading.Thread(target=self.sync_service.run_sync, kwargs={"silent": False}, daemon=True).start()
+        
         # Prefetch Initial Positions via REST API to warm the cache
         try:
             log.info("Fetching initial open positions (Scanning Linear & Inverse)...")
             
             # 1. Fetch Linear (USDT/USDC Perps)
-            positions_linear = self.bybit_adapter.get_positions(category="linear")
+            positions_linear = self.bybit_adapter.get_positions(category="linear", settleCoin="USDT")
             
-            # 2. Fetch Inverse (Coin-Margined)
-            positions_inverse = self.bybit_adapter.get_positions(category="inverse")
+            # 2. Fetch Inverse (Coin-Margined) - Try BTC/ETH or handle gracefully
+            positions_inverse = []
+            try:
+                positions_inverse = self.bybit_adapter.get_positions(category="inverse", settleCoin="BTC")
+            except Exception as e:
+                log.warning(f"Could not fetch Inverse positions (BTC): {e}")
             
             initial_positions = positions_linear + positions_inverse
             
@@ -450,8 +472,12 @@ class BybitMonitor:
             
             # Prefetch Active Orders to prevent Ghost Signals
             log.info("Fetching active orders to prevent ghost signals...")
-            active_orders_linear = self.bybit_adapter.get_active_orders(category="linear")
-            active_orders_inverse = self.bybit_adapter.get_active_orders(category="inverse")
+            active_orders_linear = self.bybit_adapter.get_active_orders(category="linear", settleCoin="USDT")
+            active_orders_inverse = []
+            try:
+                active_orders_inverse = self.bybit_adapter.get_active_orders(category="inverse", settleCoin="BTC")
+            except Exception as e:
+                log.warning(f"Could not fetch Inverse active orders (BTC): {e}")
             
             all_active = active_orders_linear + active_orders_inverse
             for order in all_active:

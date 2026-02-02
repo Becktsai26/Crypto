@@ -824,3 +824,1442 @@ AttributeError: 'DatabasesEndpoint' object has no attribute 'query'
 2026-01-23 10:55:14 - SyncServiceLogger - INFO - Skipped 1 duplicate records found in Notion.
 2026-01-23 10:55:14 - SyncServiceLogger - INFO - No new unique records to create.
 2026-01-23 10:55:14 - SyncServiceLogger - INFO - Synchronization process completed successfully.
+2026-01-23 12:34:38 - SyncServiceLogger - INFO - --- Generating Manual PnL Report ---
+2026-01-23 12:34:38 - SyncServiceLogger - INFO - Fetching account data from Bybit...
+2026-01-23 12:34:39 - SyncServiceLogger - INFO - Sending Daily Report to Discord...
+2026-01-23 12:34:39 - SyncServiceLogger - INFO - Fetching last closed position stats...
+2026-01-23 12:34:40 - SyncServiceLogger - INFO - Sending Last Position Result: SOLUSDT PnL: 46.3621026 (Aggregated 1 fills)
+2026-01-23 12:36:23 - SyncServiceLogger - INFO - --- Starting Bybit Real-time Monitor ---
+2026-01-23 12:36:24 - SyncServiceLogger - INFO - Services (Sync, Stats) initialized successfully.
+2026-01-23 12:36:24 - SyncServiceLogger - INFO - Starting Bybit Monitor (Custom WebSocket)...
+2026-01-23 12:36:24 - SyncServiceLogger - INFO - Fetching initial open positions (Scanning Linear & Inverse)...
+2026-01-23 12:36:25 - SyncServiceLogger - INFO - Loaded Active Position: BTCUSDT, Size: 0.6
+2026-01-23 12:36:25 - SyncServiceLogger - INFO - Loaded Active Position: SOLUSDT, Size: 150.0
+2026-01-23 12:36:25 - SyncServiceLogger - INFO - Total 2 active positions loaded.
+2026-01-23 12:36:25 - SyncServiceLogger - INFO - WebSocket Connected. Sending Auth...
+2026-01-23 12:36:25 - SyncServiceLogger - INFO - WebSocket Authentication Successful!
+2026-01-23 12:36:25 - SyncServiceLogger - INFO - Subscribing to topics: ['order', 'execution', 'position']
+2026-01-23 12:36:26 - SyncServiceLogger - INFO - Subscribed: 
+2026-01-23 12:36:29 - SyncServiceLogger - INFO - Position TP/SL Changed for BTCUSDT: TP 92300->0, SL 88300->0
+2026-01-23 12:36:29 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for BTCUSDT because position is closed (Size=0).
+2026-01-23 12:36:29 - SyncServiceLogger - INFO - Position TP/SL Changed for BTCUSDT: TP 0->92300, SL 0->88300
+2026-01-23 12:54:36 - SyncServiceLogger - INFO - --- Generating Manual PnL Report ---
+2026-01-23 12:54:36 - SyncServiceLogger - INFO - Fetching account data from Bybit...
+2026-01-23 12:54:37 - SyncServiceLogger - INFO - Sending Daily Report to Discord...
+2026-01-23 12:54:38 - SyncServiceLogger - INFO - Fetching last closed position stats...
+2026-01-23 12:54:39 - SyncServiceLogger - INFO - Sending Last Position Result: SOLUSDT PnL: 46.3621026 (Aggregated 1 fills)
+2026-01-23 15:59:59 - SyncServiceLogger - INFO - Position TP/SL Changed for BTCUSDT: TP 92300->0, SL 88300->0
+2026-01-23 15:59:59 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for BTCUSDT because position is closed (Size=0).
+2026-01-23 15:59:59 - SyncServiceLogger - INFO - Position TP/SL Changed for BTCUSDT: TP 0->92300, SL 0->88300
+2026-01-23 16:00:01 - SyncServiceLogger - INFO - Position TP/SL Changed for SOLUSDT: TP 139->0, SL 124->0
+2026-01-23 16:00:01 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SOLUSDT because position is closed (Size=0).
+2026-01-23 23:59:59 - SyncServiceLogger - INFO - Position TP/SL Changed for BTCUSDT: TP 92300->0, SL 88300->0
+2026-01-23 23:59:59 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for BTCUSDT because position is closed (Size=0).
+2026-01-23 23:59:59 - SyncServiceLogger - INFO - Position TP/SL Changed for BTCUSDT: TP 0->92300, SL 0->88300
+2026-01-24 00:00:00 - SyncServiceLogger - INFO - Position TP/SL Changed for SOLUSDT: TP 0->139, SL 0->124
+2026-01-24 00:00:01 - SyncServiceLogger - INFO - Position TP/SL Changed for SOLUSDT: TP 139->0, SL 124->0
+2026-01-24 00:00:01 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SOLUSDT because position is closed (Size=0).
+2026-01-24 01:31:04 - SyncServiceLogger - INFO - Position TP/SL Changed for BTCUSDT: TP 92300->0, SL 88300->0
+2026-01-24 01:31:04 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for BTCUSDT because position is closed (Size=0).
+2026-01-24 01:31:04 - SyncServiceLogger - INFO - Position TP/SL Changed for BTCUSDT: TP 0->92300, SL 0->88300
+2026-01-24 01:31:06 - SyncServiceLogger - INFO - Starting synchronization process...
+2026-01-24 01:31:07 - SyncServiceLogger - INFO - Last sync found at 2026-01-23 01:19:00+00:00. Starting from 2026-01-23 01:19:00.001000+00:00
+2026-01-24 01:31:07 - SyncServiceLogger - WARNING - Note: Syncing main account only.
+2026-01-24 01:31:07 - SyncServiceLogger - INFO - Fetching chunk from 2026-01-23 01:19:00.001000+00:00 to 2026-01-23 17:31:07.099000+00:00
+2026-01-24 01:31:08 - SyncServiceLogger - INFO - Total transactions retrieved: 17
+2026-01-24 01:31:08 - SyncServiceLogger - INFO - Processed 2 records (PnL > 0.5) to be written to Notion.
+2026-01-24 01:31:08 - SyncServiceLogger - INFO - Skipped 1 duplicate records found in Notion.
+2026-01-24 01:31:09 - SyncServiceLogger - INFO - Successfully created record in Notion for symbol: BTCUSDT
+2026-01-24 01:31:09 - SyncServiceLogger - INFO - Synchronization process completed successfully.
+2026-01-24 01:31:17 - SyncServiceLogger - INFO - Position TP/SL Changed for BTCUSDT: TP 92300->92300, SL 88300->89750
+2026-01-24 01:32:30 - SyncServiceLogger - INFO - --- Generating Manual PnL Report ---
+2026-01-24 01:32:30 - SyncServiceLogger - INFO - Fetching account data from Bybit...
+2026-01-24 01:32:31 - SyncServiceLogger - INFO - Sending Daily Report to Discord...
+2026-01-24 01:32:31 - SyncServiceLogger - INFO - Fetching last closed position stats...
+2026-01-24 01:32:32 - SyncServiceLogger - INFO - Sending Last Position Result: BTCUSDT PnL: 353.6506409 (Aggregated 1 fills)
+2026-01-24 01:45:48 - SyncServiceLogger - INFO - --- Generating Manual PnL Report ---
+2026-01-24 01:45:48 - SyncServiceLogger - INFO - Fetching account data from Bybit...
+2026-01-24 01:45:49 - SyncServiceLogger - INFO - Fetching open positions...
+2026-01-24 01:45:50 - SyncServiceLogger - INFO - Sending PnL Dashboard to Discord...
+2026-01-24 01:45:53 - SyncServiceLogger - INFO - --- Starting Bybit Real-time Monitor ---
+2026-01-24 01:45:54 - SyncServiceLogger - INFO - Services (Sync, Stats) initialized successfully.
+2026-01-24 01:45:54 - SyncServiceLogger - INFO - Starting Bybit Monitor (Custom WebSocket)...
+2026-01-24 01:45:54 - SyncServiceLogger - INFO - Fetching initial open positions (Scanning Linear & Inverse)...
+2026-01-24 01:45:55 - SyncServiceLogger - INFO - Loaded Active Position: BTCUSDT, Size: 0.3
+2026-01-24 01:45:55 - SyncServiceLogger - INFO - Loaded Active Position: SOLUSDT, Size: 150.0
+2026-01-24 01:45:55 - SyncServiceLogger - INFO - Total 2 active positions loaded.
+2026-01-24 01:45:55 - SyncServiceLogger - INFO - Fetching active orders to prevent ghost signals...
+2026-01-24 01:45:56 - SyncServiceLogger - ERROR - Failed to fetch initial state: Bybit API Error: Missing some parameters that must be filled in, symbol or settleCoin or baseCoin (Code: 10001)
+2026-01-24 01:45:56 - SyncServiceLogger - INFO - WebSocket Connected. Sending Auth...
+2026-01-24 01:45:56 - SyncServiceLogger - INFO - WebSocket Authentication Successful!
+2026-01-24 01:45:56 - SyncServiceLogger - INFO - Subscribing to topics: ['order', 'execution', 'position']
+2026-01-24 01:45:56 - SyncServiceLogger - INFO - Subscribed: 
+2026-01-24 01:46:34 - SyncServiceLogger - INFO - Position TP/SL Changed for BTCUSDT: TP 92300->93600, SL 89750->89750
+2026-01-24 01:46:39 - SyncServiceLogger - INFO - Sending Debounced TP/SL Alert for BTCUSDT
+2026-01-24 01:49:32 - SyncServiceLogger - INFO - --- Starting Bybit Real-time Monitor ---
+2026-01-24 01:49:32 - SyncServiceLogger - INFO - Services (Sync, Stats) initialized successfully.
+2026-01-24 01:49:32 - SyncServiceLogger - INFO - Starting Bybit Monitor (Custom WebSocket)...
+2026-01-24 01:49:32 - SyncServiceLogger - INFO - Fetching initial open positions (Scanning Linear & Inverse)...
+2026-01-24 01:49:33 - SyncServiceLogger - INFO - Loaded Active Position: BTCUSDT, Size: 0.3
+2026-01-24 01:49:33 - SyncServiceLogger - INFO - Loaded Active Position: SOLUSDT, Size: 150.0
+2026-01-24 01:49:33 - SyncServiceLogger - INFO - Total 2 active positions loaded.
+2026-01-24 01:49:33 - SyncServiceLogger - INFO - Fetching active orders to prevent ghost signals...
+2026-01-24 01:49:34 - SyncServiceLogger - ERROR - Failed to fetch initial state: Bybit API Error: Missing some parameters that must be filled in, symbol or settleCoin or baseCoin (Code: 10001)
+2026-01-24 01:49:34 - SyncServiceLogger - INFO - WebSocket Connected. Sending Auth...
+2026-01-24 01:49:34 - SyncServiceLogger - INFO - WebSocket Authentication Successful!
+2026-01-24 01:49:34 - SyncServiceLogger - INFO - Subscribing to topics: ['order', 'execution', 'position']
+2026-01-24 01:49:34 - SyncServiceLogger - INFO - Subscribed: 
+2026-01-24 01:49:39 - SyncServiceLogger - INFO - Position TP/SL Changed for BTCUSDT: TP 93600->93500, SL 89750->89750
+2026-01-24 01:49:44 - SyncServiceLogger - INFO - Sending Debounced TP/SL Alert for BTCUSDT
+2026-01-24 01:50:35 - SyncServiceLogger - INFO - Position TP/SL Changed for SOLUSDT: TP 139->0, SL 124->0
+2026-01-24 01:50:35 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SOLUSDT because position is closed (Size=0).
+2026-01-24 01:50:35 - SyncServiceLogger - INFO - Position TP/SL Changed for BTCUSDT: TP 93500->0, SL 89750->0
+2026-01-24 01:50:35 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for BTCUSDT because position is closed (Size=0).
+2026-01-24 01:50:38 - SyncServiceLogger - INFO - Starting synchronization process... (Silent Mode: False)
+2026-01-24 01:50:38 - SyncServiceLogger - INFO - Starting synchronization process... (Silent Mode: False)
+2026-01-24 01:50:39 - SyncServiceLogger - INFO - Last sync found at 2026-01-23 17:31:00+00:00. Starting from 2026-01-23 17:31:00.001000+00:00
+2026-01-24 01:50:39 - SyncServiceLogger - WARNING - Note: Syncing main account only.
+2026-01-24 01:50:39 - SyncServiceLogger - INFO - Fetching chunk from 2026-01-23 17:31:00.001000+00:00 to 2026-01-23 17:50:39.398000+00:00
+2026-01-24 01:50:39 - SyncServiceLogger - INFO - Last sync found at 2026-01-23 17:31:00+00:00. Starting from 2026-01-23 17:31:00.001000+00:00
+2026-01-24 01:50:39 - SyncServiceLogger - WARNING - Note: Syncing main account only.
+2026-01-24 01:50:39 - SyncServiceLogger - INFO - Fetching chunk from 2026-01-23 17:31:00.001000+00:00 to 2026-01-23 17:50:39.414000+00:00
+2026-01-24 01:50:40 - SyncServiceLogger - INFO - Total transactions retrieved: 43
+2026-01-24 01:50:40 - SyncServiceLogger - INFO - Processed 3 records (PnL > 0.5) to be written to Notion.
+2026-01-24 01:50:40 - SyncServiceLogger - INFO - Total transactions retrieved: 43
+2026-01-24 01:50:40 - SyncServiceLogger - INFO - Processed 3 records (PnL > 0.5) to be written to Notion.
+2026-01-24 01:50:41 - SyncServiceLogger - INFO - Skipped 1 duplicate records found in Notion.
+2026-01-24 01:50:41 - SyncServiceLogger - INFO - Successfully created record in Notion for symbol: BTCUSDT
+2026-01-24 01:50:42 - SyncServiceLogger - INFO - Successfully created record in Notion for symbol: SOLUSDT
+2026-01-24 01:50:43 - SyncServiceLogger - INFO - Synchronization process completed successfully.
+2026-01-24 01:50:43 - SyncServiceLogger - INFO - Skipped 2 duplicate records found in Notion.
+2026-01-24 01:50:43 - SyncServiceLogger - INFO - Successfully created record in Notion for symbol: SOLUSDT
+2026-01-24 01:50:44 - SyncServiceLogger - INFO - Synchronization process completed successfully.
+2026-01-24 01:51:09 - SyncServiceLogger - INFO - --- Generating Manual PnL Report ---
+2026-01-24 01:51:09 - SyncServiceLogger - INFO - Fetching account data from Bybit...
+2026-01-24 01:51:10 - SyncServiceLogger - INFO - Fetching open positions...
+2026-01-24 01:51:10 - SyncServiceLogger - INFO - Sending PnL Dashboard to Discord...
+2026-01-24 01:52:10 - SyncServiceLogger - INFO - --- Starting Bybit Real-time Monitor ---
+2026-01-24 01:52:10 - SyncServiceLogger - INFO - Services (Sync, Stats) initialized successfully.
+2026-01-24 01:52:10 - SyncServiceLogger - INFO - Starting Bybit Monitor (Custom WebSocket)...
+2026-01-24 01:52:10 - SyncServiceLogger - INFO - Fetching initial open positions (Scanning Linear & Inverse)...
+2026-01-24 01:52:11 - SyncServiceLogger - INFO - No active positions found on startup.
+2026-01-24 01:52:11 - SyncServiceLogger - INFO - Total 0 active positions loaded.
+2026-01-24 01:52:11 - SyncServiceLogger - INFO - Fetching active orders to prevent ghost signals...
+2026-01-24 01:52:11 - SyncServiceLogger - ERROR - Failed to fetch initial state: Bybit API Error: Missing some parameters that must be filled in, symbol or settleCoin or baseCoin (Code: 10001)
+2026-01-24 01:52:12 - SyncServiceLogger - INFO - WebSocket Connected. Sending Auth...
+2026-01-24 01:52:12 - SyncServiceLogger - INFO - WebSocket Authentication Successful!
+2026-01-24 01:52:12 - SyncServiceLogger - INFO - Subscribing to topics: ['order', 'execution', 'position']
+2026-01-24 01:52:12 - SyncServiceLogger - INFO - Subscribed: 
+2026-01-24 05:13:53 - SyncServiceLogger - WARNING - WebSocket Connection Closed.
+2026-01-24 05:13:53 - SyncServiceLogger - INFO - Reconnecting in 5 seconds...
+2026-01-24 05:13:58 - SyncServiceLogger - INFO - WebSocket Connected. Sending Auth...
+2026-01-24 05:13:58 - SyncServiceLogger - INFO - WebSocket Authentication Successful!
+2026-01-24 05:13:58 - SyncServiceLogger - INFO - Subscribing to topics: ['order', 'execution', 'position']
+2026-01-24 05:13:58 - SyncServiceLogger - INFO - Subscribed: 
+2026-01-24 05:15:00 - SyncServiceLogger - WARNING - WebSocket Connection Closed.
+2026-01-24 05:15:00 - SyncServiceLogger - INFO - Reconnecting in 5 seconds...
+2026-01-24 05:15:05 - SyncServiceLogger - INFO - WebSocket Connected. Sending Auth...
+2026-01-24 05:15:05 - SyncServiceLogger - INFO - WebSocket Authentication Successful!
+2026-01-24 05:15:05 - SyncServiceLogger - INFO - Subscribing to topics: ['order', 'execution', 'position']
+2026-01-24 05:15:05 - SyncServiceLogger - INFO - Subscribed: 
+2026-01-25 03:16:00 - SyncServiceLogger - WARNING - WebSocket Connection Closed.
+2026-01-25 03:16:00 - SyncServiceLogger - INFO - Reconnecting in 5 seconds...
+2026-01-25 03:16:05 - SyncServiceLogger - INFO - WebSocket Connected. Sending Auth...
+2026-01-25 03:16:05 - SyncServiceLogger - INFO - WebSocket Authentication Successful!
+2026-01-25 03:16:05 - SyncServiceLogger - INFO - Subscribing to topics: ['order', 'execution', 'position']
+2026-01-25 03:16:05 - SyncServiceLogger - INFO - Subscribed: 
+2026-01-25 04:40:54 - SyncServiceLogger - INFO - Position TP/SL Changed for ASTERUSDT: TP 0->3.1, SL 0->0.53
+2026-01-25 04:40:57 - SyncServiceLogger - INFO - Starting synchronization process... (Silent Mode: False)
+2026-01-25 04:40:58 - SyncServiceLogger - WARNING - PnL not ready for ASTERUSDT (Attempt 1/3). Retrying in 2s...
+2026-01-25 04:40:58 - SyncServiceLogger - INFO - Last sync found at 2026-01-23 17:50:00+00:00. Starting from 2026-01-23 17:50:00.001000+00:00
+2026-01-25 04:40:58 - SyncServiceLogger - WARNING - Note: Syncing main account only.
+2026-01-25 04:40:58 - SyncServiceLogger - INFO - Fetching chunk from 2026-01-23 17:50:00.001000+00:00 to 2026-01-24 20:40:58.505000+00:00
+2026-01-25 04:40:59 - SyncServiceLogger - INFO - Total transactions retrieved: 43
+2026-01-25 04:40:59 - SyncServiceLogger - INFO - Processed 2 records (PnL > 0.5) to be written to Notion.
+2026-01-25 04:40:59 - SyncServiceLogger - INFO - Sending Debounced TP/SL Alert for ASTERUSDT
+2026-01-25 04:41:01 - SyncServiceLogger - WARNING - PnL not ready for ASTERUSDT (Attempt 2/3). Retrying in 2s...
+2026-01-25 04:41:06 - SyncServiceLogger - INFO - Skipped 2 duplicate records found in Notion.
+2026-01-25 04:41:06 - SyncServiceLogger - INFO - No new unique records to create.
+2026-01-25 04:41:06 - SyncServiceLogger - INFO - Synchronization process completed successfully.
+2026-01-25 08:00:00 - SyncServiceLogger - INFO - Position TP/SL Changed for ASTERUSDT: TP 3.1->0, SL 0.53->0
+2026-01-25 08:00:00 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for ASTERUSDT because position is closed (Size=0).
+2026-01-25 08:00:00 - SyncServiceLogger - INFO - Position TP/SL Changed for ASTERUSDT: TP 0->3.1, SL 0->0.53
+2026-01-25 08:00:05 - SyncServiceLogger - INFO - Sending Debounced TP/SL Alert for ASTERUSDT
+2026-01-25 11:59:59 - SyncServiceLogger - INFO - Position TP/SL Changed for ASTERUSDT: TP 3.1->0, SL 0.53->0
+2026-01-25 11:59:59 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for ASTERUSDT because position is closed (Size=0).
+2026-01-25 11:59:59 - SyncServiceLogger - INFO - Position TP/SL Changed for ASTERUSDT: TP 0->3.1, SL 0->0.53
+2026-01-25 12:00:04 - SyncServiceLogger - INFO - Sending Debounced TP/SL Alert for ASTERUSDT
+2026-01-25 16:00:00 - SyncServiceLogger - INFO - Position TP/SL Changed for ASTERUSDT: TP 3.1->0, SL 0.53->0
+2026-01-25 16:00:00 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for ASTERUSDT because position is closed (Size=0).
+2026-01-25 16:00:00 - SyncServiceLogger - INFO - Position TP/SL Changed for ASTERUSDT: TP 0->3.1, SL 0->0.53
+2026-01-25 16:00:05 - SyncServiceLogger - INFO - Sending Debounced TP/SL Alert for ASTERUSDT
+2026-01-25 19:59:59 - SyncServiceLogger - INFO - Position TP/SL Changed for ASTERUSDT: TP 3.1->0, SL 0.53->0
+2026-01-25 19:59:59 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for ASTERUSDT because position is closed (Size=0).
+2026-01-25 19:59:59 - SyncServiceLogger - INFO - Position TP/SL Changed for ASTERUSDT: TP 0->3.1, SL 0->0.53
+2026-01-25 20:00:04 - SyncServiceLogger - INFO - Sending Debounced TP/SL Alert for ASTERUSDT
+2026-01-25 23:59:59 - SyncServiceLogger - INFO - Position TP/SL Changed for ASTERUSDT: TP 3.1->0, SL 0.53->0
+2026-01-25 23:59:59 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for ASTERUSDT because position is closed (Size=0).
+2026-01-25 23:59:59 - SyncServiceLogger - INFO - Position TP/SL Changed for ASTERUSDT: TP 0->3.1, SL 0->0.53
+2026-01-26 00:00:04 - SyncServiceLogger - INFO - Sending Debounced TP/SL Alert for ASTERUSDT
+2026-01-26 00:32:12 - SyncServiceLogger - INFO - --- Starting Bybit Real-time Monitor ---
+2026-01-26 00:32:12 - SyncServiceLogger - INFO - Services (Sync, Stats) initialized successfully.
+2026-01-26 00:32:12 - SyncServiceLogger - INFO - Starting Bybit Monitor (Custom WebSocket)...
+2026-01-26 00:32:12 - SyncServiceLogger - INFO - Fetching initial open positions (Scanning Linear & Inverse)...
+2026-01-26 00:32:14 - SyncServiceLogger - INFO - Loaded Active Position: ASTERUSDT, Size: 2100.0
+2026-01-26 00:32:14 - SyncServiceLogger - INFO - Total 1 active positions loaded.
+2026-01-26 00:32:14 - SyncServiceLogger - INFO - Fetching active orders to prevent ghost signals...
+2026-01-26 00:32:14 - SyncServiceLogger - ERROR - Failed to fetch initial state: Bybit API Error: Missing some parameters that must be filled in, symbol or settleCoin or baseCoin (Code: 10001)
+2026-01-26 00:32:15 - SyncServiceLogger - INFO - WebSocket Connected. Sending Auth...
+2026-01-26 00:32:15 - SyncServiceLogger - INFO - WebSocket Authentication Successful!
+2026-01-26 00:32:15 - SyncServiceLogger - INFO - Subscribing to topics: ['order', 'execution', 'position']
+2026-01-26 00:32:15 - SyncServiceLogger - INFO - Subscribed: 
+2026-01-26 12:24:11 - SyncServiceLogger - INFO - --- Starting Bybit Real-time Monitor ---
+2026-01-26 12:24:12 - SyncServiceLogger - INFO - Services (Sync, Stats) initialized successfully.
+2026-01-26 12:24:12 - SyncServiceLogger - INFO - Starting Bybit Monitor (Custom WebSocket)...
+2026-01-26 12:24:12 - SyncServiceLogger - INFO - Fetching initial open positions (Scanning Linear & Inverse)...
+2026-01-26 12:24:13 - SyncServiceLogger - INFO - Loaded Active Position: ASTERUSDT, Size: 2100.0
+2026-01-26 12:24:13 - SyncServiceLogger - INFO - Total 1 active positions loaded.
+2026-01-26 12:24:13 - SyncServiceLogger - INFO - Fetching active orders to prevent ghost signals...
+2026-01-26 12:24:13 - SyncServiceLogger - ERROR - Failed to fetch initial state: Bybit API Error: Missing some parameters that must be filled in, symbol or settleCoin or baseCoin (Code: 10001)
+2026-01-26 12:24:14 - SyncServiceLogger - INFO - WebSocket Connected. Sending Auth...
+2026-01-26 12:24:14 - SyncServiceLogger - INFO - WebSocket Authentication Successful!
+2026-01-26 12:24:14 - SyncServiceLogger - INFO - Subscribing to topics: ['order', 'execution', 'position']
+2026-01-26 12:24:14 - SyncServiceLogger - INFO - Subscribed: 
+2026-01-26 14:26:05 - SyncServiceLogger - INFO - Position TP/SL Changed for BTCUSDT: TP 0->85700, SL 0->89000
+2026-01-26 14:26:05 - SyncServiceLogger - INFO - TP/SL for BTCUSDT reverted to original state. Cancelling debounce timer.
+2026-01-26 14:26:08 - SyncServiceLogger - INFO - Starting synchronization process... (Silent Mode: False)
+2026-01-26 14:26:08 - SyncServiceLogger - INFO - Last sync found at 2026-01-23 17:50:00+00:00. Starting from 2026-01-23 17:50:00.001000+00:00
+2026-01-26 14:26:08 - SyncServiceLogger - WARNING - Note: Syncing main account only.
+2026-01-26 14:26:08 - SyncServiceLogger - INFO - Fetching chunk from 2026-01-23 17:50:00.001000+00:00 to 2026-01-26 06:26:08.848000+00:00
+2026-01-26 14:26:09 - SyncServiceLogger - WARNING - PnL not ready for BTCUSDT (Attempt 1/3). Retrying in 2s...
+2026-01-26 14:26:10 - SyncServiceLogger - INFO - Total transactions retrieved: 52
+2026-01-26 14:26:10 - SyncServiceLogger - INFO - Processed 2 records (PnL > 0.5) to be written to Notion.
+2026-01-26 14:26:11 - SyncServiceLogger - INFO - Skipped 2 duplicate records found in Notion.
+2026-01-26 14:26:11 - SyncServiceLogger - INFO - No new unique records to create.
+2026-01-26 14:26:11 - SyncServiceLogger - INFO - Synchronization process completed successfully.
+2026-01-26 14:26:11 - SyncServiceLogger - WARNING - PnL not ready for BTCUSDT (Attempt 2/3). Retrying in 2s...
+2026-01-26 14:30:43 - SyncServiceLogger - INFO - Position TP/SL Changed for BTCUSDT: TP 0->84666, SL 0->89000
+2026-01-26 14:30:48 - SyncServiceLogger - INFO - Sending Debounced TP/SL Alert for BTCUSDT
+2026-01-26 15:59:59 - SyncServiceLogger - INFO - Position TP/SL Changed for BTCUSDT: TP 84666->0, SL 89000->0
+2026-01-26 15:59:59 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for BTCUSDT because position is closed (Size=0).
+2026-01-26 15:59:59 - SyncServiceLogger - INFO - Position TP/SL Changed for ASTERUSDT: TP 3.1->0, SL 0.53->0
+2026-01-26 15:59:59 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for ASTERUSDT because position is closed (Size=0).
+2026-01-26 19:59:59 - SyncServiceLogger - INFO - Position TP/SL Changed for ASTERUSDT: TP 3.1->0, SL 0.53->0
+2026-01-26 19:59:59 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for ASTERUSDT because position is closed (Size=0).
+2026-01-26 22:31:44 - SyncServiceLogger - INFO - --- Generating Manual PnL Report ---
+2026-01-26 22:31:44 - SyncServiceLogger - INFO - Fetching account data from Bybit...
+2026-01-26 22:31:44 - SyncServiceLogger - INFO - Fetching open positions...
+2026-01-26 22:31:45 - SyncServiceLogger - INFO - Sending PnL Dashboard to Discord...
+2026-01-26 23:18:06 - SyncServiceLogger - INFO - Position TP/SL Changed for BTCUSDT: TP 84666->84666, SL 89000->90200
+2026-01-26 23:18:11 - SyncServiceLogger - INFO - Sending Debounced TP/SL Alert for BTCUSDT
+2026-01-26 23:41:23 - SyncServiceLogger - INFO - Position TP/SL Changed for BTCUSDT: TP 84666->84666, SL 90200->89000
+2026-01-26 23:41:28 - SyncServiceLogger - INFO - Sending Debounced TP/SL Alert for BTCUSDT
+2026-01-26 23:59:59 - SyncServiceLogger - INFO - Position TP/SL Changed for BTCUSDT: TP 84666->0, SL 89000->0
+2026-01-26 23:59:59 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for BTCUSDT because position is closed (Size=0).
+2026-01-26 23:59:59 - SyncServiceLogger - INFO - Position TP/SL Changed for ASTERUSDT: TP 3.1->0, SL 0.53->0
+2026-01-26 23:59:59 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for ASTERUSDT because position is closed (Size=0).
+2026-01-27 00:16:16 - SyncServiceLogger - INFO - Position TP/SL Changed for BTCUSDT: TP 84666->0, SL 89000->0
+2026-01-27 00:16:16 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for BTCUSDT because position is closed (Size=0).
+2026-01-27 00:16:19 - SyncServiceLogger - INFO - Starting synchronization process... (Silent Mode: False)
+2026-01-27 00:16:22 - SyncServiceLogger - INFO - Last sync found at 2026-01-23 17:50:00+00:00. Starting from 2026-01-23 17:50:00.001000+00:00
+2026-01-27 00:16:22 - SyncServiceLogger - WARNING - Note: Syncing main account only.
+2026-01-27 00:16:22 - SyncServiceLogger - INFO - Fetching chunk from 2026-01-23 17:50:00.001000+00:00 to 2026-01-26 16:16:22.075000+00:00
+2026-01-27 00:16:23 - SyncServiceLogger - INFO - Total transactions retrieved: 60
+2026-01-27 00:16:23 - SyncServiceLogger - INFO - Processed 3 records (PnL > 0.5) to be written to Notion.
+2026-01-27 00:16:24 - SyncServiceLogger - INFO - Skipped 2 duplicate records found in Notion.
+2026-01-27 00:16:24 - SyncServiceLogger - INFO - Successfully created record in Notion for symbol: BTCUSDT
+2026-01-27 00:16:24 - SyncServiceLogger - INFO - Synchronization process completed successfully.
+2026-01-27 00:16:36 - SyncServiceLogger - INFO - Position TP/SL Changed for BTCUSDT: TP 84666->84666, SL 89000->87900
+2026-01-27 00:16:41 - SyncServiceLogger - INFO - Sending Debounced TP/SL Alert for BTCUSDT
+2026-01-27 00:23:27 - SyncServiceLogger - INFO - Position TP/SL Changed for BTCUSDT: TP 84666->0, SL 87900->0
+2026-01-27 00:23:27 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for BTCUSDT because position is closed (Size=0).
+2026-01-27 00:23:27 - SyncServiceLogger - INFO - Position TP/SL Changed for BTCUSDT: TP 84666->0, SL 87900->0
+2026-01-27 00:23:27 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for BTCUSDT because position is closed (Size=0).
+2026-01-27 00:23:27 - SyncServiceLogger - INFO - Position TP/SL Changed for BTCUSDT: TP 84666->0, SL 87900->0
+2026-01-27 00:23:27 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for BTCUSDT because position is closed (Size=0).
+2026-01-27 00:23:30 - SyncServiceLogger - INFO - Starting synchronization process... (Silent Mode: False)
+2026-01-27 00:23:32 - SyncServiceLogger - INFO - Last sync found at 2026-01-26 16:16:00+00:00. Starting from 2026-01-26 16:16:00.001000+00:00
+2026-01-27 00:23:32 - SyncServiceLogger - WARNING - Note: Syncing main account only.
+2026-01-27 00:23:32 - SyncServiceLogger - INFO - Fetching chunk from 2026-01-26 16:16:00.001000+00:00 to 2026-01-26 16:23:32.008000+00:00
+2026-01-27 00:23:32 - SyncServiceLogger - INFO - Total transactions retrieved: 8
+2026-01-27 00:23:32 - SyncServiceLogger - INFO - Processed 2 records (PnL > 0.5) to be written to Notion.
+2026-01-27 00:23:33 - SyncServiceLogger - INFO - Skipped 1 duplicate records found in Notion.
+2026-01-27 00:23:34 - SyncServiceLogger - INFO - Successfully created record in Notion for symbol: BTCUSDT
+2026-01-27 00:23:34 - SyncServiceLogger - INFO - Synchronization process completed successfully.
+2026-01-27 03:54:15 - SyncServiceLogger - INFO - Position TP/SL Changed for ETHUSDT: TP 0->3165, SL 0->2864
+2026-01-27 03:54:15 - SyncServiceLogger - INFO - TP/SL for ETHUSDT reverted to original state. Cancelling debounce timer.
+2026-01-27 03:54:18 - SyncServiceLogger - INFO - Starting synchronization process... (Silent Mode: False)
+2026-01-27 03:54:18 - SyncServiceLogger - WARNING - PnL not ready for ETHUSDT (Attempt 1/3). Retrying in 2s...
+2026-01-27 03:54:21 - SyncServiceLogger - INFO - Last sync found at 2026-01-26 16:23:00+00:00. Starting from 2026-01-26 16:23:00.001000+00:00
+2026-01-27 03:54:21 - SyncServiceLogger - WARNING - Note: Syncing main account only.
+2026-01-27 03:54:21 - SyncServiceLogger - INFO - Fetching chunk from 2026-01-26 16:23:00.001000+00:00 to 2026-01-26 19:54:21.201000+00:00
+2026-01-27 03:54:21 - SyncServiceLogger - WARNING - PnL not ready for ETHUSDT (Attempt 2/3). Retrying in 2s...
+2026-01-27 03:54:22 - SyncServiceLogger - INFO - Total transactions retrieved: 6
+2026-01-27 03:54:22 - SyncServiceLogger - INFO - Processed 1 records (PnL > 0.5) to be written to Notion.
+2026-01-27 03:54:22 - SyncServiceLogger - INFO - Skipped 1 duplicate records found in Notion.
+2026-01-27 03:54:22 - SyncServiceLogger - INFO - No new unique records to create.
+2026-01-27 03:54:22 - SyncServiceLogger - INFO - Synchronization process completed successfully.
+2026-01-27 03:54:29 - SyncServiceLogger - INFO - Position TP/SL Changed for ETHUSDT: TP 0->3165, SL 0->2864
+2026-01-27 03:54:29 - SyncServiceLogger - INFO - TP/SL for ETHUSDT reverted to original state. Cancelling debounce timer.
+2026-01-27 03:54:30 - SyncServiceLogger - INFO - Position TP/SL Changed for ETHUSDT: TP 0->3165, SL 0->2864
+2026-01-27 03:54:30 - SyncServiceLogger - INFO - TP/SL for ETHUSDT reverted to original state. Cancelling debounce timer.
+2026-01-27 03:54:30 - SyncServiceLogger - INFO - Position TP/SL Changed for ETHUSDT: TP 0->3165, SL 0->2864
+2026-01-27 03:54:30 - SyncServiceLogger - INFO - TP/SL for ETHUSDT reverted to original state. Cancelling debounce timer.
+2026-01-27 03:54:31 - SyncServiceLogger - INFO - Position TP/SL Changed for ETHUSDT: TP 0->3165, SL 0->2864
+2026-01-27 03:54:31 - SyncServiceLogger - INFO - TP/SL for ETHUSDT reverted to original state. Cancelling debounce timer.
+2026-01-27 03:54:32 - SyncServiceLogger - INFO - Starting synchronization process... (Silent Mode: False)
+2026-01-27 03:54:33 - SyncServiceLogger - INFO - Position TP/SL Changed for ETHUSDT: TP 0->3165, SL 0->2864
+2026-01-27 03:54:33 - SyncServiceLogger - INFO - TP/SL for ETHUSDT reverted to original state. Cancelling debounce timer.
+2026-01-27 03:54:33 - SyncServiceLogger - INFO - Starting synchronization process... (Silent Mode: False)
+2026-01-27 03:54:33 - SyncServiceLogger - INFO - Last sync found at 2026-01-26 16:23:00+00:00. Starting from 2026-01-26 16:23:00.001000+00:00
+2026-01-27 03:54:33 - SyncServiceLogger - WARNING - Note: Syncing main account only.
+2026-01-27 03:54:33 - SyncServiceLogger - INFO - Fetching chunk from 2026-01-26 16:23:00.001000+00:00 to 2026-01-26 19:54:33.543000+00:00
+2026-01-27 03:54:33 - SyncServiceLogger - INFO - Starting synchronization process... (Silent Mode: False)
+2026-01-27 03:54:34 - SyncServiceLogger - INFO - Last sync found at 2026-01-26 16:23:00+00:00. Starting from 2026-01-26 16:23:00.001000+00:00
+2026-01-27 03:54:34 - SyncServiceLogger - WARNING - Note: Syncing main account only.
+2026-01-27 03:54:34 - SyncServiceLogger - INFO - Fetching chunk from 2026-01-26 16:23:00.001000+00:00 to 2026-01-26 19:54:34.058000+00:00
+2026-01-27 03:54:34 - SyncServiceLogger - INFO - Last sync found at 2026-01-26 16:23:00+00:00. Starting from 2026-01-26 16:23:00.001000+00:00
+2026-01-27 03:54:34 - SyncServiceLogger - WARNING - Note: Syncing main account only.
+2026-01-27 03:54:34 - SyncServiceLogger - INFO - Fetching chunk from 2026-01-26 16:23:00.001000+00:00 to 2026-01-26 19:54:34.163000+00:00
+2026-01-27 03:54:34 - SyncServiceLogger - INFO - Starting synchronization process... (Silent Mode: False)
+2026-01-27 03:54:34 - SyncServiceLogger - INFO - Total transactions retrieved: 10
+2026-01-27 03:54:34 - SyncServiceLogger - INFO - Processed 1 records (PnL > 0.5) to be written to Notion.
+2026-01-27 03:54:34 - SyncServiceLogger - INFO - Last sync found at 2026-01-26 16:23:00+00:00. Starting from 2026-01-26 16:23:00.001000+00:00
+2026-01-27 03:54:34 - SyncServiceLogger - WARNING - Note: Syncing main account only.
+2026-01-27 03:54:34 - SyncServiceLogger - INFO - Fetching chunk from 2026-01-26 16:23:00.001000+00:00 to 2026-01-26 19:54:34.965000+00:00
+2026-01-27 03:54:34 - SyncServiceLogger - INFO - Total transactions retrieved: 10
+2026-01-27 03:54:34 - SyncServiceLogger - INFO - Processed 1 records (PnL > 0.5) to be written to Notion.
+2026-01-27 03:54:35 - SyncServiceLogger - INFO - Skipped 1 duplicate records found in Notion.
+2026-01-27 03:54:35 - SyncServiceLogger - INFO - No new unique records to create.
+2026-01-27 03:54:35 - SyncServiceLogger - INFO - Synchronization process completed successfully.
+2026-01-27 03:54:35 - SyncServiceLogger - INFO - Total transactions retrieved: 10
+2026-01-27 03:54:35 - SyncServiceLogger - INFO - Processed 1 records (PnL > 0.5) to be written to Notion.
+2026-01-27 03:54:35 - SyncServiceLogger - INFO - Skipped 1 duplicate records found in Notion.
+2026-01-27 03:54:35 - SyncServiceLogger - INFO - No new unique records to create.
+2026-01-27 03:54:35 - SyncServiceLogger - INFO - Synchronization process completed successfully.
+2026-01-27 03:54:36 - SyncServiceLogger - INFO - Total transactions retrieved: 11
+2026-01-27 03:54:36 - SyncServiceLogger - INFO - Processed 1 records (PnL > 0.5) to be written to Notion.
+2026-01-27 03:54:36 - SyncServiceLogger - INFO - Starting synchronization process... (Silent Mode: False)
+2026-01-27 03:54:36 - SyncServiceLogger - INFO - Skipped 1 duplicate records found in Notion.
+2026-01-27 03:54:36 - SyncServiceLogger - INFO - No new unique records to create.
+2026-01-27 03:54:36 - SyncServiceLogger - INFO - Synchronization process completed successfully.
+2026-01-27 03:54:36 - SyncServiceLogger - INFO - Skipped 1 duplicate records found in Notion.
+2026-01-27 03:54:36 - SyncServiceLogger - INFO - No new unique records to create.
+2026-01-27 03:54:36 - SyncServiceLogger - INFO - Synchronization process completed successfully.
+2026-01-27 03:54:36 - SyncServiceLogger - INFO - Last sync found at 2026-01-26 16:23:00+00:00. Starting from 2026-01-26 16:23:00.001000+00:00
+2026-01-27 03:54:36 - SyncServiceLogger - WARNING - Note: Syncing main account only.
+2026-01-27 03:54:36 - SyncServiceLogger - INFO - Fetching chunk from 2026-01-26 16:23:00.001000+00:00 to 2026-01-26 19:54:36.851000+00:00
+2026-01-27 03:54:37 - SyncServiceLogger - WARNING - PnL not ready for ETHUSDT (Attempt 1/3). Retrying in 2s...
+2026-01-27 03:54:38 - SyncServiceLogger - INFO - Total transactions retrieved: 11
+2026-01-27 03:54:38 - SyncServiceLogger - INFO - Processed 1 records (PnL > 0.5) to be written to Notion.
+2026-01-27 03:54:38 - SyncServiceLogger - INFO - Skipped 1 duplicate records found in Notion.
+2026-01-27 03:54:38 - SyncServiceLogger - INFO - No new unique records to create.
+2026-01-27 03:54:38 - SyncServiceLogger - INFO - Synchronization process completed successfully.
+2026-01-27 03:54:39 - SyncServiceLogger - WARNING - PnL not ready for ETHUSDT (Attempt 2/3). Retrying in 2s...
+2026-01-27 03:59:58 - SyncServiceLogger - INFO - Position TP/SL Changed for ASTERUSDT: TP 3.1->0, SL 0.53->0
+2026-01-27 03:59:58 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for ASTERUSDT because position is closed (Size=0).
+2026-01-27 12:35:39 - SyncServiceLogger - INFO - --- Generating Manual PnL Report ---
+2026-01-27 12:35:39 - SyncServiceLogger - INFO - Fetching account data from Bybit...
+2026-01-27 12:35:40 - SyncServiceLogger - INFO - Fetching open positions...
+2026-01-27 12:35:41 - SyncServiceLogger - INFO - Sending PnL Dashboard to Discord...
+2026-01-27 12:35:58 - SyncServiceLogger - INFO - --- Starting Bybit Real-time Monitor ---
+2026-01-27 12:35:58 - SyncServiceLogger - INFO - Services (Sync, Stats) initialized successfully.
+2026-01-27 12:35:58 - SyncServiceLogger - INFO - Starting Bybit Monitor (Custom WebSocket)...
+2026-01-27 12:35:58 - SyncServiceLogger - INFO - Fetching initial open positions (Scanning Linear & Inverse)...
+2026-01-27 12:36:00 - SyncServiceLogger - INFO - Loaded Active Position: ASTERUSDT, Size: 2100.0
+2026-01-27 12:36:00 - SyncServiceLogger - INFO - Loaded Active Position: BTCUSDT, Size: 0.5
+2026-01-27 12:36:00 - SyncServiceLogger - INFO - Total 2 active positions loaded.
+2026-01-27 12:36:00 - SyncServiceLogger - INFO - Fetching active orders to prevent ghost signals...
+2026-01-27 12:36:00 - SyncServiceLogger - ERROR - Failed to fetch initial state: Bybit API Error: Missing some parameters that must be filled in, symbol or settleCoin or baseCoin (Code: 10001)
+2026-01-27 12:36:00 - SyncServiceLogger - INFO - WebSocket Connected. Sending Auth...
+2026-01-27 12:36:00 - SyncServiceLogger - INFO - WebSocket Authentication Successful!
+2026-01-27 12:36:00 - SyncServiceLogger - INFO - Subscribing to topics: ['order', 'execution', 'position']
+2026-01-27 12:36:00 - SyncServiceLogger - INFO - Subscribed: 
+2026-01-27 16:00:00 - SyncServiceLogger - INFO - Position TP/SL Changed for BTCUSDT: TP 85666->0, SL 90200->0
+2026-01-27 16:00:00 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for BTCUSDT because position is closed (Size=0).
+2026-01-27 16:00:00 - SyncServiceLogger - INFO - Position TP/SL Changed for ASTERUSDT: TP 3.1->0, SL 0.53->0
+2026-01-27 16:00:00 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for ASTERUSDT because position is closed (Size=0).
+2026-01-27 18:12:12 - SyncServiceLogger - INFO - --- Generating Manual PnL Report ---
+2026-01-27 18:12:12 - SyncServiceLogger - INFO - Fetching account data from Bybit...
+2026-01-27 18:12:13 - SyncServiceLogger - INFO - Fetching open positions...
+2026-01-27 18:12:14 - SyncServiceLogger - INFO - Sending PnL Dashboard to Discord...
+2026-01-27 18:13:16 - SyncServiceLogger - INFO - --- Generating Manual PnL Report ---
+2026-01-27 18:13:16 - SyncServiceLogger - INFO - Fetching account data from Bybit...
+2026-01-27 18:13:17 - SyncServiceLogger - INFO - Fetching open positions...
+2026-01-27 18:13:18 - SyncServiceLogger - INFO - Sending PnL Dashboard to Discord...
+2026-01-27 18:14:16 - SyncServiceLogger - INFO - --- Generating Manual PnL Report ---
+2026-01-27 18:14:16 - SyncServiceLogger - INFO - Fetching account data from Bybit...
+2026-01-27 18:14:17 - SyncServiceLogger - INFO - Fetching open positions...
+2026-01-27 18:14:18 - SyncServiceLogger - INFO - Sending PnL Dashboard to Discord...
+2026-01-27 18:14:35 - SyncServiceLogger - INFO - --- Generating Manual PnL Report ---
+2026-01-27 18:14:35 - SyncServiceLogger - INFO - Fetching account data from Bybit...
+2026-01-27 18:14:36 - SyncServiceLogger - INFO - Fetching open positions...
+2026-01-27 18:14:37 - SyncServiceLogger - INFO - Sending PnL Dashboard to Discord...
+2026-01-27 18:15:23 - SyncServiceLogger - INFO - --- Generating Manual PnL Report ---
+2026-01-27 18:15:23 - SyncServiceLogger - INFO - Fetching account data from Bybit...
+2026-01-27 18:15:24 - SyncServiceLogger - INFO - Fetching open positions...
+2026-01-27 18:15:25 - SyncServiceLogger - INFO - Sending PnL Dashboard to Discord...
+2026-01-27 18:15:38 - SyncServiceLogger - INFO - --- Generating Manual PnL Report ---
+2026-01-27 18:15:38 - SyncServiceLogger - INFO - Fetching account data from Bybit...
+2026-01-27 18:15:38 - SyncServiceLogger - INFO - Fetching open positions...
+2026-01-27 18:15:40 - SyncServiceLogger - INFO - Sending PnL Dashboard to Discord...
+2026-01-27 18:28:35 - SyncServiceLogger - INFO - --- Generating Manual PnL Report ---
+2026-01-27 18:28:35 - SyncServiceLogger - INFO - Fetching account data from Bybit...
+2026-01-27 18:28:35 - SyncServiceLogger - INFO - Fetching open positions...
+2026-01-27 18:28:36 - SyncServiceLogger - INFO - Sending PnL Dashboard to Discord...
+2026-01-27 18:28:52 - SyncServiceLogger - INFO - --- Generating Manual PnL Report ---
+2026-01-27 18:28:52 - SyncServiceLogger - INFO - Fetching account data from Bybit...
+2026-01-27 18:28:52 - SyncServiceLogger - INFO - Fetching open positions...
+2026-01-27 18:28:53 - SyncServiceLogger - INFO - Sending PnL Dashboard to Discord...
+2026-01-27 18:30:14 - SyncServiceLogger - INFO - --- Generating Manual PnL Report ---
+2026-01-27 18:30:14 - SyncServiceLogger - INFO - Fetching account data from Bybit...
+2026-01-27 18:30:15 - SyncServiceLogger - INFO - Fetching open positions...
+2026-01-27 18:30:16 - SyncServiceLogger - INFO - Sending PnL Dashboard to Discord...
+2026-01-27 18:31:05 - SyncServiceLogger - INFO - --- Generating Manual PnL Report ---
+2026-01-27 18:31:05 - SyncServiceLogger - INFO - Fetching account data from Bybit...
+2026-01-27 18:31:05 - SyncServiceLogger - INFO - Fetching open positions...
+2026-01-27 18:31:07 - SyncServiceLogger - INFO - Sending PnL Dashboard to Discord...
+2026-01-27 18:31:16 - SyncServiceLogger - INFO - --- Generating Manual PnL Report ---
+2026-01-27 18:31:16 - SyncServiceLogger - INFO - Fetching account data from Bybit...
+2026-01-27 18:31:17 - SyncServiceLogger - INFO - Fetching open positions...
+2026-01-27 18:31:18 - SyncServiceLogger - INFO - Sending PnL Dashboard to Discord...
+2026-01-27 18:35:01 - SyncServiceLogger - INFO - --- Generating Manual PnL Report ---
+2026-01-27 18:35:01 - SyncServiceLogger - INFO - Fetching account data from Bybit...
+2026-01-27 18:35:02 - SyncServiceLogger - INFO - Fetching open positions...
+2026-01-27 18:35:03 - SyncServiceLogger - INFO - Sending PnL Dashboard to Discord...
+2026-01-27 18:40:07 - SyncServiceLogger - INFO - --- Generating Manual PnL Report ---
+2026-01-27 18:40:07 - SyncServiceLogger - INFO - Fetching account data from Bybit...
+2026-01-27 18:40:08 - SyncServiceLogger - INFO - Fetching open positions...
+2026-01-27 18:40:09 - SyncServiceLogger - INFO - Sending PnL Dashboard to Discord...
+2026-01-27 18:40:18 - SyncServiceLogger - INFO - --- Generating Manual PnL Report ---
+2026-01-27 18:40:18 - SyncServiceLogger - INFO - Fetching account data from Bybit...
+2026-01-27 18:40:18 - SyncServiceLogger - INFO - Fetching open positions...
+2026-01-27 18:40:20 - SyncServiceLogger - INFO - Sending PnL Dashboard to Discord...
+2026-01-27 18:40:25 - SyncServiceLogger - INFO - --- Generating Manual PnL Report ---
+2026-01-27 18:40:25 - SyncServiceLogger - INFO - Fetching account data from Bybit...
+2026-01-27 18:40:26 - SyncServiceLogger - INFO - Fetching open positions...
+2026-01-27 18:40:27 - SyncServiceLogger - INFO - Sending PnL Dashboard to Discord...
+2026-01-27 18:40:37 - SyncServiceLogger - INFO - --- Generating Manual PnL Report ---
+2026-01-27 18:40:37 - SyncServiceLogger - INFO - Fetching account data from Bybit...
+2026-01-27 18:40:38 - SyncServiceLogger - INFO - Fetching open positions...
+2026-01-27 18:40:39 - SyncServiceLogger - INFO - Sending PnL Dashboard to Discord...
+2026-01-27 18:40:45 - SyncServiceLogger - INFO - --- Generating Manual PnL Report ---
+2026-01-27 18:40:45 - SyncServiceLogger - INFO - Fetching account data from Bybit...
+2026-01-27 18:40:46 - SyncServiceLogger - INFO - Fetching open positions...
+2026-01-27 18:40:47 - SyncServiceLogger - INFO - Sending PnL Dashboard to Discord...
+2026-01-27 18:40:57 - SyncServiceLogger - INFO - --- Generating Manual PnL Report ---
+2026-01-27 18:40:57 - SyncServiceLogger - INFO - Fetching account data from Bybit...
+2026-01-27 18:40:57 - SyncServiceLogger - INFO - Fetching open positions...
+2026-01-27 18:40:58 - SyncServiceLogger - INFO - Sending PnL Dashboard to Discord...
+2026-01-27 18:41:10 - SyncServiceLogger - INFO - --- Generating Manual PnL Report ---
+2026-01-27 18:41:10 - SyncServiceLogger - INFO - Fetching account data from Bybit...
+2026-01-27 18:41:11 - SyncServiceLogger - INFO - Fetching open positions...
+2026-01-27 18:41:12 - SyncServiceLogger - INFO - Sending PnL Dashboard to Discord...
+2026-01-27 18:41:27 - SyncServiceLogger - INFO - --- Generating Manual PnL Report ---
+2026-01-27 18:41:27 - SyncServiceLogger - INFO - Fetching account data from Bybit...
+2026-01-27 18:41:28 - SyncServiceLogger - INFO - Fetching open positions...
+2026-01-27 18:41:29 - SyncServiceLogger - INFO - Sending PnL Dashboard to Discord...
+2026-01-27 18:42:08 - SyncServiceLogger - INFO - --- Generating Manual PnL Report ---
+2026-01-27 18:42:08 - SyncServiceLogger - INFO - Fetching account data from Bybit...
+2026-01-27 18:42:08 - SyncServiceLogger - INFO - Fetching open positions...
+2026-01-27 18:42:10 - SyncServiceLogger - INFO - Sending PnL Dashboard to Discord...
+2026-01-27 18:46:35 - SyncServiceLogger - INFO - Fetching PnL records since 2026-01-23 00:00:00
+2026-01-27 18:46:36 - SyncServiceLogger - INFO - Fetched 7 records for multi-day stats.
+2026-01-27 18:46:36 - SyncServiceLogger - INFO - Multi-day stats calculated: {'01-23': 46.3621026, '01-24': 780.92083974, '01-25': 0.0, '01-26': 0.0, '01-27': 213.37303012}, Total: 1040.6559724600002
+2026-01-27 18:49:48 - SyncServiceLogger - INFO - --- Generating Manual PnL Report ---
+2026-01-27 18:49:48 - SyncServiceLogger - INFO - Fetching account data from Bybit...
+2026-01-27 18:49:49 - SyncServiceLogger - INFO - Fetching multi-day stats...
+2026-01-27 18:49:49 - SyncServiceLogger - INFO - Fetching PnL records since 2026-01-23 00:00:00
+2026-01-27 18:49:50 - SyncServiceLogger - INFO - Fetched 7 records for multi-day stats.
+2026-01-27 18:49:50 - SyncServiceLogger - INFO - Multi-day stats calculated: {'01-23': 46.3621026, '01-24': 780.92083974, '01-25': 0.0, '01-26': 0.0, '01-27': 213.37303012}, Total: 1040.6559724600002
+2026-01-27 18:49:50 - SyncServiceLogger - INFO - Fetching open positions...
+2026-01-27 18:49:51 - SyncServiceLogger - INFO - Sending PnL Dashboard to Discord...
+2026-01-27 18:49:52 - SyncServiceLogger - INFO - Reports sent successfully!
+2026-01-27 19:27:51 - SyncServiceLogger - INFO - --- Starting Bybit Real-time Monitor ---
+2026-01-27 19:27:51 - SyncServiceLogger - INFO - Services (Sync, Stats) initialized successfully.
+2026-01-27 19:27:51 - SyncServiceLogger - INFO - Starting Bybit Monitor (Custom WebSocket)...
+2026-01-27 19:27:51 - SyncServiceLogger - INFO - Fetching initial open positions (Scanning Linear & Inverse)...
+2026-01-27 19:27:52 - SyncServiceLogger - INFO - Loaded Active Position: ASTERUSDT, Size: 2100.0
+2026-01-27 19:27:52 - SyncServiceLogger - INFO - Total 1 active positions loaded.
+2026-01-27 19:27:52 - SyncServiceLogger - INFO - Fetching active orders to prevent ghost signals...
+2026-01-27 19:27:53 - SyncServiceLogger - ERROR - Failed to fetch initial state: Bybit API Error: Missing some parameters that must be filled in, symbol or settleCoin or baseCoin (Code: 10001)
+2026-01-27 19:27:53 - SyncServiceLogger - INFO - WebSocket Connected. Sending Auth...
+2026-01-27 19:27:53 - SyncServiceLogger - INFO - WebSocket Authentication Successful!
+2026-01-27 19:27:53 - SyncServiceLogger - INFO - Subscribing to topics: ['order', 'execution', 'position']
+2026-01-27 19:27:53 - SyncServiceLogger - INFO - Subscribed: 
+2026-01-27 19:27:58 - SyncServiceLogger - INFO - --- Generating Manual PnL Report ---
+2026-01-27 19:27:58 - SyncServiceLogger - INFO - Fetching account data from Bybit...
+2026-01-27 19:27:59 - SyncServiceLogger - INFO - Fetching multi-day stats...
+2026-01-27 19:27:59 - SyncServiceLogger - INFO - Fetching PnL records since 2026-01-23 00:00:00
+2026-01-27 19:28:00 - SyncServiceLogger - INFO - Fetched 8 records for multi-day stats.
+2026-01-27 19:28:00 - SyncServiceLogger - INFO - Multi-day stats calculated: {'01-23': 46.3621026, '01-24': 780.92083974, '01-25': 0.0, '01-26': 0.0, '01-27': 423.48820914}, Total: 1250.77115148
+2026-01-27 19:28:00 - SyncServiceLogger - INFO - Fetching open positions...
+2026-01-27 19:28:01 - SyncServiceLogger - INFO - Sending PnL Dashboard to Discord...
+2026-01-27 19:28:01 - SyncServiceLogger - INFO - Reports sent successfully!
+2026-01-27 20:00:00 - SyncServiceLogger - INFO - Position TP/SL Changed for ASTERUSDT: TP 3.1->0, SL 0.53->0
+2026-01-27 20:00:00 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for ASTERUSDT because position is closed (Size=0).
+2026-01-28 00:00:00 - SyncServiceLogger - INFO - Position TP/SL Changed for ASTERUSDT: TP 3.1->0, SL 0.53->0
+2026-01-28 00:00:00 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for ASTERUSDT because position is closed (Size=0).
+2026-01-28 01:51:29 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0->0.078, SL 0->0.091
+2026-01-28 01:51:29 - SyncServiceLogger - INFO - TP/SL for SIRENUSDT reverted to original state. Cancelling debounce timer.
+2026-01-28 01:51:29 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0->0.078, SL 0->0.091
+2026-01-28 01:51:29 - SyncServiceLogger - INFO - TP/SL for SIRENUSDT reverted to original state. Cancelling debounce timer.
+2026-01-28 01:51:29 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0->0.078, SL 0->0.091
+2026-01-28 01:51:32 - SyncServiceLogger - INFO - Starting synchronization process... (Silent Mode: False)
+2026-01-28 01:51:32 - SyncServiceLogger - INFO - Starting synchronization process... (Silent Mode: False)
+2026-01-28 01:51:32 - SyncServiceLogger - INFO - Starting synchronization process... (Silent Mode: False)
+2026-01-28 01:51:33 - SyncServiceLogger - INFO - Last sync found at 2026-01-26 16:23:00+00:00. Starting from 2026-01-26 16:23:00.001000+00:00
+2026-01-28 01:51:33 - SyncServiceLogger - WARNING - Note: Syncing main account only.
+2026-01-28 01:51:33 - SyncServiceLogger - INFO - Fetching chunk from 2026-01-26 16:23:00.001000+00:00 to 2026-01-27 17:51:33.625000+00:00
+2026-01-28 01:51:33 - SyncServiceLogger - INFO - Last sync found at 2026-01-26 16:23:00+00:00. Starting from 2026-01-26 16:23:00.001000+00:00
+2026-01-28 01:51:33 - SyncServiceLogger - WARNING - Note: Syncing main account only.
+2026-01-28 01:51:33 - SyncServiceLogger - INFO - Fetching chunk from 2026-01-26 16:23:00.001000+00:00 to 2026-01-27 17:51:33.657000+00:00
+2026-01-28 01:51:33 - SyncServiceLogger - WARNING - PnL not ready for SIRENUSDT (Attempt 1/3). Retrying in 2s...
+2026-01-28 01:51:34 - SyncServiceLogger - INFO - Total transactions retrieved: 41
+2026-01-28 01:51:34 - SyncServiceLogger - INFO - Processed 3 records (PnL > 0.5) to be written to Notion.
+2026-01-28 01:51:34 - SyncServiceLogger - INFO - Total transactions retrieved: 41
+2026-01-28 01:51:34 - SyncServiceLogger - INFO - Processed 3 records (PnL > 0.5) to be written to Notion.
+2026-01-28 01:51:34 - SyncServiceLogger - INFO - Sending Debounced TP/SL Alert for SIRENUSDT
+2026-01-28 01:51:35 - SyncServiceLogger - INFO - Skipped 1 duplicate records found in Notion.
+2026-01-28 01:51:36 - SyncServiceLogger - INFO - Skipped 1 duplicate records found in Notion.
+2026-01-28 01:51:36 - SyncServiceLogger - WARNING - PnL not ready for SIRENUSDT (Attempt 2/3). Retrying in 2s...
+2026-01-28 01:51:36 - SyncServiceLogger - INFO - Successfully created record in Notion for symbol: ETHUSDT
+2026-01-28 01:51:36 - SyncServiceLogger - INFO - Successfully created record in Notion for symbol: ETHUSDT
+2026-01-28 01:51:37 - SyncServiceLogger - INFO - Successfully created record in Notion for symbol: BTCUSDT
+2026-01-28 01:51:37 - SyncServiceLogger - INFO - Successfully created record in Notion for symbol: BTCUSDT
+2026-01-28 01:51:37 - SyncServiceLogger - INFO - Synchronization process completed successfully.
+2026-01-28 01:51:38 - SyncServiceLogger - INFO - Synchronization process completed successfully.
+2026-01-28 01:51:39 - SyncServiceLogger - INFO - Last sync found at 2026-01-27 11:12:00+00:00. Starting from 2026-01-27 11:12:00.001000+00:00
+2026-01-28 01:51:39 - SyncServiceLogger - WARNING - Note: Syncing main account only.
+2026-01-28 01:51:39 - SyncServiceLogger - INFO - Fetching chunk from 2026-01-27 11:12:00.001000+00:00 to 2026-01-27 17:51:39.704000+00:00
+2026-01-28 01:51:40 - SyncServiceLogger - INFO - Total transactions retrieved: 11
+2026-01-28 01:51:40 - SyncServiceLogger - INFO - Processed 1 records (PnL > 0.5) to be written to Notion.
+2026-01-28 01:51:41 - SyncServiceLogger - INFO - Skipped 1 duplicate records found in Notion.
+2026-01-28 01:51:41 - SyncServiceLogger - INFO - No new unique records to create.
+2026-01-28 01:51:41 - SyncServiceLogger - INFO - Synchronization process completed successfully.
+2026-01-28 01:52:06 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 01:52:06 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 01:52:09 - SyncServiceLogger - INFO - Starting synchronization process... (Silent Mode: False)
+2026-01-28 01:52:09 - SyncServiceLogger - INFO - Last sync found at 2026-01-27 11:12:00+00:00. Starting from 2026-01-27 11:12:00.001000+00:00
+2026-01-28 01:52:09 - SyncServiceLogger - WARNING - Note: Syncing main account only.
+2026-01-28 01:52:09 - SyncServiceLogger - INFO - Fetching chunk from 2026-01-27 11:12:00.001000+00:00 to 2026-01-27 17:52:09.925000+00:00
+2026-01-28 01:52:10 - SyncServiceLogger - WARNING - PnL not ready for SIRENUSDT (Attempt 1/3). Retrying in 2s...
+2026-01-28 01:52:10 - SyncServiceLogger - INFO - Total transactions retrieved: 12
+2026-01-28 01:52:10 - SyncServiceLogger - INFO - Processed 1 records (PnL > 0.5) to be written to Notion.
+2026-01-28 01:52:11 - SyncServiceLogger - INFO - Skipped 1 duplicate records found in Notion.
+2026-01-28 01:52:11 - SyncServiceLogger - INFO - No new unique records to create.
+2026-01-28 01:52:11 - SyncServiceLogger - INFO - Synchronization process completed successfully.
+2026-01-28 01:52:13 - SyncServiceLogger - WARNING - PnL not ready for SIRENUSDT (Attempt 2/3). Retrying in 2s...
+2026-01-28 01:52:59 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 01:52:59 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 01:54:00 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 01:54:00 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 01:56:06 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 01:56:06 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 01:57:58 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 01:57:58 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 02:00:58 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 02:00:58 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 02:02:58 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 02:02:58 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 02:17:58 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 02:17:58 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 02:18:58 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 02:18:58 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 02:25:58 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 02:25:58 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 02:26:58 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 02:26:58 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 02:37:55 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 02:37:55 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 02:38:56 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 02:38:56 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 03:04:51 - SyncServiceLogger - WARNING - WebSocket Connection Closed.
+2026-01-28 03:04:51 - SyncServiceLogger - INFO - Reconnecting in 5 seconds...
+2026-01-28 03:04:57 - SyncServiceLogger - INFO - WebSocket Connected. Sending Auth...
+2026-01-28 03:04:57 - SyncServiceLogger - INFO - WebSocket Authentication Successful!
+2026-01-28 03:04:57 - SyncServiceLogger - INFO - Subscribing to topics: ['order', 'execution', 'position']
+2026-01-28 03:04:57 - SyncServiceLogger - INFO - Subscribed: 
+2026-01-28 03:05:58 - SyncServiceLogger - WARNING - WebSocket Connection Closed.
+2026-01-28 03:05:58 - SyncServiceLogger - INFO - Reconnecting in 5 seconds...
+2026-01-28 03:06:04 - SyncServiceLogger - INFO - WebSocket Connected. Sending Auth...
+2026-01-28 03:06:04 - SyncServiceLogger - INFO - WebSocket Authentication Successful!
+2026-01-28 03:06:04 - SyncServiceLogger - INFO - Subscribing to topics: ['order', 'execution', 'position']
+2026-01-28 03:06:04 - SyncServiceLogger - INFO - Subscribed: 
+2026-01-28 03:59:59 - SyncServiceLogger - INFO - Position TP/SL Changed for ASTERUSDT: TP 3.1->0, SL 0.53->0
+2026-01-28 03:59:59 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for ASTERUSDT because position is closed (Size=0).
+2026-01-28 03:59:59 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 03:59:59 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 05:46:07 - SyncServiceLogger - WARNING - WebSocket Connection Closed.
+2026-01-28 05:46:07 - SyncServiceLogger - INFO - Reconnecting in 5 seconds...
+2026-01-28 05:46:13 - SyncServiceLogger - INFO - WebSocket Connected. Sending Auth...
+2026-01-28 05:46:13 - SyncServiceLogger - INFO - WebSocket Authentication Successful!
+2026-01-28 05:46:13 - SyncServiceLogger - INFO - Subscribing to topics: ['order', 'execution', 'position']
+2026-01-28 05:46:13 - SyncServiceLogger - INFO - Subscribed: 
+2026-01-28 06:19:58 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 06:19:58 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 06:20:58 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 06:20:58 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 07:06:58 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 07:06:58 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 07:07:59 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 07:07:59 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 08:00:00 - SyncServiceLogger - INFO - Position TP/SL Changed for ASTERUSDT: TP 3.1->0, SL 0.53->0
+2026-01-28 08:00:00 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for ASTERUSDT because position is closed (Size=0).
+2026-01-28 08:00:00 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 08:00:00 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 08:41:44 - SyncServiceLogger - WARNING - WebSocket Connection Closed.
+2026-01-28 08:41:44 - SyncServiceLogger - INFO - Reconnecting in 5 seconds...
+2026-01-28 08:41:49 - SyncServiceLogger - INFO - WebSocket Connected. Sending Auth...
+2026-01-28 08:41:49 - SyncServiceLogger - INFO - WebSocket Authentication Successful!
+2026-01-28 08:41:49 - SyncServiceLogger - INFO - Subscribing to topics: ['order', 'execution', 'position']
+2026-01-28 08:41:49 - SyncServiceLogger - INFO - Subscribed: 
+2026-01-28 08:50:37 - SyncServiceLogger - INFO - Position TP/SL Changed for BTCUSDT: TP 0->87200, SL 0->90700
+2026-01-28 08:50:37 - SyncServiceLogger - INFO - TP/SL for BTCUSDT reverted to original state. Cancelling debounce timer.
+2026-01-28 08:50:37 - SyncServiceLogger - INFO - Position TP/SL Changed for BTCUSDT: TP 0->87200, SL 0->90700
+2026-01-28 08:50:37 - SyncServiceLogger - INFO - TP/SL for BTCUSDT reverted to original state. Cancelling debounce timer.
+2026-01-28 08:50:40 - SyncServiceLogger - INFO - Starting synchronization process... (Silent Mode: False)
+2026-01-28 08:50:40 - SyncServiceLogger - INFO - Starting synchronization process... (Silent Mode: False)
+2026-01-28 08:50:40 - SyncServiceLogger - INFO - Starting synchronization process... (Silent Mode: False)
+2026-01-28 08:50:41 - SyncServiceLogger - INFO - Last sync found at 2026-01-27 11:12:00+00:00. Starting from 2026-01-27 11:12:00.001000+00:00
+2026-01-28 08:50:41 - SyncServiceLogger - WARNING - Note: Syncing main account only.
+2026-01-28 08:50:41 - SyncServiceLogger - INFO - Fetching chunk from 2026-01-27 11:12:00.001000+00:00 to 2026-01-28 00:50:41.424000+00:00
+2026-01-28 08:50:41 - SyncServiceLogger - WARNING - PnL not ready for BTCUSDT (Attempt 1/3). Retrying in 2s...
+2026-01-28 08:50:41 - SyncServiceLogger - INFO - Last sync found at 2026-01-27 11:12:00+00:00. Starting from 2026-01-27 11:12:00.001000+00:00
+2026-01-28 08:50:41 - SyncServiceLogger - WARNING - Note: Syncing main account only.
+2026-01-28 08:50:41 - SyncServiceLogger - INFO - Fetching chunk from 2026-01-27 11:12:00.001000+00:00 to 2026-01-28 00:50:41.846000+00:00
+2026-01-28 08:50:41 - SyncServiceLogger - INFO - Last sync found at 2026-01-27 11:12:00+00:00. Starting from 2026-01-27 11:12:00.001000+00:00
+2026-01-28 08:50:41 - SyncServiceLogger - WARNING - Note: Syncing main account only.
+2026-01-28 08:50:41 - SyncServiceLogger - INFO - Fetching chunk from 2026-01-27 11:12:00.001000+00:00 to 2026-01-28 00:50:41.882000+00:00
+2026-01-28 08:50:42 - SyncServiceLogger - INFO - Total transactions retrieved: 19
+2026-01-28 08:50:42 - SyncServiceLogger - INFO - Processed 1 records (PnL > 0.5) to be written to Notion.
+2026-01-28 08:50:43 - SyncServiceLogger - INFO - Total transactions retrieved: 19
+2026-01-28 08:50:43 - SyncServiceLogger - INFO - Processed 1 records (PnL > 0.5) to be written to Notion.
+2026-01-28 08:50:43 - SyncServiceLogger - INFO - Total transactions retrieved: 19
+2026-01-28 08:50:43 - SyncServiceLogger - INFO - Processed 1 records (PnL > 0.5) to be written to Notion.
+2026-01-28 08:50:43 - SyncServiceLogger - INFO - Skipped 1 duplicate records found in Notion.
+2026-01-28 08:50:43 - SyncServiceLogger - INFO - No new unique records to create.
+2026-01-28 08:50:43 - SyncServiceLogger - INFO - Synchronization process completed successfully.
+2026-01-28 08:50:44 - SyncServiceLogger - WARNING - PnL not ready for BTCUSDT (Attempt 2/3). Retrying in 2s...
+2026-01-28 08:50:44 - SyncServiceLogger - INFO - Skipped 1 duplicate records found in Notion.
+2026-01-28 08:50:44 - SyncServiceLogger - INFO - No new unique records to create.
+2026-01-28 08:50:44 - SyncServiceLogger - INFO - Synchronization process completed successfully.
+2026-01-28 08:50:45 - SyncServiceLogger - INFO - Skipped 1 duplicate records found in Notion.
+2026-01-28 08:50:45 - SyncServiceLogger - INFO - No new unique records to create.
+2026-01-28 08:50:45 - SyncServiceLogger - INFO - Synchronization process completed successfully.
+2026-01-28 09:31:09 - SyncServiceLogger - WARNING - WebSocket Connection Closed.
+2026-01-28 09:31:09 - SyncServiceLogger - INFO - Reconnecting in 5 seconds...
+2026-01-28 09:31:15 - SyncServiceLogger - INFO - WebSocket Connected. Sending Auth...
+2026-01-28 09:31:15 - SyncServiceLogger - INFO - WebSocket Authentication Successful!
+2026-01-28 09:31:15 - SyncServiceLogger - INFO - Subscribing to topics: ['order', 'execution', 'position']
+2026-01-28 09:31:15 - SyncServiceLogger - INFO - Subscribed: 
+2026-01-28 11:28:57 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 11:28:57 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 11:29:58 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 11:29:58 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 11:59:58 - SyncServiceLogger - INFO - Position TP/SL Changed for ASTERUSDT: TP 3.1->0, SL 0.53->0
+2026-01-28 11:59:58 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for ASTERUSDT because position is closed (Size=0).
+2026-01-28 11:59:59 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 11:59:59 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 12:15:58 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 12:15:58 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 12:17:57 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 12:17:57 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 12:19:58 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 12:19:58 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 12:25:17 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 12:25:17 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 12:29:57 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 12:29:57 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 12:30:57 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 12:30:57 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 12:32:50 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 12:32:50 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 12:33:52 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 12:33:52 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 12:34:57 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 12:34:57 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 12:38:58 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 12:38:58 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 12:39:59 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 12:39:59 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 12:45:58 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 12:45:58 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 12:46:58 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 12:46:58 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 12:49:57 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 12:49:57 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 12:50:57 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 12:50:57 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 12:54:57 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 12:54:57 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 13:02:58 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 13:02:58 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 13:08:58 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 13:08:58 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 13:13:58 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 13:13:58 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 13:14:58 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 13:14:58 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 13:18:57 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 13:18:57 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 13:26:43 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 13:26:43 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 13:27:45 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 13:27:45 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 13:32:57 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 13:32:57 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 13:33:57 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 13:33:57 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 13:38:32 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 13:38:32 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 13:39:32 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 13:39:32 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 13:41:57 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 13:41:57 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 13:43:57 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 13:43:57 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 13:56:57 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 13:56:57 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 13:58:57 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 13:58:57 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 13:59:57 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 13:59:57 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 14:03:39 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 14:03:39 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 14:05:40 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 14:05:40 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 14:09:57 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 14:09:57 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 14:11:57 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 14:11:57 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 14:16:57 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 14:16:57 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 14:20:57 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 14:20:57 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 14:21:57 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 14:21:57 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 14:24:57 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 14:24:57 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 14:25:58 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 14:25:58 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 14:29:57 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 14:29:57 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 14:39:57 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 14:39:57 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 14:40:57 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 14:40:57 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 14:46:07 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 14:46:07 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 14:47:08 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 14:47:08 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 14:53:57 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 14:53:57 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 14:54:57 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 14:54:57 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 14:56:24 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 14:56:24 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 14:57:25 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 14:57:25 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 15:04:44 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 15:04:44 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 15:05:45 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 15:05:45 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 15:10:50 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 15:10:50 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 15:11:50 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 15:11:50 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 15:22:57 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 15:22:57 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 15:23:57 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 15:23:57 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 15:24:58 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 15:24:58 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 15:27:57 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 15:27:57 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 15:34:57 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 15:34:57 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 15:35:57 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 15:35:57 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 15:53:54 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 15:53:54 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 15:54:55 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 15:54:55 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 15:59:58 - SyncServiceLogger - INFO - Position TP/SL Changed for BTCUSDT: TP 0->87200, SL 0->90700
+2026-01-28 15:59:59 - SyncServiceLogger - INFO - TP/SL for BTCUSDT reverted to original state. Cancelling debounce timer.
+2026-01-28 15:59:59 - SyncServiceLogger - INFO - Position TP/SL Changed for ASTERUSDT: TP 3.1->0, SL 0.53->0
+2026-01-28 15:59:59 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for ASTERUSDT because position is closed (Size=0).
+2026-01-28 15:59:59 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 15:59:59 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 16:05:56 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 16:05:56 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 16:06:57 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 16:06:57 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 16:12:10 - SyncServiceLogger - INFO - Position TP/SL Changed for ASTERUSDT: TP 3.1->3.1, SL 0.53->0.6612
+2026-01-28 16:12:15 - SyncServiceLogger - INFO - Sending Debounced TP/SL Alert for ASTERUSDT
+2026-01-28 16:34:54 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 16:34:54 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 16:35:55 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 16:35:55 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 16:37:35 - SyncServiceLogger - INFO - Position TP/SL Changed for ASTERUSDT: TP 3.1->0, SL 0.6612->0
+2026-01-28 16:37:35 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for ASTERUSDT because position is closed (Size=0).
+2026-01-28 16:37:35 - SyncServiceLogger - INFO - Position TP/SL Changed for ASTERUSDT: TP 3.1->0, SL 0.6612->0
+2026-01-28 16:37:35 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for ASTERUSDT because position is closed (Size=0).
+2026-01-28 16:37:38 - SyncServiceLogger - INFO - Starting synchronization process... (Silent Mode: False)
+2026-01-28 16:37:39 - SyncServiceLogger - INFO - Last sync found at 2026-01-27 11:12:00+00:00. Starting from 2026-01-27 11:12:00.001000+00:00
+2026-01-28 16:37:39 - SyncServiceLogger - WARNING - Note: Syncing main account only.
+2026-01-28 16:37:39 - SyncServiceLogger - INFO - Fetching chunk from 2026-01-27 11:12:00.001000+00:00 to 2026-01-28 08:37:39.605000+00:00
+2026-01-28 16:37:40 - SyncServiceLogger - INFO - Total transactions retrieved: 27
+2026-01-28 16:37:40 - SyncServiceLogger - INFO - Processed 2 records (PnL > 0.5) to be written to Notion.
+2026-01-28 16:37:41 - SyncServiceLogger - INFO - Skipped 1 duplicate records found in Notion.
+2026-01-28 16:37:43 - SyncServiceLogger - INFO - Successfully created record in Notion for symbol: ASTERUSDT
+2026-01-28 16:37:43 - SyncServiceLogger - INFO - Synchronization process completed successfully.
+2026-01-28 16:38:01 - SyncServiceLogger - INFO - Position TP/SL Changed for BTCUSDT: TP 0->86400, SL 0->90700
+2026-01-28 16:38:06 - SyncServiceLogger - INFO - Sending Debounced TP/SL Alert for BTCUSDT
+2026-01-28 16:44:51 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 16:44:51 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 16:45:52 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 16:45:52 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 18:02:45 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 18:02:45 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 18:03:46 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 18:03:46 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 19:59:58 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 19:59:58 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 22:35:31 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 22:35:31 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 22:36:31 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 22:36:31 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 22:44:31 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 22:44:31 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 22:45:31 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 22:45:31 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 22:57:57 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 22:57:57 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 23:19:22 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 23:19:22 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 23:19:22 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 23:19:22 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 23:19:22 - SyncServiceLogger - INFO - Position TP/SL Changed for SIRENUSDT: TP 0.078->0, SL 0.091->0
+2026-01-28 23:19:22 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for SIRENUSDT because position is closed (Size=0).
+2026-01-28 23:19:24 - SyncServiceLogger - INFO - Starting synchronization process... (Silent Mode: False)
+2026-01-28 23:19:25 - SyncServiceLogger - INFO - Starting synchronization process... (Silent Mode: False)
+2026-01-28 23:19:26 - SyncServiceLogger - INFO - Last sync found at 2026-01-28 08:37:00+00:00. Starting from 2026-01-28 08:37:00.001000+00:00
+2026-01-28 23:19:26 - SyncServiceLogger - WARNING - Note: Syncing main account only.
+2026-01-28 23:19:26 - SyncServiceLogger - INFO - Fetching chunk from 2026-01-28 08:37:00.001000+00:00 to 2026-01-28 15:19:26.227000+00:00
+2026-01-28 23:19:26 - SyncServiceLogger - INFO - Last sync found at 2026-01-28 08:37:00+00:00. Starting from 2026-01-28 08:37:00.001000+00:00
+2026-01-28 23:19:26 - SyncServiceLogger - WARNING - Note: Syncing main account only.
+2026-01-28 23:19:26 - SyncServiceLogger - INFO - Fetching chunk from 2026-01-28 08:37:00.001000+00:00 to 2026-01-28 15:19:26.621000+00:00
+2026-01-28 23:19:28 - SyncServiceLogger - INFO - Total transactions retrieved: 73
+2026-01-28 23:19:28 - SyncServiceLogger - INFO - Total transactions retrieved: 73
+2026-01-28 23:19:28 - SyncServiceLogger - INFO - Processed 3 records (PnL > 0.5) to be written to Notion.
+2026-01-28 23:19:28 - SyncServiceLogger - INFO - Processed 3 records (PnL > 0.5) to be written to Notion.
+2026-01-28 23:19:29 - SyncServiceLogger - INFO - Skipped 1 duplicate records found in Notion.
+2026-01-28 23:19:29 - SyncServiceLogger - INFO - Skipped 1 duplicate records found in Notion.
+2026-01-28 23:19:29 - SyncServiceLogger - INFO - Successfully created record in Notion for symbol: SIRENUSDT
+2026-01-28 23:19:29 - SyncServiceLogger - INFO - Successfully created record in Notion for symbol: SIRENUSDT
+2026-01-28 23:19:30 - SyncServiceLogger - INFO - Successfully created record in Notion for symbol: SIRENUSDT
+2026-01-28 23:19:30 - SyncServiceLogger - INFO - Successfully created record in Notion for symbol: SIRENUSDT
+2026-01-28 23:19:30 - SyncServiceLogger - INFO - Synchronization process completed successfully.
+2026-01-28 23:19:31 - SyncServiceLogger - INFO - Synchronization process completed successfully.
+2026-01-28 23:20:58 - SyncServiceLogger - INFO - --- Starting Bybit Real-time Monitor ---
+2026-01-28 23:20:58 - SyncServiceLogger - INFO - Services (Sync, Stats) initialized successfully.
+2026-01-28 23:20:58 - SyncServiceLogger - INFO - Starting Bybit Monitor (Custom WebSocket)...
+2026-01-28 23:20:58 - SyncServiceLogger - INFO - Fetching initial open positions (Scanning Linear & Inverse)...
+2026-01-28 23:20:59 - SyncServiceLogger - INFO - Loaded Active Position: BTCUSDT, Size: 0.5
+2026-01-28 23:20:59 - SyncServiceLogger - INFO - Total 1 active positions loaded.
+2026-01-28 23:20:59 - SyncServiceLogger - INFO - Fetching active orders to prevent ghost signals...
+2026-01-28 23:21:00 - SyncServiceLogger - ERROR - Failed to fetch initial state: Bybit API Error: Missing some parameters that must be filled in, symbol or settleCoin or baseCoin (Code: 10001)
+2026-01-28 23:21:00 - SyncServiceLogger - INFO - WebSocket Connected. Sending Auth...
+2026-01-28 23:21:00 - SyncServiceLogger - INFO - WebSocket Authentication Successful!
+2026-01-28 23:21:00 - SyncServiceLogger - INFO - Subscribing to topics: ['order', 'execution', 'position']
+2026-01-28 23:21:00 - SyncServiceLogger - INFO - Subscribed: 
+2026-01-28 23:28:40 - SyncServiceLogger - INFO - --- Starting Bybit Real-time Monitor ---
+2026-01-28 23:28:40 - SyncServiceLogger - INFO - Services (Sync, Stats) initialized successfully.
+2026-01-28 23:28:40 - SyncServiceLogger - INFO - Starting Bybit Monitor (Custom WebSocket)...
+2026-01-28 23:28:40 - SyncServiceLogger - INFO - Fetching initial open positions (Scanning Linear & Inverse)...
+2026-01-28 23:28:41 - SyncServiceLogger - INFO - Loaded Active Position: BTCUSDT, Size: 0.5
+2026-01-28 23:28:41 - SyncServiceLogger - INFO - Total 1 active positions loaded.
+2026-01-28 23:28:41 - SyncServiceLogger - INFO - Fetching active orders to prevent ghost signals...
+2026-01-28 23:28:42 - SyncServiceLogger - ERROR - Failed to fetch initial state: Bybit API Error: Missing some parameters that must be filled in, symbol or settleCoin or baseCoin (Code: 10001)
+2026-01-28 23:28:42 - SyncServiceLogger - INFO - WebSocket Connected. Sending Auth...
+2026-01-28 23:28:42 - SyncServiceLogger - INFO - WebSocket Authentication Successful!
+2026-01-28 23:28:42 - SyncServiceLogger - INFO - Subscribing to topics: ['order', 'execution', 'position']
+2026-01-28 23:28:42 - SyncServiceLogger - INFO - Subscribed: 
+2026-01-28 23:29:03 - SyncServiceLogger - INFO - Position TP/SL Changed for BTCUSDT: TP 86400->86800, SL 90700->90700
+2026-01-28 23:29:08 - SyncServiceLogger - INFO - Sending Debounced TP/SL Alert for BTCUSDT
+2026-01-29 01:44:35 - SyncServiceLogger - INFO - --- Starting Bybit Real-time Monitor ---
+2026-01-29 01:44:35 - SyncServiceLogger - INFO - Services (Sync, Stats) initialized successfully.
+2026-01-29 01:44:35 - SyncServiceLogger - INFO - Starting Bybit Monitor (Custom WebSocket)...
+2026-01-29 01:44:35 - SyncServiceLogger - INFO - Fetching initial open positions (Scanning Linear & Inverse)...
+2026-01-29 01:44:36 - SyncServiceLogger - INFO - Loaded Active Position: BTCUSDT, Size: 0.5
+2026-01-29 01:44:36 - SyncServiceLogger - INFO - Total 1 active positions loaded.
+2026-01-29 01:44:36 - SyncServiceLogger - INFO - Fetching active orders to prevent ghost signals...
+2026-01-29 01:44:37 - SyncServiceLogger - ERROR - Failed to fetch initial state: Bybit API Error: Missing some parameters that must be filled in, symbol or settleCoin or baseCoin (Code: 10001)
+2026-01-29 01:44:37 - SyncServiceLogger - INFO - WebSocket Connected. Sending Auth...
+2026-01-29 01:44:37 - SyncServiceLogger - INFO - WebSocket Authentication Successful!
+2026-01-29 01:44:37 - SyncServiceLogger - INFO - Subscribing to topics: ['order', 'execution', 'position']
+2026-01-29 01:44:37 - SyncServiceLogger - INFO - Subscribed: 
+2026-01-29 08:00:01 - SyncServiceLogger - INFO - Position TP/SL Changed for BTCUSDT: TP 86800->0, SL 90700->0
+2026-01-29 08:00:01 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for BTCUSDT because position is closed (Size=0).
+2026-01-29 08:36:57 - SyncServiceLogger - INFO - --- Generating Manual PnL Report ---
+2026-01-29 08:36:57 - SyncServiceLogger - INFO - Fetching account data from Bybit...
+2026-01-29 08:36:57 - SyncServiceLogger - INFO - Fetching multi-day stats...
+2026-01-29 08:36:57 - SyncServiceLogger - INFO - Fetching PnL records since 2026-01-25 00:00:00
+2026-01-29 08:36:58 - SyncServiceLogger - INFO - Fetched 7 records for multi-day stats.
+2026-01-29 08:36:58 - SyncServiceLogger - INFO - Multi-day stats calculated: {'01-25': 0.0, '01-26': 0.0, '01-27': 423.48820914, '01-28': 123.39408443, '01-29': 0.0}, Total: 546.88229357
+2026-01-29 08:36:58 - SyncServiceLogger - INFO - Fetching open positions...
+2026-01-29 08:36:59 - SyncServiceLogger - INFO - Sending PnL Dashboard to Discord...
+2026-01-29 08:37:00 - SyncServiceLogger - INFO - Reports sent successfully!
+2026-01-29 09:56:10 - SyncServiceLogger - INFO - Position TP/SL Changed for BTCUSDT: TP 86800->86800, SL 90700->89200
+2026-01-29 09:56:15 - SyncServiceLogger - INFO - Sending Debounced TP/SL Alert for BTCUSDT
+2026-01-29 10:47:57 - SyncServiceLogger - INFO - Position TP/SL Changed for BTCUSDT: TP 86800->87200, SL 89200->89200
+2026-01-29 10:48:02 - SyncServiceLogger - INFO - Sending Debounced TP/SL Alert for BTCUSDT
+2026-01-29 10:55:29 - SyncServiceLogger - INFO - Position TP/SL Changed for BTCUSDT: TP 87200->87613.2, SL 89200->89200
+2026-01-29 10:55:34 - SyncServiceLogger - INFO - Sending Debounced TP/SL Alert for BTCUSDT
+2026-01-29 10:58:47 - SyncServiceLogger - INFO - Position TP/SL Changed for BTCUSDT: TP 87613.2->0, SL 89200->0
+2026-01-29 10:58:47 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for BTCUSDT because position is closed (Size=0).
+2026-01-29 10:58:47 - SyncServiceLogger - INFO - Position TP/SL Changed for BTCUSDT: TP 87613.2->0, SL 89200->0
+2026-01-29 10:58:47 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for BTCUSDT because position is closed (Size=0).
+2026-01-29 10:58:50 - SyncServiceLogger - INFO - Starting synchronization process... (Silent Mode: False)
+2026-01-29 10:58:50 - SyncServiceLogger - INFO - Last sync found at 2026-01-28 15:19:00+00:00. Starting from 2026-01-28 15:19:00.001000+00:00
+2026-01-29 10:58:50 - SyncServiceLogger - WARNING - Note: Syncing main account only.
+2026-01-29 10:58:50 - SyncServiceLogger - INFO - Fetching chunk from 2026-01-28 15:19:00.001000+00:00 to 2026-01-29 02:58:50.779000+00:00
+2026-01-29 10:58:50 - SyncServiceLogger - INFO - Refreshing positions via REST to ensure Footer accuracy...
+2026-01-29 10:58:52 - SyncServiceLogger - INFO - Total transactions retrieved: 72
+2026-01-29 10:58:52 - SyncServiceLogger - INFO - Processed 3 records (PnL > 0.5) to be written to Notion.
+2026-01-29 10:58:53 - SyncServiceLogger - INFO - Skipped 2 duplicate records found in Notion.
+2026-01-29 10:58:55 - SyncServiceLogger - INFO - Successfully created record in Notion for symbol: BTCUSDT
+2026-01-29 10:58:56 - SyncServiceLogger - INFO - Synchronization process completed successfully.
+2026-01-29 11:32:53 - SyncServiceLogger - INFO - Position TP/SL Changed for BTCUSDT: TP 87613.2->0, SL 89200->0
+2026-01-29 11:32:53 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for BTCUSDT because position is closed (Size=0).
+2026-01-29 11:32:53 - SyncServiceLogger - INFO - Position TP/SL Changed for BTCUSDT: TP 87613.2->0, SL 89200->0
+2026-01-29 11:32:53 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for BTCUSDT because position is closed (Size=0).
+2026-01-29 11:36:16 - SyncServiceLogger - INFO - Position TP/SL Changed for BTCUSDT: TP 87613.2->85600, SL 89200->88800
+2026-01-29 11:36:16 - SyncServiceLogger - INFO - Position TP/SL Changed for BTCUSDT: TP 87613.2->0, SL 89200->0
+2026-01-29 11:36:16 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for BTCUSDT because position is closed (Size=0).
+2026-01-29 11:36:16 - SyncServiceLogger - INFO - Position TP/SL Changed for BTCUSDT: TP 87613.2->85600, SL 89200->88800
+2026-01-29 11:36:16 - SyncServiceLogger - INFO - Position TP/SL Changed for BTCUSDT: TP 87613.2->0, SL 89200->0
+2026-01-29 11:36:16 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for BTCUSDT because position is closed (Size=0).
+2026-01-29 11:36:19 - SyncServiceLogger - INFO - Starting synchronization process... (Silent Mode: False)
+2026-01-29 11:36:19 - SyncServiceLogger - INFO - Starting synchronization process... (Silent Mode: False)
+2026-01-29 11:36:20 - SyncServiceLogger - INFO - Last sync found at 2026-01-29 02:58:00+00:00. Starting from 2026-01-29 02:58:00.001000+00:00
+2026-01-29 11:36:20 - SyncServiceLogger - WARNING - Note: Syncing main account only.
+2026-01-29 11:36:20 - SyncServiceLogger - INFO - Fetching chunk from 2026-01-29 02:58:00.001000+00:00 to 2026-01-29 03:36:20.484000+00:00
+2026-01-29 11:36:20 - SyncServiceLogger - WARNING - PnL not ready for BTCUSDT (Attempt 1/3). Retrying in 2s...
+2026-01-29 11:36:20 - SyncServiceLogger - INFO - Last sync found at 2026-01-29 02:58:00+00:00. Starting from 2026-01-29 02:58:00.001000+00:00
+2026-01-29 11:36:20 - SyncServiceLogger - WARNING - Note: Syncing main account only.
+2026-01-29 11:36:20 - SyncServiceLogger - INFO - Fetching chunk from 2026-01-29 02:58:00.001000+00:00 to 2026-01-29 03:36:20.847000+00:00
+2026-01-29 11:36:21 - SyncServiceLogger - INFO - Total transactions retrieved: 3
+2026-01-29 11:36:21 - SyncServiceLogger - INFO - Processed 1 records (PnL > 0.5) to be written to Notion.
+2026-01-29 11:36:21 - SyncServiceLogger - INFO - Total transactions retrieved: 3
+2026-01-29 11:36:21 - SyncServiceLogger - INFO - Processed 1 records (PnL > 0.5) to be written to Notion.
+2026-01-29 11:36:21 - SyncServiceLogger - INFO - Sending Debounced TP/SL Alert for BTCUSDT
+2026-01-29 11:36:22 - SyncServiceLogger - INFO - Skipped 1 duplicate records found in Notion.
+2026-01-29 11:36:22 - SyncServiceLogger - INFO - No new unique records to create.
+2026-01-29 11:36:22 - SyncServiceLogger - INFO - Synchronization process completed successfully.
+2026-01-29 11:36:22 - SyncServiceLogger - INFO - Skipped 1 duplicate records found in Notion.
+2026-01-29 11:36:22 - SyncServiceLogger - INFO - No new unique records to create.
+2026-01-29 11:36:22 - SyncServiceLogger - INFO - Synchronization process completed successfully.
+2026-01-29 11:36:23 - SyncServiceLogger - WARNING - PnL not ready for BTCUSDT (Attempt 2/3). Retrying in 2s...
+2026-01-29 11:36:26 - SyncServiceLogger - INFO - Refreshing positions via REST to ensure Footer accuracy...
+2026-01-29 12:22:25 - SyncServiceLogger - INFO - --- Generating Manual PnL Report ---
+2026-01-29 12:22:25 - SyncServiceLogger - INFO - Fetching account data from Bybit...
+2026-01-29 12:22:26 - SyncServiceLogger - INFO - Fetching multi-day stats...
+2026-01-29 12:22:26 - SyncServiceLogger - INFO - Fetching PnL records since 2026-01-25 00:00:00
+2026-01-29 12:22:27 - SyncServiceLogger - INFO - Fetched 8 records for multi-day stats.
+2026-01-29 12:22:27 - SyncServiceLogger - INFO - Multi-day stats calculated: {'01-25': 0.0, '01-26': 0.0, '01-27': 423.48820914, '01-28': 123.39408443, '01-29': 698.6659604}, Total: 1245.5482539700001
+2026-01-29 12:22:27 - SyncServiceLogger - INFO - Fetching open positions...
+2026-01-29 12:22:28 - SyncServiceLogger - INFO - Sending PnL Dashboard to Discord...
+2026-01-29 12:22:29 - SyncServiceLogger - INFO - Reports sent successfully!
+2026-01-29 15:59:59 - SyncServiceLogger - INFO - Position TP/SL Changed for BTCUSDT: TP 0->85600, SL 0->88800
+2026-01-29 15:59:59 - SyncServiceLogger - INFO - TP/SL for BTCUSDT reverted to original state. Cancelling debounce timer.
+2026-01-29 18:11:24 - SyncServiceLogger - INFO - Position TP/SL Changed for BTCUSDT: TP 0->86500, SL 0->88800
+2026-01-29 18:11:29 - SyncServiceLogger - INFO - Sending Debounced TP/SL Alert for BTCUSDT
+2026-01-29 19:31:53 - SyncServiceLogger - INFO - Position TP/SL Changed for BTCUSDT: TP 86500->0, SL 88800->0
+2026-01-29 19:31:53 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for BTCUSDT because position is closed (Size=0).
+2026-01-29 19:32:27 - SyncServiceLogger - INFO - Position TP/SL Changed for BTCUSDT: TP 86500->87700, SL 88800->88800
+2026-01-29 19:32:32 - SyncServiceLogger - INFO - Sending Debounced TP/SL Alert for BTCUSDT
+2026-01-29 19:34:53 - SyncServiceLogger - INFO - Position TP/SL Changed for BTCUSDT: TP 87700->0, SL 88800->0
+2026-01-29 19:34:53 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for BTCUSDT because position is closed (Size=0).
+2026-01-29 19:37:14 - SyncServiceLogger - INFO - Position TP/SL Changed for BTCUSDT: TP 87700->0, SL 88800->0
+2026-01-29 19:37:14 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for BTCUSDT because position is closed (Size=0).
+2026-01-29 19:37:52 - SyncServiceLogger - INFO - Position TP/SL Changed for BTCUSDT: TP 87700->0, SL 88800->0
+2026-01-29 19:37:52 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for BTCUSDT because position is closed (Size=0).
+2026-01-29 19:38:06 - SyncServiceLogger - INFO - Position TP/SL Changed for BTCUSDT: TP 87700->0, SL 88800->0
+2026-01-29 19:38:06 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for BTCUSDT because position is closed (Size=0).
+2026-01-29 19:49:51 - SyncServiceLogger - INFO - Position TP/SL Changed for BTCUSDT: TP 87700->0, SL 88800->0
+2026-01-29 19:49:51 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for BTCUSDT because position is closed (Size=0).
+2026-01-29 19:49:51 - SyncServiceLogger - INFO - Position TP/SL Changed for BTCUSDT: TP 87700->0, SL 88800->0
+2026-01-29 19:49:51 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for BTCUSDT because position is closed (Size=0).
+2026-01-29 19:49:51 - SyncServiceLogger - INFO - Position TP/SL Changed for BTCUSDT: TP 87700->91000, SL 88800->85666
+2026-01-29 19:49:54 - SyncServiceLogger - INFO - Starting synchronization process... (Silent Mode: False)
+2026-01-29 19:49:54 - SyncServiceLogger - INFO - Starting synchronization process... (Silent Mode: False)
+2026-01-29 19:49:54 - SyncServiceLogger - INFO - Last sync found at 2026-01-29 02:58:00+00:00. Starting from 2026-01-29 02:58:00.001000+00:00
+2026-01-29 19:49:54 - SyncServiceLogger - WARNING - Note: Syncing main account only.
+2026-01-29 19:49:54 - SyncServiceLogger - INFO - Fetching chunk from 2026-01-29 02:58:00.001000+00:00 to 2026-01-29 11:49:54.913000+00:00
+2026-01-29 19:49:54 - SyncServiceLogger - INFO - Last sync found at 2026-01-29 02:58:00+00:00. Starting from 2026-01-29 02:58:00.001000+00:00
+2026-01-29 19:49:54 - SyncServiceLogger - WARNING - Note: Syncing main account only.
+2026-01-29 19:49:54 - SyncServiceLogger - INFO - Fetching chunk from 2026-01-29 02:58:00.001000+00:00 to 2026-01-29 11:49:54.943000+00:00
+2026-01-29 19:49:55 - SyncServiceLogger - WARNING - PnL not ready for BTCUSDT (Attempt 1/3). Retrying in 2s...
+2026-01-29 19:49:55 - SyncServiceLogger - INFO - Refreshing positions via REST to ensure Footer accuracy...
+2026-01-29 19:49:56 - SyncServiceLogger - INFO - Sending Debounced TP/SL Alert for BTCUSDT
+2026-01-29 19:49:56 - SyncServiceLogger - INFO - Total transactions retrieved: 7
+2026-01-29 19:49:56 - SyncServiceLogger - INFO - Processed 2 records (PnL > 0.5) to be written to Notion.
+2026-01-29 19:49:56 - SyncServiceLogger - INFO - Total transactions retrieved: 7
+2026-01-29 19:49:56 - SyncServiceLogger - INFO - Processed 2 records (PnL > 0.5) to be written to Notion.
+2026-01-29 19:49:57 - SyncServiceLogger - INFO - Skipped 1 duplicate records found in Notion.
+2026-01-29 19:49:57 - SyncServiceLogger - WARNING - PnL not ready for BTCUSDT (Attempt 2/3). Retrying in 2s...
+2026-01-29 19:49:58 - SyncServiceLogger - INFO - Skipped 1 duplicate records found in Notion.
+2026-01-29 19:49:58 - SyncServiceLogger - INFO - Successfully created record in Notion for symbol: BTCUSDT
+2026-01-29 19:49:59 - SyncServiceLogger - INFO - Synchronization process completed successfully.
+2026-01-29 19:50:00 - SyncServiceLogger - INFO - Refreshing positions via REST to ensure Footer accuracy...
+2026-01-29 19:50:01 - SyncServiceLogger - INFO - Successfully created record in Notion for symbol: BTCUSDT
+2026-01-29 19:50:01 - SyncServiceLogger - INFO - Synchronization process completed successfully.
+2026-01-29 21:06:55 - SyncServiceLogger - INFO - Position TP/SL Changed for BTCUSDT: TP 91000->0, SL 85666->0
+2026-01-29 21:06:55 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for BTCUSDT because position is closed (Size=0).
+2026-01-29 21:22:59 - SyncServiceLogger - INFO - Position TP/SL Changed for BTCUSDT: TP 91000->0, SL 85666->0
+2026-01-29 21:22:59 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for BTCUSDT because position is closed (Size=0).
+2026-01-29 22:52:40 - SyncServiceLogger - INFO - Position TP/SL Changed for ETHUSDT: TP 0->0, SL 0->2860
+2026-01-29 22:52:40 - SyncServiceLogger - INFO - TP/SL for ETHUSDT reverted to original state. Cancelling debounce timer.
+2026-01-29 22:52:40 - SyncServiceLogger - INFO - Position TP/SL Changed for ETHUSDT: TP 0->0, SL 0->2860
+2026-01-29 22:52:40 - SyncServiceLogger - INFO - TP/SL for ETHUSDT reverted to original state. Cancelling debounce timer.
+2026-01-29 22:52:40 - SyncServiceLogger - INFO - Position TP/SL Changed for ETHUSDT: TP 0->0, SL 0->2860
+2026-01-29 22:52:40 - SyncServiceLogger - INFO - TP/SL for ETHUSDT reverted to original state. Cancelling debounce timer.
+2026-01-29 22:52:43 - SyncServiceLogger - INFO - Starting synchronization process... (Silent Mode: False)
+2026-01-29 22:52:43 - SyncServiceLogger - INFO - Starting synchronization process... (Silent Mode: False)
+2026-01-29 22:52:43 - SyncServiceLogger - INFO - Starting synchronization process... (Silent Mode: False)
+2026-01-29 22:52:43 - SyncServiceLogger - INFO - Starting synchronization process... (Silent Mode: False)
+2026-01-29 22:52:43 - SyncServiceLogger - INFO - Starting synchronization process... (Silent Mode: False)
+2026-01-29 22:52:44 - SyncServiceLogger - WARNING - PnL not ready for ETHUSDT (Attempt 1/3). Retrying in 2s...
+2026-01-29 22:52:44 - SyncServiceLogger - INFO - Last sync found at 2026-01-29 11:49:00+00:00. Starting from 2026-01-29 11:49:00.001000+00:00
+2026-01-29 22:52:44 - SyncServiceLogger - WARNING - Note: Syncing main account only.
+2026-01-29 22:52:44 - SyncServiceLogger - INFO - Fetching chunk from 2026-01-29 11:49:00.001000+00:00 to 2026-01-29 14:52:44.164000+00:00
+2026-01-29 22:52:44 - SyncServiceLogger - INFO - Last sync found at 2026-01-29 11:49:00+00:00. Starting from 2026-01-29 11:49:00.001000+00:00
+2026-01-29 22:52:44 - SyncServiceLogger - WARNING - Note: Syncing main account only.
+2026-01-29 22:52:44 - SyncServiceLogger - INFO - Fetching chunk from 2026-01-29 11:49:00.001000+00:00 to 2026-01-29 14:52:44.167000+00:00
+2026-01-29 22:52:44 - SyncServiceLogger - INFO - Last sync found at 2026-01-29 11:49:00+00:00. Starting from 2026-01-29 11:49:00.001000+00:00
+2026-01-29 22:52:44 - SyncServiceLogger - WARNING - Note: Syncing main account only.
+2026-01-29 22:52:44 - SyncServiceLogger - INFO - Fetching chunk from 2026-01-29 11:49:00.001000+00:00 to 2026-01-29 14:52:44.277000+00:00
+2026-01-29 22:52:44 - SyncServiceLogger - INFO - Last sync found at 2026-01-29 11:49:00+00:00. Starting from 2026-01-29 11:49:00.001000+00:00
+2026-01-29 22:52:44 - SyncServiceLogger - WARNING - Note: Syncing main account only.
+2026-01-29 22:52:44 - SyncServiceLogger - INFO - Fetching chunk from 2026-01-29 11:49:00.001000+00:00 to 2026-01-29 14:52:44.618000+00:00
+2026-01-29 22:52:45 - SyncServiceLogger - INFO - Last sync found at 2026-01-29 11:49:00+00:00. Starting from 2026-01-29 11:49:00.001000+00:00
+2026-01-29 22:52:45 - SyncServiceLogger - WARNING - Note: Syncing main account only.
+2026-01-29 22:52:45 - SyncServiceLogger - INFO - Fetching chunk from 2026-01-29 11:49:00.001000+00:00 to 2026-01-29 14:52:45.011000+00:00
+2026-01-29 22:52:45 - SyncServiceLogger - INFO - Total transactions retrieved: 8
+2026-01-29 22:52:45 - SyncServiceLogger - INFO - Processed 1 records (PnL > 0.5) to be written to Notion.
+2026-01-29 22:52:45 - SyncServiceLogger - INFO - Total transactions retrieved: 8
+2026-01-29 22:52:45 - SyncServiceLogger - INFO - Processed 1 records (PnL > 0.5) to be written to Notion.
+2026-01-29 22:52:45 - SyncServiceLogger - INFO - Total transactions retrieved: 8
+2026-01-29 22:52:45 - SyncServiceLogger - INFO - Processed 1 records (PnL > 0.5) to be written to Notion.
+2026-01-29 22:52:45 - SyncServiceLogger - INFO - Total transactions retrieved: 8
+2026-01-29 22:52:45 - SyncServiceLogger - INFO - Processed 1 records (PnL > 0.5) to be written to Notion.
+2026-01-29 22:52:46 - SyncServiceLogger - INFO - Total transactions retrieved: 8
+2026-01-29 22:52:46 - SyncServiceLogger - INFO - Processed 1 records (PnL > 0.5) to be written to Notion.
+2026-01-29 22:52:46 - SyncServiceLogger - INFO - Skipped 1 duplicate records found in Notion.
+2026-01-29 22:52:46 - SyncServiceLogger - INFO - No new unique records to create.
+2026-01-29 22:52:46 - SyncServiceLogger - INFO - Synchronization process completed successfully.
+2026-01-29 22:52:46 - SyncServiceLogger - INFO - Skipped 1 duplicate records found in Notion.
+2026-01-29 22:52:46 - SyncServiceLogger - INFO - No new unique records to create.
+2026-01-29 22:52:46 - SyncServiceLogger - INFO - Synchronization process completed successfully.
+2026-01-29 22:52:46 - SyncServiceLogger - INFO - Skipped 1 duplicate records found in Notion.
+2026-01-29 22:52:46 - SyncServiceLogger - INFO - No new unique records to create.
+2026-01-29 22:52:46 - SyncServiceLogger - INFO - Synchronization process completed successfully.
+2026-01-29 22:52:47 - SyncServiceLogger - INFO - Skipped 1 duplicate records found in Notion.
+2026-01-29 22:52:47 - SyncServiceLogger - INFO - No new unique records to create.
+2026-01-29 22:52:47 - SyncServiceLogger - INFO - Synchronization process completed successfully.
+2026-01-29 22:52:47 - SyncServiceLogger - WARNING - PnL not ready for ETHUSDT (Attempt 2/3). Retrying in 2s...
+2026-01-29 22:52:50 - SyncServiceLogger - INFO - Refreshing positions via REST to ensure Footer accuracy...
+2026-01-29 22:52:54 - SyncServiceLogger - INFO - Skipped 1 duplicate records found in Notion.
+2026-01-29 22:52:54 - SyncServiceLogger - INFO - No new unique records to create.
+2026-01-29 22:52:54 - SyncServiceLogger - INFO - Synchronization process completed successfully.
+2026-01-29 23:00:24 - SyncServiceLogger - INFO - Position TP/SL Changed for ETHUSDT: TP 0->0, SL 0->2860
+2026-01-29 23:00:24 - SyncServiceLogger - INFO - TP/SL for ETHUSDT reverted to original state. Cancelling debounce timer.
+2026-01-29 23:00:27 - SyncServiceLogger - INFO - Starting synchronization process... (Silent Mode: False)
+2026-01-29 23:00:28 - SyncServiceLogger - INFO - Last sync found at 2026-01-29 11:49:00+00:00. Starting from 2026-01-29 11:49:00.001000+00:00
+2026-01-29 23:00:28 - SyncServiceLogger - WARNING - Note: Syncing main account only.
+2026-01-29 23:00:28 - SyncServiceLogger - INFO - Fetching chunk from 2026-01-29 11:49:00.001000+00:00 to 2026-01-29 15:00:28.586000+00:00
+2026-01-29 23:00:28 - SyncServiceLogger - INFO - Refreshing positions via REST to ensure Footer accuracy...
+2026-01-29 23:00:29 - SyncServiceLogger - INFO - Total transactions retrieved: 13
+2026-01-29 23:00:29 - SyncServiceLogger - INFO - Processed 2 records (PnL > 0.5) to be written to Notion.
+2026-01-29 23:00:31 - SyncServiceLogger - INFO - Skipped 1 duplicate records found in Notion.
+2026-01-29 23:00:32 - SyncServiceLogger - INFO - Successfully created record in Notion for symbol: ETHUSDT
+2026-01-29 23:00:33 - SyncServiceLogger - INFO - Synchronization process completed successfully.
+2026-01-29 23:09:46 - SyncServiceLogger - INFO - Position TP/SL Changed for BTCUSDT: TP 91000->0, SL 85666->0
+2026-01-29 23:09:46 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for BTCUSDT because position is closed (Size=0).
+2026-01-29 23:10:10 - SyncServiceLogger - INFO - Position TP/SL Changed for BTCUSDT: TP 91000->0, SL 85666->0
+2026-01-29 23:10:10 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for BTCUSDT because position is closed (Size=0).
+2026-01-29 23:10:13 - SyncServiceLogger - INFO - Starting synchronization process... (Silent Mode: False)
+2026-01-29 23:10:14 - SyncServiceLogger - INFO - Last sync found at 2026-01-29 15:00:00+00:00. Starting from 2026-01-29 15:00:00.001000+00:00
+2026-01-29 23:10:14 - SyncServiceLogger - WARNING - Note: Syncing main account only.
+2026-01-29 23:10:14 - SyncServiceLogger - INFO - Fetching chunk from 2026-01-29 15:00:00.001000+00:00 to 2026-01-29 15:10:14.451000+00:00
+2026-01-29 23:10:14 - SyncServiceLogger - WARNING - PnL not ready for BTCUSDT (Attempt 1/3). Retrying in 2s...
+2026-01-29 23:10:15 - SyncServiceLogger - INFO - Total transactions retrieved: 6
+2026-01-29 23:10:15 - SyncServiceLogger - INFO - Processed 1 records (PnL > 0.5) to be written to Notion.
+2026-01-29 23:10:17 - SyncServiceLogger - WARNING - PnL not ready for BTCUSDT (Attempt 2/3). Retrying in 2s...
+2026-01-29 23:10:17 - SyncServiceLogger - INFO - Skipped 1 duplicate records found in Notion.
+2026-01-29 23:10:17 - SyncServiceLogger - INFO - No new unique records to create.
+2026-01-29 23:10:17 - SyncServiceLogger - INFO - Synchronization process completed successfully.
+2026-01-29 23:10:20 - SyncServiceLogger - INFO - Refreshing positions via REST to ensure Footer accuracy...
+2026-01-29 23:12:06 - SyncServiceLogger - INFO - Position TP/SL Changed for BTCUSDT: TP 91000->0, SL 85666->0
+2026-01-29 23:12:06 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for BTCUSDT because position is closed (Size=0).
+2026-01-29 23:12:06 - SyncServiceLogger - INFO - Position TP/SL Changed for BTCUSDT: TP 91000->0, SL 85666->0
+2026-01-29 23:12:06 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for BTCUSDT because position is closed (Size=0).
+2026-01-29 23:12:06 - SyncServiceLogger - INFO - Position TP/SL Changed for BTCUSDT: TP 91000->0, SL 85666->0
+2026-01-29 23:12:06 - SyncServiceLogger - INFO - Suppressed TP/SL Alert for BTCUSDT because position is closed (Size=0).
+2026-01-29 23:12:09 - SyncServiceLogger - INFO - Starting synchronization process... (Silent Mode: False)
+2026-01-29 23:12:10 - SyncServiceLogger - INFO - Last sync found at 2026-01-29 15:00:00+00:00. Starting from 2026-01-29 15:00:00.001000+00:00
+2026-01-29 23:12:10 - SyncServiceLogger - WARNING - Note: Syncing main account only.
+2026-01-29 23:12:10 - SyncServiceLogger - INFO - Fetching chunk from 2026-01-29 15:00:00.001000+00:00 to 2026-01-29 15:12:10.419000+00:00
+2026-01-29 23:12:10 - SyncServiceLogger - INFO - Refreshing positions via REST to ensure Footer accuracy...
+2026-01-29 23:12:11 - SyncServiceLogger - INFO - Total transactions retrieved: 7
+2026-01-29 23:12:11 - SyncServiceLogger - INFO - Processed 2 records (PnL > 0.5) to be written to Notion.
+2026-01-29 23:12:12 - SyncServiceLogger - INFO - Skipped 1 duplicate records found in Notion.
+2026-01-29 23:12:13 - SyncServiceLogger - INFO - Successfully created record in Notion for symbol: BTCUSDT
+2026-01-29 23:12:13 - SyncServiceLogger - INFO - Synchronization process completed successfully.
+2026-01-30 05:12:53 - SyncServiceLogger - WARNING - WebSocket Connection Closed.
+2026-01-30 05:12:53 - SyncServiceLogger - INFO - Reconnecting in 5 seconds...
+2026-01-30 05:12:58 - SyncServiceLogger - INFO - WebSocket Connected. Sending Auth...
+2026-01-30 05:12:58 - SyncServiceLogger - INFO - WebSocket Authentication Successful!
+2026-01-30 05:12:58 - SyncServiceLogger - INFO - Subscribing to topics: ['order', 'execution', 'position']
+2026-01-30 05:12:58 - SyncServiceLogger - INFO - Subscribed: 
+2026-01-30 05:43:18 - SyncServiceLogger - WARNING - WebSocket Connection Closed.
+2026-01-30 05:43:18 - SyncServiceLogger - INFO - Reconnecting in 5 seconds...
+2026-01-30 05:43:23 - SyncServiceLogger - INFO - WebSocket Connected. Sending Auth...
+2026-01-30 05:43:23 - SyncServiceLogger - INFO - WebSocket Authentication Successful!
+2026-01-30 05:43:23 - SyncServiceLogger - INFO - Subscribing to topics: ['order', 'execution', 'position']
+2026-01-30 05:43:23 - SyncServiceLogger - INFO - Subscribed: 
+2026-01-30 06:24:23 - SyncServiceLogger - INFO - --- Generating Manual PnL Report ---
+2026-01-30 06:24:23 - SyncServiceLogger - INFO - Fetching account data from Bybit...
+2026-01-30 06:24:23 - SyncServiceLogger - INFO - Fetching multi-day stats...
+2026-01-30 06:24:23 - SyncServiceLogger - INFO - Fetching PnL records since 2026-01-26 00:00:00
+2026-01-30 06:24:24 - SyncServiceLogger - INFO - Fetched 11 records for multi-day stats.
+2026-01-30 06:24:24 - SyncServiceLogger - INFO - Multi-day stats calculated: {'01-26': 0.0, '01-27': 423.48820914, '01-28': 123.39408443, '01-29': -213.40473454000005, '01-30': 0.0}, Total: 333.47755902999995
+2026-01-30 06:24:24 - SyncServiceLogger - INFO - Fetching open positions...
+2026-01-30 06:24:25 - SyncServiceLogger - INFO - Sending PnL Dashboard to Discord...
+2026-01-30 06:24:26 - SyncServiceLogger - INFO - Reports sent successfully!
+2026-01-30 07:49:49 - SyncServiceLogger - INFO - --- Generating Manual PnL Report ---
+2026-01-30 07:49:49 - SyncServiceLogger - INFO - Fetching account data from Bybit...
+2026-01-30 07:49:49 - SyncServiceLogger - INFO - Fetching multi-day stats...
+2026-01-30 07:49:49 - SyncServiceLogger - INFO - Fetching PnL records since 2026-01-24 00:00:00
+2026-01-30 07:49:51 - SyncServiceLogger - INFO - Fetched 14 records for multi-day stats.
+2026-01-30 07:49:51 - SyncServiceLogger - INFO - Multi-day stats calculated: {'01-24': 780.92083974, '01-25': 0.0, '01-26': 0.0, '01-27': 423.48820914, '01-28': 123.39408443, '01-29': -213.40473454000005, '01-30': 0.0}, Total: 1114.3983987699999
+2026-01-30 07:49:51 - SyncServiceLogger - INFO - Fetching open positions...
+2026-01-30 07:49:51 - SyncServiceLogger - INFO - Sending PnL Dashboard to Discord...
+2026-01-30 07:49:52 - SyncServiceLogger - INFO - Reports sent successfully!
+2026-01-30 12:18:58 - SyncServiceLogger - INFO - --- Starting Bybit Real-time Monitor ---
+2026-01-30 12:18:59 - SyncServiceLogger - INFO - Services (Sync, Stats) initialized successfully.
+2026-01-30 12:18:59 - SyncServiceLogger - INFO - Starting Bybit Monitor (Custom WebSocket)...
+2026-01-30 12:18:59 - SyncServiceLogger - INFO - Fetching initial open positions (Scanning Linear & Inverse)...
+2026-01-30 12:19:00 - SyncServiceLogger - INFO - No active positions found on startup.
+2026-01-30 12:19:00 - SyncServiceLogger - INFO - Total 0 active positions loaded.
+2026-01-30 12:19:00 - SyncServiceLogger - INFO - Fetching active orders to prevent ghost signals...
+2026-01-30 12:19:01 - SyncServiceLogger - ERROR - Failed to fetch initial state: Bybit API Error: Missing some parameters that must be filled in, symbol or settleCoin or baseCoin (Code: 10001)
+2026-01-30 12:19:01 - SyncServiceLogger - INFO - WebSocket Connected. Sending Auth...
+2026-01-30 12:19:01 - SyncServiceLogger - INFO - WebSocket Authentication Successful!
+2026-01-30 12:19:01 - SyncServiceLogger - INFO - Subscribing to topics: ['order', 'execution', 'position']
+2026-01-30 12:19:01 - SyncServiceLogger - INFO - Subscribed: 
+2026-01-30 12:20:35 - SyncServiceLogger - INFO - -----------------------------------------
+2026-01-30 12:20:35 - SyncServiceLogger - INFO - --- Bybit to Notion Sync Service ---
+2026-01-30 12:20:35 - SyncServiceLogger - INFO - -----------------------------------------
+2026-01-30 12:20:35 - SyncServiceLogger - INFO - Initializing Bybit and Notion clients for sync...
+2026-01-30 12:20:35 - SyncServiceLogger - INFO - Starting synchronization process... (Silent Mode: False)
+2026-01-30 12:20:36 - SyncServiceLogger - INFO - Last sync found at 2026-01-29 15:12:00+00:00. Starting from 2026-01-29 15:12:00.001000+00:00
+2026-01-30 12:20:36 - SyncServiceLogger - WARNING - Note: Syncing main account only.
+2026-01-30 12:20:36 - SyncServiceLogger - INFO - Fetching chunk from 2026-01-29 15:12:00.001000+00:00 to 2026-01-30 04:20:36.354000+00:00
+2026-01-30 12:20:37 - SyncServiceLogger - INFO - Total transactions retrieved: 27
+2026-01-30 12:20:37 - SyncServiceLogger - INFO - Processed 2 records (PnL > 0.5) to be written to Notion.
+2026-01-30 12:20:38 - SyncServiceLogger - INFO - Skipped 1 duplicate records found in Notion.
+2026-01-30 12:20:39 - SyncServiceLogger - INFO - Successfully created record in Notion for symbol: BTCUSDT
+2026-01-30 12:20:40 - SyncServiceLogger - INFO - Synchronization process completed successfully.
+2026-01-30 12:37:07 - SyncServiceLogger - INFO - --- Starting Bybit Real-time Monitor ---
+2026-01-30 12:37:07 - SyncServiceLogger - INFO - Services (Sync, Stats) initialized successfully.
+2026-01-30 12:37:07 - SyncServiceLogger - INFO - Starting Bybit Monitor (Custom WebSocket)...
+2026-01-30 12:37:07 - SyncServiceLogger - INFO - Fetching initial open positions (Scanning Linear & Inverse)...
+2026-01-30 12:37:08 - SyncServiceLogger - INFO - No active positions found on startup.
+2026-01-30 12:37:08 - SyncServiceLogger - INFO - Total 0 active positions loaded.
+2026-01-30 12:37:08 - SyncServiceLogger - INFO - Fetching active orders to prevent ghost signals...
+2026-01-30 12:37:08 - SyncServiceLogger - ERROR - Failed to fetch initial state: Bybit API Error: Missing some parameters that must be filled in, symbol or settleCoin or baseCoin (Code: 10001)
+2026-01-30 12:37:09 - SyncServiceLogger - INFO - WebSocket Connected. Sending Auth...
+2026-01-30 12:37:09 - SyncServiceLogger - INFO - WebSocket Authentication Successful!
+2026-01-30 12:37:09 - SyncServiceLogger - INFO - Subscribing to topics: ['order', 'execution', 'position']
+2026-01-30 12:37:09 - SyncServiceLogger - INFO - Subscribed: 
+2026-01-30 18:46:21 - SyncServiceLogger - INFO - Position TP/SL Changed for BTCUSDT: TP 0->80400, SL 0->83800
+2026-01-30 18:46:21 - SyncServiceLogger - INFO - TP/SL for BTCUSDT reverted to original state. Cancelling debounce timer.
+2026-01-30 18:46:21 - SyncServiceLogger - INFO - Position TP/SL Changed for BTCUSDT: TP 0->80400, SL 0->83800
+2026-01-30 18:46:21 - SyncServiceLogger - INFO - TP/SL for BTCUSDT reverted to original state. Cancelling debounce timer.
+2026-01-30 18:46:21 - SyncServiceLogger - INFO - Position TP/SL Changed for BTCUSDT: TP 0->80400, SL 0->83800
+2026-01-30 18:46:21 - SyncServiceLogger - INFO - TP/SL for BTCUSDT reverted to original state. Cancelling debounce timer.
+2026-01-30 18:46:21 - SyncServiceLogger - INFO - Position TP/SL Changed for BTCUSDT: TP 0->80400, SL 0->83800
+2026-01-30 18:46:21 - SyncServiceLogger - INFO - TP/SL for BTCUSDT reverted to original state. Cancelling debounce timer.
+2026-01-30 18:46:21 - SyncServiceLogger - INFO - Position TP/SL Changed for BTCUSDT: TP 0->80400, SL 0->83800
+2026-01-30 18:46:21 - SyncServiceLogger - INFO - TP/SL for BTCUSDT reverted to original state. Cancelling debounce timer.
+2026-01-30 18:46:21 - SyncServiceLogger - INFO - Position TP/SL Changed for BTCUSDT: TP 0->80400, SL 0->83800
+2026-01-30 18:46:21 - SyncServiceLogger - INFO - TP/SL for BTCUSDT reverted to original state. Cancelling debounce timer.
+2026-01-30 18:46:24 - SyncServiceLogger - INFO - Starting synchronization process... (Silent Mode: False)
+2026-01-30 18:46:24 - SyncServiceLogger - INFO - Starting synchronization process... (Silent Mode: False)
+2026-01-30 18:46:24 - SyncServiceLogger - INFO - Starting synchronization process... (Silent Mode: False)
+2026-01-30 18:46:24 - SyncServiceLogger - INFO - Starting synchronization process... (Silent Mode: False)
+2026-01-30 18:46:24 - SyncServiceLogger - INFO - Starting synchronization process... (Silent Mode: False)
+2026-01-30 18:46:24 - SyncServiceLogger - INFO - Starting synchronization process... (Silent Mode: False)
+2026-01-30 18:46:25 - SyncServiceLogger - INFO - Last sync found at 2026-01-30 01:39:00+00:00. Starting from 2026-01-30 01:39:00.001000+00:00
+2026-01-30 18:46:25 - SyncServiceLogger - WARNING - Note: Syncing main account only.
+2026-01-30 18:46:25 - SyncServiceLogger - INFO - Fetching chunk from 2026-01-30 01:39:00.001000+00:00 to 2026-01-30 10:46:25.240000+00:00
+2026-01-30 18:46:25 - SyncServiceLogger - INFO - Last sync found at 2026-01-30 01:39:00+00:00. Starting from 2026-01-30 01:39:00.001000+00:00
+2026-01-30 18:46:25 - SyncServiceLogger - WARNING - Note: Syncing main account only.
+2026-01-30 18:46:25 - SyncServiceLogger - INFO - Fetching chunk from 2026-01-30 01:39:00.001000+00:00 to 2026-01-30 10:46:25.245000+00:00
+2026-01-30 18:46:25 - SyncServiceLogger - INFO - Last sync found at 2026-01-30 01:39:00+00:00. Starting from 2026-01-30 01:39:00.001000+00:00
+2026-01-30 18:46:25 - SyncServiceLogger - WARNING - Note: Syncing main account only.
+2026-01-30 18:46:25 - SyncServiceLogger - INFO - Fetching chunk from 2026-01-30 01:39:00.001000+00:00 to 2026-01-30 10:46:25.246000+00:00
+2026-01-30 18:46:25 - SyncServiceLogger - INFO - Last sync found at 2026-01-30 01:39:00+00:00. Starting from 2026-01-30 01:39:00.001000+00:00
+2026-01-30 18:46:25 - SyncServiceLogger - WARNING - Note: Syncing main account only.
+2026-01-30 18:46:25 - SyncServiceLogger - INFO - Fetching chunk from 2026-01-30 01:39:00.001000+00:00 to 2026-01-30 10:46:25.257000+00:00
+2026-01-30 18:46:25 - SyncServiceLogger - WARNING - PnL not ready for BTCUSDT (Attempt 1/3). Retrying in 2s...
+2026-01-30 18:46:25 - SyncServiceLogger - INFO - Last sync found at 2026-01-30 01:39:00+00:00. Starting from 2026-01-30 01:39:00.001000+00:00
+2026-01-30 18:46:25 - SyncServiceLogger - WARNING - Note: Syncing main account only.
+2026-01-30 18:46:25 - SyncServiceLogger - INFO - Fetching chunk from 2026-01-30 01:39:00.001000+00:00 to 2026-01-30 10:46:25.459000+00:00
+2026-01-30 18:46:25 - SyncServiceLogger - INFO - Last sync found at 2026-01-30 01:39:00+00:00. Starting from 2026-01-30 01:39:00.001000+00:00
+2026-01-30 18:46:25 - SyncServiceLogger - WARNING - Note: Syncing main account only.
+2026-01-30 18:46:25 - SyncServiceLogger - INFO - Fetching chunk from 2026-01-30 01:39:00.001000+00:00 to 2026-01-30 10:46:25.751000+00:00
+2026-01-30 18:46:26 - SyncServiceLogger - INFO - Total transactions retrieved: 31
+2026-01-30 18:46:26 - SyncServiceLogger - INFO - Processed 1 records (PnL > 0.5) to be written to Notion.
+2026-01-30 18:46:26 - SyncServiceLogger - INFO - Total transactions retrieved: 31
+2026-01-30 18:46:26 - SyncServiceLogger - INFO - Processed 1 records (PnL > 0.5) to be written to Notion.
+2026-01-30 18:46:26 - SyncServiceLogger - INFO - Total transactions retrieved: 31
+2026-01-30 18:46:26 - SyncServiceLogger - INFO - Processed 1 records (PnL > 0.5) to be written to Notion.
+2026-01-30 18:46:26 - SyncServiceLogger - INFO - Total transactions retrieved: 31
+2026-01-30 18:46:26 - SyncServiceLogger - INFO - Processed 1 records (PnL > 0.5) to be written to Notion.
+2026-01-30 18:46:26 - SyncServiceLogger - INFO - Total transactions retrieved: 31
+2026-01-30 18:46:26 - SyncServiceLogger - INFO - Processed 1 records (PnL > 0.5) to be written to Notion.
+2026-01-30 18:46:27 - SyncServiceLogger - INFO - Total transactions retrieved: 31
+2026-01-30 18:46:27 - SyncServiceLogger - INFO - Processed 1 records (PnL > 0.5) to be written to Notion.
+2026-01-30 18:46:27 - SyncServiceLogger - INFO - Skipped 1 duplicate records found in Notion.
+2026-01-30 18:46:27 - SyncServiceLogger - INFO - No new unique records to create.
+2026-01-30 18:46:27 - SyncServiceLogger - INFO - Synchronization process completed successfully.
+2026-01-30 18:46:28 - SyncServiceLogger - INFO - Skipped 1 duplicate records found in Notion.
+2026-01-30 18:46:28 - SyncServiceLogger - INFO - No new unique records to create.
+2026-01-30 18:46:28 - SyncServiceLogger - INFO - Synchronization process completed successfully.
+2026-01-30 18:46:28 - SyncServiceLogger - WARNING - PnL not ready for BTCUSDT (Attempt 2/3). Retrying in 2s...
+2026-01-30 18:46:28 - SyncServiceLogger - INFO - Skipped 1 duplicate records found in Notion.
+2026-01-30 18:46:28 - SyncServiceLogger - INFO - No new unique records to create.
+2026-01-30 18:46:28 - SyncServiceLogger - INFO - Synchronization process completed successfully.
+2026-01-30 18:46:29 - SyncServiceLogger - INFO - Skipped 1 duplicate records found in Notion.
+2026-01-30 18:46:29 - SyncServiceLogger - INFO - No new unique records to create.
+2026-01-30 18:46:29 - SyncServiceLogger - INFO - Synchronization process completed successfully.
+2026-01-30 18:46:30 - SyncServiceLogger - INFO - Skipped 1 duplicate records found in Notion.
+2026-01-30 18:46:30 - SyncServiceLogger - INFO - No new unique records to create.
+2026-01-30 18:46:30 - SyncServiceLogger - INFO - Synchronization process completed successfully.
+2026-01-30 18:46:30 - SyncServiceLogger - INFO - Refreshing positions via REST to ensure Footer accuracy...
+2026-01-30 18:46:32 - SyncServiceLogger - INFO - Skipped 1 duplicate records found in Notion.
+2026-01-30 18:46:32 - SyncServiceLogger - INFO - No new unique records to create.
+2026-01-30 18:46:32 - SyncServiceLogger - INFO - Synchronization process completed successfully.
+2026-01-30 18:56:53 - SyncServiceLogger - INFO - Position TP/SL Changed for BTCUSDT: TP 0->80400, SL 0->83800
+2026-01-30 18:56:58 - SyncServiceLogger - INFO - Sending Debounced TP/SL Alert for BTCUSDT
+2026-01-31 03:06:23 - SyncServiceLogger - INFO - --- Starting Bybit Real-time Monitor ---
+2026-01-31 03:06:24 - SyncServiceLogger - INFO - Services (Sync, Stats) initialized successfully.
+2026-01-31 03:06:24 - SyncServiceLogger - INFO - Starting Bybit Monitor (Custom WebSocket)...
+2026-01-31 03:06:24 - SyncServiceLogger - INFO - Fetching initial open positions (Scanning Linear & Inverse)...
+2026-01-31 03:06:25 - SyncServiceLogger - INFO - No active positions found on startup.
+2026-01-31 03:06:25 - SyncServiceLogger - INFO - Total 0 active positions loaded.
+2026-01-31 03:06:25 - SyncServiceLogger - INFO - Fetching active orders to prevent ghost signals...
+2026-01-31 03:06:25 - SyncServiceLogger - ERROR - Failed to fetch initial state: Bybit API Error: Missing some parameters that must be filled in, symbol or settleCoin or baseCoin (Code: 10001)
+2026-01-31 03:06:25 - SyncServiceLogger - INFO - WebSocket Connected. Sending Auth...
+2026-01-31 03:06:25 - SyncServiceLogger - INFO - WebSocket Authentication Successful!
+2026-01-31 03:06:25 - SyncServiceLogger - INFO - Subscribing to topics: ['order', 'execution', 'position']
+2026-01-31 03:06:26 - SyncServiceLogger - INFO - Subscribed: 
+2026-01-31 03:07:48 - SyncServiceLogger - INFO - -----------------------------------------
+2026-01-31 03:07:48 - SyncServiceLogger - INFO - --- Bybit to Notion Sync Service ---
+2026-01-31 03:07:48 - SyncServiceLogger - INFO - -----------------------------------------
+2026-01-31 03:07:48 - SyncServiceLogger - INFO - Initializing Bybit and Notion clients for sync...
+2026-01-31 03:07:49 - SyncServiceLogger - INFO - Starting synchronization process... (Silent Mode: False)
+2026-01-31 03:07:49 - SyncServiceLogger - INFO - Last sync found at 2026-01-30 01:39:00+00:00. Starting from 2026-01-30 01:39:00.001000+00:00
+2026-01-31 03:07:49 - SyncServiceLogger - WARNING - Note: Syncing main account only.
+2026-01-31 03:07:49 - SyncServiceLogger - INFO - Fetching chunk from 2026-01-30 01:39:00.001000+00:00 to 2026-01-30 19:07:49.656000+00:00
+2026-01-31 03:07:50 - SyncServiceLogger - INFO - Total transactions retrieved: 39
+2026-01-31 03:07:50 - SyncServiceLogger - INFO - Processed 2 records (PnL > 0.5) to be written to Notion.
+2026-01-31 03:07:52 - SyncServiceLogger - INFO - Skipped 1 duplicate records found in Notion.
+2026-01-31 03:07:53 - SyncServiceLogger - INFO - Successfully created record in Notion for symbol: BTCUSDT
+2026-01-31 03:07:53 - SyncServiceLogger - INFO - Synchronization process completed successfully.
+2026-02-01 07:23:02 - SyncServiceLogger - INFO - --- Starting Bybit Real-time Monitor ---
+2026-02-01 07:23:03 - SyncServiceLogger - INFO - Services (Sync, Stats) initialized successfully.
+2026-02-01 07:23:03 - SyncServiceLogger - INFO - Starting Bybit Monitor (Custom WebSocket)...
+2026-02-01 07:23:03 - SyncServiceLogger - INFO - Triggering background sync to catch up on any missing records...
+2026-02-01 07:23:03 - SyncServiceLogger - INFO - Starting synchronization process... (Silent Mode: False)
+2026-02-01 07:23:03 - SyncServiceLogger - INFO - Fetching initial open positions (Scanning Linear & Inverse)...
+2026-02-01 07:23:04 - SyncServiceLogger - INFO - No active positions found on startup.
+2026-02-01 07:23:04 - SyncServiceLogger - INFO - Total 0 active positions loaded.
+2026-02-01 07:23:04 - SyncServiceLogger - INFO - Fetching active orders to prevent ghost signals...
+2026-02-01 07:23:04 - SyncServiceLogger - INFO - Last sync found at 2026-01-30 18:54:00+00:00. Starting from 2026-01-30 18:54:00.001000+00:00
+2026-02-01 07:23:04 - SyncServiceLogger - WARNING - Note: Syncing main account only.
+2026-02-01 07:23:04 - SyncServiceLogger - INFO - Fetching chunk from 2026-01-30 18:54:00.001000+00:00 to 2026-01-31 23:23:04.874000+00:00
+2026-02-01 07:23:05 - SyncServiceLogger - ERROR - Failed to fetch initial state: Bybit API Error: Missing some parameters that must be filled in, symbol or settleCoin or baseCoin (Code: 10001)
+2026-02-01 07:23:05 - SyncServiceLogger - INFO - WebSocket Connected. Sending Auth...
+2026-02-01 07:23:05 - SyncServiceLogger - INFO - WebSocket Authentication Successful!
+2026-02-01 07:23:05 - SyncServiceLogger - INFO - Subscribing to topics: ['order', 'execution', 'position']
+2026-02-01 07:23:05 - SyncServiceLogger - INFO - Subscribed: 
+2026-02-01 07:23:06 - SyncServiceLogger - INFO - Total transactions retrieved: 23
+2026-02-01 07:23:06 - SyncServiceLogger - INFO - Processed 3 records (PnL > 0.5) to be written to Notion.
+2026-02-01 07:23:07 - SyncServiceLogger - INFO - Skipped 1 duplicate records found in Notion.
+2026-02-01 07:23:07 - SyncServiceLogger - INFO - Successfully created record in Notion for symbol: BTCUSDT
+2026-02-01 07:23:08 - SyncServiceLogger - INFO - Successfully created record in Notion for symbol: BTCUSDT
+2026-02-01 07:23:08 - SyncServiceLogger - INFO - Synchronization process completed successfully.
+2026-02-01 23:39:01 - SyncServiceLogger - INFO - --- Starting Bybit Real-time Monitor ---
+2026-02-01 23:39:02 - SyncServiceLogger - INFO - Services (Sync, Stats) initialized successfully.
+2026-02-01 23:39:02 - SyncServiceLogger - INFO - Starting Bybit Monitor (Custom WebSocket)...
+2026-02-01 23:39:02 - SyncServiceLogger - INFO - Triggering background sync to catch up on any missing records...
+2026-02-01 23:39:02 - SyncServiceLogger - INFO - Starting synchronization process... (Silent Mode: False)
+2026-02-01 23:39:02 - SyncServiceLogger - INFO - Fetching initial open positions (Scanning Linear & Inverse)...
+2026-02-01 23:39:02 - SyncServiceLogger - INFO - Last sync found at 2026-01-31 18:43:00+00:00. Starting from 2026-01-31 18:43:00.001000+00:00
+2026-02-01 23:39:02 - SyncServiceLogger - WARNING - Note: Syncing main account only.
+2026-02-01 23:39:02 - SyncServiceLogger - INFO - Fetching chunk from 2026-01-31 18:43:00.001000+00:00 to 2026-02-01 15:39:02.789000+00:00
+2026-02-01 23:39:02 - SyncServiceLogger - INFO - No active positions found on startup.
+2026-02-01 23:39:02 - SyncServiceLogger - INFO - Total 0 active positions loaded.
+2026-02-01 23:39:02 - SyncServiceLogger - INFO - Fetching active orders to prevent ghost signals...
+2026-02-01 23:39:03 - SyncServiceLogger - ERROR - Failed to fetch initial state: Bybit API Error: Missing some parameters that must be filled in, symbol or settleCoin or baseCoin (Code: 10001)
+2026-02-01 23:39:03 - SyncServiceLogger - INFO - WebSocket Connected. Sending Auth...
+2026-02-01 23:39:03 - SyncServiceLogger - INFO - WebSocket Authentication Successful!
+2026-02-01 23:39:03 - SyncServiceLogger - INFO - Subscribing to topics: ['order', 'execution', 'position']
+2026-02-01 23:39:03 - SyncServiceLogger - INFO - Subscribed: 
+2026-02-01 23:39:04 - SyncServiceLogger - INFO - Total transactions retrieved: 4
+2026-02-01 23:39:04 - SyncServiceLogger - INFO - Processed 2 records (PnL > 0.5) to be written to Notion.
+2026-02-01 23:39:04 - SyncServiceLogger - INFO - Skipped 1 duplicate records found in Notion.
+2026-02-01 23:39:05 - SyncServiceLogger - INFO - Successfully created record in Notion for symbol: BTCUSDT
+2026-02-01 23:39:05 - SyncServiceLogger - INFO - Synchronization process completed successfully.
+2026-02-02 02:24:04 - SyncServiceLogger - INFO - --- Starting Bybit Real-time Monitor ---
+2026-02-02 02:24:05 - SyncServiceLogger - INFO - Services (Sync, Stats) initialized successfully.
+2026-02-02 02:24:05 - SyncServiceLogger - INFO - Starting Bybit Monitor (Custom WebSocket)...
+2026-02-02 02:24:05 - SyncServiceLogger - INFO - Triggering background sync to catch up on any missing records...
+2026-02-02 02:24:05 - SyncServiceLogger - INFO - Starting synchronization process... (Silent Mode: False)
+2026-02-02 02:24:05 - SyncServiceLogger - INFO - Fetching initial open positions (Scanning Linear & Inverse)...
+2026-02-02 02:24:06 - SyncServiceLogger - INFO - Last sync found at 2026-02-01 15:38:00+00:00. Starting from 2026-02-01 15:38:00.001000+00:00
+2026-02-02 02:24:06 - SyncServiceLogger - WARNING - Note: Syncing main account only.
+2026-02-02 02:24:06 - SyncServiceLogger - INFO - Fetching chunk from 2026-02-01 15:38:00.001000+00:00 to 2026-02-01 18:24:06.283000+00:00
+2026-02-02 02:24:06 - SyncServiceLogger - INFO - No active positions found on startup.
+2026-02-02 02:24:06 - SyncServiceLogger - INFO - Total 0 active positions loaded.
+2026-02-02 02:24:06 - SyncServiceLogger - INFO - Fetching active orders to prevent ghost signals...
+2026-02-02 02:24:07 - SyncServiceLogger - ERROR - Failed to fetch initial state: Bybit API Error: Missing some parameters that must be filled in, symbol or settleCoin or baseCoin (Code: 10001)
+2026-02-02 02:24:07 - SyncServiceLogger - INFO - WebSocket Connected. Sending Auth...
+2026-02-02 02:24:07 - SyncServiceLogger - INFO - WebSocket Authentication Successful!
+2026-02-02 02:24:07 - SyncServiceLogger - INFO - Subscribing to topics: ['order', 'execution', 'position']
+2026-02-02 02:24:07 - SyncServiceLogger - INFO - Subscribed: 
+2026-02-02 02:24:07 - SyncServiceLogger - INFO - Total transactions retrieved: 14
+2026-02-02 02:24:07 - SyncServiceLogger - INFO - Processed 2 records (PnL > 0.5) to be written to Notion.
+2026-02-02 02:24:08 - SyncServiceLogger - INFO - Skipped 1 duplicate records found in Notion.
+2026-02-02 02:24:08 - SyncServiceLogger - INFO - Successfully created record in Notion for symbol: BTCUSDT
+2026-02-02 02:24:09 - SyncServiceLogger - INFO - Synchronization process completed successfully.
+2026-02-02 02:24:41 - SyncServiceLogger - INFO - --- Starting Bybit Real-time Monitor ---
+2026-02-02 02:24:41 - SyncServiceLogger - INFO - Services (Sync, Stats) initialized successfully.
+2026-02-02 02:24:41 - SyncServiceLogger - INFO - Starting Bybit Monitor (Custom WebSocket)...
+2026-02-02 02:24:41 - SyncServiceLogger - INFO - Triggering background sync to catch up on any missing records...
+2026-02-02 02:24:41 - SyncServiceLogger - INFO - Starting synchronization process... (Silent Mode: False)
+2026-02-02 02:24:41 - SyncServiceLogger - INFO - Fetching initial open positions (Scanning Linear & Inverse)...
+2026-02-02 02:24:42 - SyncServiceLogger - INFO - Last sync found at 2026-02-01 18:15:00+00:00. Starting from 2026-02-01 18:15:00.001000+00:00
+2026-02-02 02:24:42 - SyncServiceLogger - WARNING - Note: Syncing main account only.
+2026-02-02 02:24:42 - SyncServiceLogger - INFO - Fetching chunk from 2026-02-01 18:15:00.001000+00:00 to 2026-02-01 18:24:42.157000+00:00
+2026-02-02 02:24:42 - SyncServiceLogger - INFO - No active positions found on startup.
+2026-02-02 02:24:42 - SyncServiceLogger - INFO - Total 0 active positions loaded.
+2026-02-02 02:24:42 - SyncServiceLogger - INFO - Fetching active orders to prevent ghost signals...
+2026-02-02 02:24:42 - SyncServiceLogger - ERROR - Failed to fetch initial state: Bybit API Error: Missing some parameters that must be filled in, symbol or settleCoin or baseCoin (Code: 10001)
+2026-02-02 02:24:43 - SyncServiceLogger - INFO - WebSocket Connected. Sending Auth...
+2026-02-02 02:24:43 - SyncServiceLogger - INFO - WebSocket Authentication Successful!
+2026-02-02 02:24:43 - SyncServiceLogger - INFO - Subscribing to topics: ['order', 'execution', 'position']
+2026-02-02 02:24:43 - SyncServiceLogger - INFO - Subscribed: 
+2026-02-02 02:24:43 - SyncServiceLogger - INFO - Total transactions retrieved: 3
+2026-02-02 02:24:43 - SyncServiceLogger - INFO - Processed 1 records (PnL > 0.5) to be written to Notion.
+2026-02-02 02:24:44 - SyncServiceLogger - INFO - Skipped 1 duplicate records found in Notion.
+2026-02-02 02:24:44 - SyncServiceLogger - INFO - No new unique records to create.
+2026-02-02 02:24:44 - SyncServiceLogger - INFO - Synchronization process completed successfully.
+2026-02-02 02:26:32 - SyncServiceLogger - INFO - -----------------------------------------
+2026-02-02 02:26:32 - SyncServiceLogger - INFO - --- Bybit to Notion Sync Service ---
+2026-02-02 02:26:32 - SyncServiceLogger - INFO - -----------------------------------------
+2026-02-02 02:26:32 - SyncServiceLogger - INFO - Initializing Bybit and Notion clients for sync...
+2026-02-02 02:26:33 - SyncServiceLogger - INFO - Starting synchronization process... (Silent Mode: False)
+2026-02-02 02:26:33 - SyncServiceLogger - INFO - Last sync found at 2026-02-01 18:15:00+00:00. Starting from 2026-02-01 18:15:00.001000+00:00
+2026-02-02 02:26:33 - SyncServiceLogger - WARNING - Note: Syncing main account only.
+2026-02-02 02:26:33 - SyncServiceLogger - INFO - Fetching chunk from 2026-02-01 18:15:00.001000+00:00 to 2026-02-01 18:26:33.781000+00:00
+2026-02-02 02:26:34 - SyncServiceLogger - INFO - Total transactions retrieved: 3
+2026-02-02 02:26:34 - SyncServiceLogger - INFO - Processed 1 records (PnL > 0.5) to be written to Notion.
+2026-02-02 02:26:35 - SyncServiceLogger - INFO - Skipped 1 duplicate records found in Notion.
+2026-02-02 02:26:35 - SyncServiceLogger - INFO - No new unique records to create.
+2026-02-02 02:26:35 - SyncServiceLogger - INFO - Synchronization process completed successfully.
+2026-02-02 02:37:02 - SyncServiceLogger - INFO - --- FORCED PnL Sync (Last 24 Hours) ---
+2026-02-02 02:37:02 - SyncServiceLogger - INFO - Forcing scan from 2026-01-31 18:37:02.866000+00:00
+2026-02-02 02:37:03 - SyncServiceLogger - INFO - Fetched 18 transactions.
+2026-02-02 02:37:03 - SyncServiceLogger - INFO - Prepared 3 records after aggregation and filter.
+2026-02-02 02:37:04 - SyncServiceLogger - INFO - Skipped 3 duplicate records found in Notion.
+2026-02-02 02:37:04 - SyncServiceLogger - INFO - No new unique records to create.
+2026-02-02 02:37:04 - SyncServiceLogger - INFO - Forced sync complete.
+2026-02-02 02:37:12 - SyncServiceLogger - INFO - --- FORCED PnL Sync (Last 24 Hours) ---
+2026-02-02 02:37:12 - SyncServiceLogger - INFO - Forcing scan from 2026-01-31 18:37:12.397000+00:00
+2026-02-02 02:37:13 - SyncServiceLogger - INFO - Fetched 18 transactions.
+2026-02-02 02:37:13 - SyncServiceLogger - INFO - Prepared 3 records after aggregation and filter.
+2026-02-02 02:37:14 - SyncServiceLogger - INFO - Skipped 3 duplicate records found in Notion.
+2026-02-02 02:37:14 - SyncServiceLogger - INFO - No new unique records to create.
+2026-02-02 02:37:14 - SyncServiceLogger - INFO - Forced sync complete.
+2026-02-02 02:52:10 - SyncServiceLogger - INFO - --- Starting Bybit Real-time Monitor ---
+2026-02-02 02:52:10 - SyncServiceLogger - INFO - Services (Sync, Stats) initialized successfully.
+2026-02-02 02:52:10 - SyncServiceLogger - INFO - Starting Bybit Monitor (Custom WebSocket)...
+2026-02-02 02:52:10 - SyncServiceLogger - INFO - Triggering background sync to catch up on any missing records...
+2026-02-02 02:52:10 - SyncServiceLogger - INFO - Starting synchronization process... (Silent Mode: False)
+2026-02-02 02:52:10 - SyncServiceLogger - INFO - Fetching initial open positions (Scanning Linear & Inverse)...
+2026-02-02 02:52:10 - SyncServiceLogger - INFO - Last sync found at 2026-02-01 18:15:00+00:00. Starting from 2026-02-01 18:15:00.001000+00:00
+2026-02-02 02:52:10 - SyncServiceLogger - WARNING - Note: Syncing main account only.
+2026-02-02 02:52:10 - SyncServiceLogger - INFO - Fetching chunk from 2026-02-01 18:15:00.001000+00:00 to 2026-02-01 18:52:10.876000+00:00
+2026-02-02 02:52:11 - SyncServiceLogger - INFO - No active positions found on startup.
+2026-02-02 02:52:11 - SyncServiceLogger - INFO - Total 0 active positions loaded.
+2026-02-02 02:52:11 - SyncServiceLogger - INFO - Fetching active orders to prevent ghost signals...
+2026-02-02 02:52:11 - SyncServiceLogger - ERROR - Failed to fetch initial state: Bybit API Error: Missing some parameters that must be filled in, symbol or settleCoin or baseCoin (Code: 10001)
+2026-02-02 02:52:12 - SyncServiceLogger - INFO - WebSocket Connected. Sending Auth...
+2026-02-02 02:52:12 - SyncServiceLogger - INFO - WebSocket Authentication Successful!
+2026-02-02 02:52:12 - SyncServiceLogger - INFO - Subscribing to topics: ['order', 'execution', 'position']
+2026-02-02 02:52:12 - SyncServiceLogger - INFO - Subscribed: 
+2026-02-02 02:52:12 - SyncServiceLogger - INFO - Total transactions retrieved: 3
+2026-02-02 02:52:12 - SyncServiceLogger - INFO - Processed 1 records (PnL > 0.5) to be written to Notion.
+2026-02-02 02:52:13 - SyncServiceLogger - INFO - Skipped 1 duplicate records found in Notion.
+2026-02-02 02:52:13 - SyncServiceLogger - INFO - No new unique records to create.
+2026-02-02 02:52:13 - SyncServiceLogger - INFO - Synchronization process completed successfully.
+2026-02-02 02:56:18 - SyncServiceLogger - INFO - --- Starting Bybit Real-time Monitor ---
+2026-02-02 02:56:18 - SyncServiceLogger - INFO - Services (Sync, Stats) initialized successfully.
+2026-02-02 02:56:18 - SyncServiceLogger - INFO - Starting Bybit Monitor (Custom WebSocket)...
+2026-02-02 02:56:18 - SyncServiceLogger - INFO - Triggering background sync to catch up on any missing records...
+2026-02-02 02:56:18 - SyncServiceLogger - INFO - Starting synchronization process... (Silent Mode: False)
+2026-02-02 02:56:18 - SyncServiceLogger - INFO - Fetching initial open positions (Scanning Linear & Inverse)...
+2026-02-02 02:56:19 - SyncServiceLogger - INFO - Last sync found at 2026-02-01 18:15:00+00:00. Starting from 2026-02-01 18:15:00.001000+00:00
+2026-02-02 02:56:19 - SyncServiceLogger - WARNING - Note: Syncing main account only.
+2026-02-02 02:56:19 - SyncServiceLogger - INFO - Fetching chunk from 2026-02-01 18:15:00.001000+00:00 to 2026-02-01 18:56:19.163000+00:00
+2026-02-02 02:56:19 - SyncServiceLogger - INFO - No active positions found on startup.
+2026-02-02 02:56:19 - SyncServiceLogger - INFO - Total 0 active positions loaded.
+2026-02-02 02:56:19 - SyncServiceLogger - INFO - Fetching active orders to prevent ghost signals...
+2026-02-02 02:56:19 - SyncServiceLogger - ERROR - Failed to fetch initial state: BybitAdapter.get_active_orders() got an unexpected keyword argument 'settleCoin'
+2026-02-02 02:56:19 - SyncServiceLogger - INFO - WebSocket Connected. Sending Auth...
+2026-02-02 02:56:19 - SyncServiceLogger - INFO - WebSocket Authentication Successful!
+2026-02-02 02:56:19 - SyncServiceLogger - INFO - Subscribing to topics: ['order', 'execution', 'position']
+2026-02-02 02:56:19 - SyncServiceLogger - INFO - Subscribed: 
+2026-02-02 02:56:20 - SyncServiceLogger - INFO - Total transactions retrieved: 3
+2026-02-02 02:56:20 - SyncServiceLogger - INFO - Processed 1 records (PnL > 0.5) to be written to Notion.
+2026-02-02 02:56:21 - SyncServiceLogger - INFO - Skipped 1 duplicate records found in Notion.
+2026-02-02 02:56:21 - SyncServiceLogger - INFO - No new unique records to create.
+2026-02-02 02:56:21 - SyncServiceLogger - INFO - Synchronization process completed successfully.
+2026-02-02 03:00:45 - SyncServiceLogger - INFO - --- Starting Bybit Real-time Monitor ---
+2026-02-02 03:00:45 - SyncServiceLogger - INFO - Services (Sync, Stats) initialized successfully.
+2026-02-02 03:00:45 - SyncServiceLogger - INFO - Starting Bybit Monitor (Custom WebSocket)...
+2026-02-02 03:00:45 - SyncServiceLogger - INFO - Triggering background sync to catch up on any missing records...
+2026-02-02 03:00:45 - SyncServiceLogger - INFO - Starting synchronization process... (Silent Mode: False)
+2026-02-02 03:00:45 - SyncServiceLogger - INFO - Fetching initial open positions (Scanning Linear & Inverse)...
+2026-02-02 03:00:46 - SyncServiceLogger - INFO - Last sync found at 2026-02-01 18:15:00+00:00. Starting from 2026-02-01 18:15:00.001000+00:00
+2026-02-02 03:00:46 - SyncServiceLogger - WARNING - Note: Syncing main account only.
+2026-02-02 03:00:46 - SyncServiceLogger - INFO - Fetching chunk from 2026-02-01 18:15:00.001000+00:00 to 2026-02-01 19:00:46.099000+00:00
+2026-02-02 03:00:46 - SyncServiceLogger - INFO - No active positions found on startup.
+2026-02-02 03:00:46 - SyncServiceLogger - INFO - Total 0 active positions loaded.
+2026-02-02 03:00:46 - SyncServiceLogger - INFO - Fetching active orders to prevent ghost signals...
+2026-02-02 03:00:47 - SyncServiceLogger - INFO - Total transactions retrieved: 3
+2026-02-02 03:00:47 - SyncServiceLogger - INFO - Processed 1 records (PnL > 0.5) to be written to Notion.
+2026-02-02 03:00:47 - SyncServiceLogger - INFO - Loaded 0 active orders to ignore.
+2026-02-02 03:00:47 - SyncServiceLogger - INFO - WebSocket Connected. Sending Auth...
+2026-02-02 03:00:47 - SyncServiceLogger - INFO - WebSocket Authentication Successful!
+2026-02-02 03:00:47 - SyncServiceLogger - INFO - Subscribing to topics: ['order', 'execution', 'position']
+2026-02-02 03:00:47 - SyncServiceLogger - INFO - Subscribed: 
+2026-02-02 03:00:48 - SyncServiceLogger - INFO - Skipped 1 duplicate records found in Notion.
+2026-02-02 03:00:48 - SyncServiceLogger - INFO - No new unique records to create.
+2026-02-02 03:00:48 - SyncServiceLogger - INFO - Synchronization process completed successfully.
