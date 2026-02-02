@@ -1,0 +1,13 @@
+# 預設行為：自動偵測
+* text=auto
+
+# 強制使用 LF (Linux 換行)，避免 Windows 編輯後在 Docker/Mac 執行失敗
+*.sh text eol=lf
+*.py text eol=lf
+*.md text eol=lf
+Dockerfile text eol=lf
+docker-compose.yml text eol=lf
+requirements.txt text eol=lf
+.env.example text eol=lf
+.gitignore text eol=lf
+.dockerignore text eol=lf
