@@ -42,21 +42,21 @@ class SyncService:
         # 2. Skip subaccount notice for brevity
         log.warning("Note: Syncing main account only.")
 
-        # 3. Fetch data from Bybit in 7-day chunks (API limit)
+        # 3. Fetch data in chunks (window size depends on exchange)
         all_transactions = []
         current_start = start_time_ms
-        
+        window_ms = self.exchange.max_query_window_ms
+
         while current_start < end_time_ms:
-            # 7 days max per request
-            current_end = min(current_start + (7 * 24 * 60 * 60 * 1000) - 1, end_time_ms)
-            
-            log.info(f"Fetching chunk from {datetime.fromtimestamp(current_start/1000, tz=timezone.utc)} to {datetime.fromtimestamp(current_end/1000, tz=timezone.utc)}")
-            
+            current_end = min(current_start + window_ms - 1, end_time_ms) if window_ms > 0 else end_time_ms
+
+            log.info(f"[{self.exchange.exchange_name}] Fetching chunk from {datetime.fromtimestamp(current_start/1000, tz=timezone.utc)} to {datetime.fromtimestamp(current_end/1000, tz=timezone.utc)}")
+
             try:
                 chunk_txs = self.exchange.fetch_transaction_log(
-                    account_type="UNIFIED", 
-                    category="linear", 
-                    start_time=int(current_start), 
+                    account_type=self.exchange.default_account_type,
+                    category=self.exchange.default_category,
+                    start_time=int(current_start),
                     end_time=int(current_end)
                 )
                 all_transactions.extend(chunk_txs)

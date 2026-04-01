@@ -26,6 +26,10 @@ class BybitAdapter(BaseExchangeAdapter):
     including authentication, pagination, and error handling.
     """
 
+    @property
+    def exchange_name(self) -> str:
+        return "bybit"
+
     def __init__(self, api_key: str, api_secret: str):
         super().__init__(api_key, api_secret)
         self.last_request_time = 0

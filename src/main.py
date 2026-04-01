@@ -6,7 +6,7 @@ import os
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from src.config import settings
-from src.adapters.bybit import BybitAdapter
+from src.adapters import ADAPTER_MAP
 from src.clients.notion import NotionClient
 from src.services.sync import SyncService
 from src.services.reporter import ReporterService
@@ -30,34 +30,59 @@ def main():
         run_sync()
 
 def run_sync():
-    """Runs the data synchronization process."""
+    """Runs the data synchronization process for all configured exchanges."""
     log.info("-----------------------------------------")
-    log.info("--- Bybit to Notion Sync Service ---")
+    log.info("--- Multi-Exchange to Notion Sync ---")
     log.info("-----------------------------------------")
-    try:
-        log.info("Initializing Bybit and Notion clients for sync...")
-        bybit_adapter = BybitAdapter(
-            api_key=settings["bybit_api_key"],
-            api_secret=settings["bybit_api_secret"]
-        )
-        notion_client = NotionClient(
-            token=settings["notion_token"],
-            database_id=settings["notion_db_id"]
-        )
-        sync_service = SyncService(
-            exchange_adapter=bybit_adapter,
-            notion_client=notion_client
-        )
-        sync_service.run_sync()
-    except (ApiException, NotionApiException) as e:
-        error_message = f"An API error occurred during synchronization: {e}"
-        log.error(error_message)
-        send_discord_alert(settings.get("discord_webhook_url"), error_message)
-        sys.exit(1)
-    except Exception as e:
-        error_message = f"An unexpected error occurred: {e}"
-        log.critical(error_message, exc_info=True)
-        send_discord_alert(settings.get("discord_webhook_url"), error_message)
+
+    configured_exchanges = settings.get("exchanges", {})
+    if not configured_exchanges:
+        log.warning("No exchanges configured. Nothing to sync.")
+        return
+
+    has_error = False
+
+    for exchange_name, ex_config in configured_exchanges.items():
+        log.info(f"=== Syncing {exchange_name.upper()} ===")
+        try:
+            adapter_cls = ADAPTER_MAP.get(exchange_name)
+            if not adapter_cls:
+                log.warning(f"No adapter for exchange '{exchange_name}'. Skipping.")
+                continue
+
+            adapter_kwargs = {
+                "api_key": ex_config["api_key"],
+                "api_secret": ex_config["api_secret"],
+            }
+            if "passphrase" in ex_config and ex_config["passphrase"]:
+                adapter_kwargs["passphrase"] = ex_config["passphrase"]
+
+            adapter = adapter_cls(**adapter_kwargs)
+            notion_client = NotionClient(
+                token=settings["notion_token"],
+                database_id=ex_config["notion_db_id"]
+            )
+            sync_service = SyncService(
+                exchange_adapter=adapter,
+                notion_client=notion_client
+            )
+            sync_service.run_sync()
+            log.info(f"=== {exchange_name.upper()} sync complete ===")
+
+        except (ApiException, NotionApiException) as e:
+            error_message = f"API error during {exchange_name} sync: {e}"
+            log.error(error_message)
+            send_discord_alert(settings.get("discord_webhook_url"), error_message)
+            has_error = True
+            continue  # Don't let one exchange failure stop others
+        except Exception as e:
+            error_message = f"Unexpected error during {exchange_name} sync: {e}"
+            log.critical(error_message, exc_info=True)
+            send_discord_alert(settings.get("discord_webhook_url"), error_message)
+            has_error = True
+            continue
+
+    if has_error:
         sys.exit(1)
 
 def run_reporter(output_format: str):

@@ -9,17 +9,40 @@ class BaseExchangeAdapter(ABC):
     the core logic can interact with different exchanges in a standardized way.
     """
 
-    def __init__(self, api_key: str, api_secret: str):
+    def __init__(self, api_key: str, api_secret: str, passphrase: str = None):
         """
         Initializes the adapter with API credentials.
 
         Args:
             api_key: The API key for the exchange.
             api_secret: The API secret for the exchange.
+            passphrase: Optional passphrase (required by OKX, Bitget).
         """
         self._api_key = api_key
         self._api_secret = api_secret
+        self._passphrase = passphrase
         self._rate_limit_lock = None  # To be implemented in subclasses
+
+    @property
+    @abstractmethod
+    def exchange_name(self) -> str:
+        """Returns the exchange identifier (e.g., 'bybit', 'binance')."""
+        pass
+
+    @property
+    def default_account_type(self) -> str:
+        """Default account type for fetch_transaction_log. Override per exchange."""
+        return "UNIFIED"
+
+    @property
+    def default_category(self) -> str:
+        """Default product category for fetch_transaction_log. Override per exchange."""
+        return "linear"
+
+    @property
+    def max_query_window_ms(self) -> int:
+        """Max time window per API request in milliseconds. 0 means no limit."""
+        return 7 * 24 * 60 * 60 * 1000  # 7 days default
 
     @abstractmethod
     def _sign(self, params: Dict[str, Any]) -> Dict[str, Any]:
