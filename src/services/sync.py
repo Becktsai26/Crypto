@@ -26,12 +26,14 @@ class SyncService:
         self.journal_db_id = journal_db_id
         self.pnl_threshold = pnl_threshold
 
-    def run_sync(self, silent: bool = False):
+    def run_sync(self, silent: bool = False) -> Dict[str, Any]:
         """
         Runs the main synchronization logic with support for multi-window fetching.
-        :param silent: If True, suppresses external notifications (prepared for future use if SyncService triggers alerts independently)
+        :param silent: If True, suppresses external notifications
+        :returns: Dict with sync results: created_records (list), total_fetched (int)
         """
         log.info(f"Starting synchronization process... (Silent Mode: {silent})")
+        sync_result = {"created_records": [], "total_fetched": 0}
         
         # 1. Determine the time window
         last_sync_ms = self.notion.get_last_sync_timestamp()
@@ -77,6 +79,7 @@ class SyncService:
             current_start = current_end + 1
 
         log.info(f"Total transactions retrieved: {len(all_transactions)}")
+        sync_result["total_fetched"] = len(all_transactions)
 
         # 4. Process and Aggregation
         # Group by (symbol, side, tradeId_prefix) or just tradeId if available to merge split fills.
@@ -135,8 +138,9 @@ class SyncService:
         for key, agg in aggregated_data.items():
             final_pnl = agg["pnl"]
 
-            # Apply threshold filter on the AGGREGATED PnL
-            if abs(final_pnl) < self.pnl_threshold:
+            # Skip opening trades (PnL=0 means change=-fee, no realized PnL)
+            # and apply threshold filter on the AGGREGATED PnL
+            if final_pnl == 0 or abs(final_pnl) < self.pnl_threshold:
                 continue
 
             avg_price = agg["total_value"] / agg["size"] if agg["size"] > 0 else 0.0
@@ -169,7 +173,7 @@ class SyncService:
         
         if not notion_records:
             log.info("No records matching the filter were found.")
-            return
+            return sync_result
 
         log.info(f"Processed {len(notion_records)} records (PnL > {self.pnl_threshold}) to be written to Notion.")
 
@@ -186,4 +190,9 @@ class SyncService:
             except Exception as e:
                 log.error(f"Journal stub creation failed (non-fatal): {e}")
 
+        # Build result: only include records that were actually created (not duplicates)
+        created_txids = set(p["transaction_id"] for p in created_pages) if created_pages else set()
+        sync_result["created_records"] = [r for r in notion_records if r["id"] in created_txids]
+
         log.info("Synchronization process completed successfully.")
+        return sync_result

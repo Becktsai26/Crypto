@@ -396,11 +396,10 @@ class NotionClient:
 
         while has_more:
             try:
-                response = self._query_database(
-                    filter=date_filter,
-                    start_cursor=start_cursor,
-                    page_size=100,
-                )
+                query_params = {"filter": date_filter, "page_size": 100}
+                if start_cursor:
+                    query_params["start_cursor"] = start_cursor
+                response = self._query_database(**query_params)
                 all_results.extend(response["results"])
                 has_more = response["has_more"]
                 start_cursor = response.get("next_cursor")

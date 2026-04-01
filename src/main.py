@@ -1,6 +1,8 @@
 # src/main.py
 import sys
 import os
+import json
+import requests
 from datetime import datetime, timezone
 
 # Adjust the Python path to include the project root
@@ -42,6 +44,7 @@ def run_sync():
         return
 
     has_error = False
+    all_new_records = []  # collect newly created records across all exchanges
 
     for exchange_name, ex_config in configured_exchanges.items():
         log.info(f"=== Syncing {exchange_name.upper()} ===")
@@ -70,7 +73,11 @@ def run_sync():
                 journal_db_id=settings.get("notion_journal_db_id"),
                 pnl_threshold=settings.get("pnl_threshold", 0),
             )
-            sync_service.run_sync()
+            result = sync_service.run_sync()
+            if result and result.get("created_records"):
+                for r in result["created_records"]:
+                    r["_exchange"] = exchange_name
+                all_new_records.extend(result["created_records"])
             log.info(f"=== {exchange_name.upper()} sync complete ===")
 
         except (ApiException, NotionApiException) as e:
@@ -87,21 +94,26 @@ def run_sync():
             continue
 
     # After all exchanges sync, update monthly summary once (portfolio-level)
+    monthly_stats = None
     monthly_db_id = settings.get("notion_monthly_db_id")
     if monthly_db_id:
         try:
-            _update_monthly_summary(configured_exchanges, monthly_db_id)
+            monthly_stats = _update_monthly_summary(configured_exchanges, monthly_db_id)
         except Exception as e:
             log.error(f"Monthly summary update failed (non-fatal): {e}")
+
+    # Send Discord summary
+    _send_sync_discord_summary(all_new_records, monthly_stats)
 
     if has_error:
         sys.exit(1)
 
 
-def _update_monthly_summary(configured_exchanges: dict, monthly_db_id: str):
+def _update_monthly_summary(configured_exchanges: dict, monthly_db_id: str) -> dict:
     """
     Aggregates current month's trades across ALL exchange raw DBs
     and upserts a single portfolio-level row to the monthly summary DB.
+    Returns the stats dict for Discord notification.
     """
     now = datetime.now(timezone.utc)
     month_start = now.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
@@ -110,7 +122,8 @@ def _update_monthly_summary(configured_exchanges: dict, monthly_db_id: str):
     else:
         month_end = month_start.replace(month=now.month + 1)
 
-    month_key = now.strftime("%Y-%m")
+    # Match existing Notion format: "2026-04 April"
+    month_key = now.strftime("%Y-%m %B")
     log.info(f"=== Aggregating portfolio monthly summary for {month_key} ===")
 
     total_pnl = 0.0
@@ -169,6 +182,82 @@ def _update_monthly_summary(configured_exchanges: dict, monthly_db_id: str):
     )
     notion_client.upsert_monthly_summary(monthly_db_id, month_key, stats)
     log.info(f"=== Monthly summary for {month_key} updated ===")
+
+    stats["month_key"] = month_key
+    return stats
+
+
+def _send_sync_discord_summary(new_records: list, monthly_stats: dict = None):
+    """
+    Sends a Discord embed summarizing the sync results.
+    Always sends — shows 'no new trades' if nothing was synced.
+    """
+    webhook_url = settings.get("discord_webhook_url")
+    if not webhook_url:
+        return
+
+    now_str = datetime.now().strftime("%Y-%m-%d %H:%M")
+
+    # ── Build trade lines ──
+    if new_records:
+        total_pnl = sum(r["pnl"] for r in new_records)
+        wins = sum(1 for r in new_records if r["pnl"] > 0)
+        losses = sum(1 for r in new_records if r["pnl"] < 0)
+        color = 0x00FF00 if total_pnl >= 0 else 0xFF0000
+        emoji = "🟢" if total_pnl >= 0 else "🔴"
+
+        trade_lines = []
+        for r in new_records:
+            result_icon = "✅" if r["pnl"] > 0 else "❌"
+            ex = r.get("_exchange", "").upper()
+            trade_lines.append(
+                f"{result_icon} **{r['symbol']}** {r['side']}  `{r['pnl']:+.2f} U`  ({ex})"
+            )
+        trades_text = "\n".join(trade_lines)
+
+        fields = [
+            {"name": f"📝 新同步 {len(new_records)} 筆交易", "value": trades_text, "inline": False},
+            {"name": "💰 本次 PnL", "value": f"**{total_pnl:+.2f} U**", "inline": True},
+            {"name": "📊 勝負", "value": f"{wins}W / {losses}L", "inline": True},
+        ]
+    else:
+        color = 0x95A5A6
+        emoji = "✔️"
+        fields = [
+            {"name": "📝 同步結果", "value": "無新交易需同步", "inline": False},
+        ]
+
+    # ── Monthly summary ──
+    if monthly_stats:
+        mk = monthly_stats.get("month_key", "")
+        m_pnl = monthly_stats.get("total_pnl", 0)
+        m_wins = monthly_stats.get("wins", 0)
+        m_losses = monthly_stats.get("losses", 0)
+        m_total = m_wins + m_losses
+        m_wr = f"{(m_wins / m_total * 100):.0f}%" if m_total > 0 else "N/A"
+        m_icon = "📈" if m_pnl >= 0 else "📉"
+
+        fields.append({"name": "─────────────────────", "value": f"**{m_icon} {mk} 月度累計**", "inline": False})
+        fields.append({"name": "月 PnL", "value": f"**{m_pnl:+.2f} U**", "inline": True})
+        fields.append({"name": "月勝率", "value": f"{m_wr} ({m_wins}W / {m_losses}L)", "inline": True})
+
+    embed = {
+        "title": f"{emoji} Notion Sync 完成",
+        "description": f"同步時間：{now_str}",
+        "color": color,
+        "fields": fields,
+        "footer": {"text": "Bybit-Notion Sync Bot"},
+    }
+
+    try:
+        requests.post(
+            webhook_url,
+            data=json.dumps({"embeds": [embed]}),
+            headers={"Content-Type": "application/json"},
+        )
+        log.info("Discord sync summary sent.")
+    except Exception as e:
+        log.error(f"Failed to send Discord summary: {e}")
 
 
 def run_reporter(output_format: str):
