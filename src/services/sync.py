@@ -1,7 +1,7 @@
 # src/services/sync.py
 import time
 from datetime import datetime, timedelta, timezone
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Optional
 
 from ..adapters.base import BaseExchangeAdapter
 from ..clients.notion import NotionClient
@@ -12,9 +12,19 @@ class SyncService:
     Orchestrates the synchronization process between an exchange and Notion.
     """
 
-    def __init__(self, exchange_adapter: BaseExchangeAdapter, notion_client: NotionClient):
+    def __init__(
+        self,
+        exchange_adapter: BaseExchangeAdapter,
+        notion_client: NotionClient,
+        exchange_name: str = "bybit",
+        journal_db_id: Optional[str] = None,
+        pnl_threshold: float = 0,
+    ):
         self.exchange = exchange_adapter
         self.notion = notion_client
+        self.exchange_name = exchange_name
+        self.journal_db_id = journal_db_id
+        self.pnl_threshold = pnl_threshold
 
     def run_sync(self, silent: bool = False):
         """
@@ -121,17 +131,24 @@ class SyncService:
             agg["count"] += 1
 
         notion_records = []
-        pnl_threshold = 0.5 
 
         for key, agg in aggregated_data.items():
             final_pnl = agg["pnl"]
-            
+
             # Apply threshold filter on the AGGREGATED PnL
-            if abs(final_pnl) < pnl_threshold:
+            if abs(final_pnl) < self.pnl_threshold:
                 continue
-                
+
             avg_price = agg["total_value"] / agg["size"] if agg["size"] > 0 else 0.0
-            
+
+            # Determine Result
+            if final_pnl > 0:
+                result = "Win"
+            elif final_pnl < 0:
+                result = "Loss"
+            else:
+                result = "BE"
+
             record = {
                 "symbol": agg["symbol"],
                 "side": agg["side"],
@@ -141,7 +158,9 @@ class SyncService:
                 "pnl": final_pnl,
                 "timestamp": agg["timestamp"],
                 "subaccount": "Main Account",
-                "id": agg["id"] 
+                "id": agg["id"],
+                "exchange": self.exchange_name,
+                "result": result,
             }
             notion_records.append(record)
 
@@ -152,8 +171,19 @@ class SyncService:
             log.info("No records matching the filter were found.")
             return
 
-        log.info(f"Processed {len(notion_records)} records (PnL > {pnl_threshold}) to be written to Notion.")
-        
-        # 5. Write to Notion
-        self.notion.create_records(notion_records)
+        log.info(f"Processed {len(notion_records)} records (PnL > {self.pnl_threshold}) to be written to Notion.")
+
+        # 5. Write to Main_Account
+        created_pages = self.notion.create_records(notion_records)
+        log.info("Main_Account synchronization completed.")
+
+        # 6. Create Trade_Journal stubs (non-fatal)
+        if self.journal_db_id and created_pages:
+            try:
+                log.info(f"Creating {len(created_pages)} journal stubs...")
+                self.notion.create_journal_stubs(self.journal_db_id, created_pages)
+                log.info("Journal stubs created.")
+            except Exception as e:
+                log.error(f"Journal stub creation failed (non-fatal): {e}")
+
         log.info("Synchronization process completed successfully.")

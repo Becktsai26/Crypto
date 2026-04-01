@@ -25,6 +25,10 @@ def load_config():
         "discord_webhook_url": os.getenv("DISCORD_WEBHOOK_URL"),
         "discord_pnl_webhook_url": os.getenv("DISCORD_PNL_WEBHOOK_URL"),
         "discord_bot_token": os.getenv("DISCORD_BOT_TOKEN"),
+        # Phase 1: Trade Dashboard
+        "notion_journal_db_id": os.getenv("NOTION_JOURNAL_DB_ID"),
+        "notion_monthly_db_id": os.getenv("NOTION_MONTHLY_DB_ID"),
+        "pnl_threshold": float(os.getenv("PNL_THRESHOLD", "0")),
         "exchanges": {},
     }
 
