@@ -16,6 +16,91 @@ from src.services.reporter import ReporterService
 from src.utils.exceptions import ApiException, NotionApiException
 from src.utils.logger import log
 from src.utils.alerter import send_discord_alert
+from src.utils.goal_progress import (
+    build_monthly_goal_progress,
+    format_currency,
+    format_signed_currency,
+    get_newly_crossed_milestones,
+    load_goal_milestone_state,
+    save_goal_milestone_state,
+)
+
+
+MILESTONE_EMBEDS = {
+    25: {"title_prefix": "🏁", "description": "起步完成，繼續累積。", "color": 0x3498DB},
+    50: {"title_prefix": "🏁", "description": "正式進入下半場，維持節奏。", "color": 0x2ECC71},
+    75: {"title_prefix": "🏁", "description": "最後一段，先穩再推。", "color": 0xF1C40F},
+    100: {"title_prefix": "👑", "description": "本月任務完成，接下來守成果。", "color": 0x9B59B6},
+}
+
+
+def _post_discord_embeds(webhook_url: str, embeds: list) -> bool:
+    response = requests.post(
+        webhook_url,
+        data=json.dumps({"embeds": embeds}),
+        headers={"Content-Type": "application/json"},
+    )
+    if response.status_code not in [200, 201, 204]:
+        log.error(f"Failed to send Discord payload: {response.status_code} {response.text}")
+        return False
+    return True
+
+
+def _build_goal_progress_from_monthly_stats(monthly_stats: dict, now: datetime = None):
+    target_pnl = settings.get("monthly_pnl_target", 0)
+    current_pnl = (monthly_stats or {}).get("total_pnl")
+    if target_pnl <= 0 or current_pnl is None:
+        return None
+
+    progress_time = now or datetime.now()
+    return build_monthly_goal_progress(current_pnl, target_pnl, progress_time)
+
+
+def _send_goal_milestones(webhook_url: str, goal_progress: dict, now: datetime) -> None:
+    month_key = now.strftime("%Y-%m")
+    milestone_state = load_goal_milestone_state()
+    newly_crossed = get_newly_crossed_milestones(goal_progress, month_key, milestone_state)
+    if not newly_crossed:
+        return
+    sent_any = False
+
+    for milestone in newly_crossed:
+        milestone_spec = MILESTONE_EMBEDS.get(milestone)
+        if not milestone_spec:
+            continue
+
+        title = (
+            f"{milestone_spec['title_prefix']} {goal_progress['month_label']}目標達成"
+            if milestone == 100
+            else f"{milestone_spec['title_prefix']} {goal_progress['month_label']}目標已達 {milestone}%"
+        )
+        embed = {
+            "title": title,
+            "description": milestone_spec["description"],
+            "color": milestone_spec["color"],
+            "fields": [
+                {
+                    "name": "目前",
+                    "value": f"{format_signed_currency(goal_progress['current'])} / {format_currency(goal_progress['target'])}",
+                    "inline": False,
+                },
+                {
+                    "name": "進度",
+                    "value": f"{goal_progress['display_pct']:.1f}%",
+                    "inline": False,
+                },
+            ],
+            "footer": {"text": "Bybit-Notion Sync Bot"},
+        }
+
+        if _post_discord_embeds(webhook_url, [embed]):
+            month_state = set(milestone_state.get(month_key, []))
+            month_state.add(milestone)
+            milestone_state[month_key] = sorted(month_state)
+            sent_any = True
+
+    if sent_any:
+        save_goal_milestone_state(milestone_state)
 
 def main():
     """
@@ -123,7 +208,7 @@ def run_sync():
             log.error(f"Monthly summary update failed (non-fatal): {e}")
 
     # Send Discord summary
-    _send_sync_discord_summary(all_new_records, monthly_stats)
+    _send_sync_discord_summary_v2(all_new_records, monthly_stats)
 
     if has_error:
         sys.exit(1)
@@ -300,6 +385,99 @@ def _send_sync_discord_summary(new_records: list, monthly_stats: dict = None):
             headers={"Content-Type": "application/json"},
         )
         log.info("Discord sync summary sent.")
+    except Exception as e:
+        log.error(f"Failed to send Discord summary: {e}")
+
+
+def _send_sync_discord_summary_v2(new_records: list, monthly_stats: dict = None):
+    """
+    Sends a Discord embed summarizing the sync results.
+    Always sends a summary, even when there are no new trades.
+    """
+    webhook_url = settings.get("discord_webhook_url")
+    if not webhook_url:
+        return
+
+    now = datetime.now()
+    now_str = now.strftime("%Y-%m-%d %H:%M")
+
+    if new_records:
+        total_pnl = sum(r["pnl"] for r in new_records)
+        wins = sum(1 for r in new_records if r["pnl"] > 0)
+        losses = sum(1 for r in new_records if r["pnl"] < 0)
+        color = 0x00FF00 if total_pnl >= 0 else 0xFF0000
+        emoji = "📈" if total_pnl >= 0 else "📉"
+
+        trade_lines = []
+        for record in new_records:
+            result_icon = "🟢" if record["pnl"] > 0 else ("🔴" if record["pnl"] < 0 else "⚪")
+            exchange_name = record.get("_exchange", "").upper()
+            trade_lines.append(
+                f"{result_icon} **{record['symbol']}** {record['side']}  `{record['pnl']:+.2f} U`  ({exchange_name})"
+            )
+
+        fields = [
+            {"name": f"🧾 本次新增 {len(new_records)} 筆交易", "value": "\n".join(trade_lines), "inline": False},
+            {"name": "💰 本次 PnL", "value": f"**{total_pnl:+.2f} U**", "inline": True},
+            {"name": "🏁 勝負", "value": f"{wins}W / {losses}L", "inline": True},
+        ]
+    else:
+        color = 0x95A5A6
+        emoji = "🧭"
+        fields = [
+            {"name": "🧾 本次同步", "value": "本次沒有新交易。", "inline": False},
+        ]
+
+    if monthly_stats:
+        month_key = monthly_stats.get("month_key", "")
+        monthly_pnl = monthly_stats.get("total_pnl", 0)
+        monthly_wins = monthly_stats.get("wins", 0)
+        monthly_losses = monthly_stats.get("losses", 0)
+        total_trades = monthly_wins + monthly_losses
+        monthly_win_rate = f"{(monthly_wins / total_trades * 100):.0f}%" if total_trades > 0 else "N/A"
+        month_icon = "📈" if monthly_pnl >= 0 else "📉"
+
+        fields.append({"name": "----------------", "value": f"**{month_icon} {month_key} 月度摘要**", "inline": False})
+        fields.append({"name": "📊 月 PnL", "value": f"**{monthly_pnl:+.2f} U**", "inline": True})
+        fields.append({"name": "🏆 月勝率", "value": f"{monthly_win_rate} ({monthly_wins}W / {monthly_losses}L)", "inline": True})
+
+        balance = monthly_stats.get("actual_end_balance")
+        if balance is not None:
+            fields.append({"name": "💼 帳戶餘額", "value": f"**{balance:,.2f} U**", "inline": True})
+
+    goal_progress = _build_goal_progress_from_monthly_stats(monthly_stats, now=now)
+    if goal_progress:
+        fields.append({
+            "name": "🎯 本月目標",
+            "value": "\n".join([
+                (
+                    f"{format_signed_currency(goal_progress['current'])} / "
+                    f"{format_currency(goal_progress['target'])} "
+                    f"({goal_progress['display_pct']:.1f}%)"
+                ),
+                (
+                    f"已超標 {format_signed_currency(goal_progress['surplus'])}"
+                    if goal_progress["achieved"]
+                    else f"還差 {format_currency(goal_progress['remaining'])}"
+                ),
+            ]),
+            "inline": False,
+        })
+
+    embed = {
+        "title": f"{emoji} Notion Sync 摘要",
+        "description": f"同步時間：{now_str}",
+        "color": color,
+        "fields": fields,
+        "footer": {"text": "Bybit-Notion Sync Bot"},
+    }
+
+    try:
+        if not _post_discord_embeds(webhook_url, [embed]):
+            return
+        log.info("Discord sync summary sent.")
+        if goal_progress:
+            _send_goal_milestones(webhook_url, goal_progress, now)
     except Exception as e:
         log.error(f"Failed to send Discord summary: {e}")
 

@@ -4,6 +4,16 @@ from dotenv import load_dotenv
 # We can't use the logger here easily because it might not be configured yet
 # and can cause circular dependencies. For config errors, printing to stderr is standard.
 
+
+def _load_optional_float(name: str, default: float = 0.0) -> float:
+    raw_value = os.getenv(name)
+    if raw_value is None or raw_value.strip() == "":
+        return default
+    try:
+        return float(raw_value)
+    except ValueError as exc:
+        raise ValueError(f"Invalid value for {name}: {raw_value}") from exc
+
 def load_config():
     """
     Loads configuration from environment variables or a .env file.
@@ -29,6 +39,7 @@ def load_config():
         "notion_journal_db_id": os.getenv("NOTION_JOURNAL_DB_ID"),
         "notion_monthly_db_id": os.getenv("NOTION_MONTHLY_DB_ID"),
         "pnl_threshold": float(os.getenv("PNL_THRESHOLD", "0")),
+        "monthly_pnl_target": _load_optional_float("MONTHLY_PNL_TARGET", 0.0),
         "exchanges": {},
     }
 

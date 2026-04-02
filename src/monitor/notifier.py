@@ -1,13 +1,49 @@
 import requests
 import json
 from datetime import datetime
+from ..clients.notion import NotionClient
 from ..config import settings
+from ..utils.goal_progress import (
+    build_monthly_goal_progress,
+    format_currency,
+    format_signed_currency,
+)
 from ..utils.logger import log
 
 class DiscordNotifier:
     def __init__(self):
         self.webhook_url = settings["discord_webhook_url"]
         self.pnl_webhook_url = settings.get("discord_pnl_webhook_url") or self.webhook_url
+
+    def _get_goal_progress_for_dashboard(self):
+        monthly_db_id = settings.get("notion_monthly_db_id")
+        target_pnl = settings.get("monthly_pnl_target", 0)
+        notion_token = settings.get("notion_token")
+
+        if not monthly_db_id or target_pnl <= 0 or not notion_token:
+            return None
+
+        database_id = settings.get("notion_db_id")
+        if not database_id:
+            first_exchange = next(iter(settings.get("exchanges", {}).values()), None)
+            if first_exchange:
+                database_id = first_exchange.get("notion_db_id")
+
+        if not database_id:
+            return None
+
+        now = datetime.now()
+        month_key = now.strftime("%Y-%m %B")
+
+        try:
+            notion_client = NotionClient(token=notion_token, database_id=database_id)
+            current_pnl = notion_client.get_monthly_total_pnl(monthly_db_id, month_key)
+            if current_pnl is None:
+                return None
+            return build_monthly_goal_progress(current_pnl, target_pnl, now)
+        except Exception as e:
+            log.warning(f"Failed to build monthly goal progress for PnL dashboard: {e}")
+            return None
 
     def _send(self, payload, webhook_url=None):
         """
@@ -297,6 +333,23 @@ class DiscordNotifier:
             {"name": "📉 當前未實現 (Unrealized)", "value": f"**{total_unrealized:+.2f} U**", "inline": True},
             {"name": "🏆 今日總結 (Total Change)", "value": f"**{total_equity_change:+.2f} U**", "inline": True},
         ]
+
+        goal_progress = self._get_goal_progress_for_dashboard()
+        if goal_progress:
+            fields.append({"name": "----------------", "value": "----------------", "inline": False})
+            fields.append({
+                "name": f"🎯 {goal_progress['month_label']}目標 PnL",
+                "value": "\n".join([
+                    f"{format_signed_currency(goal_progress['current'])} / {format_currency(goal_progress['target'])}",
+                    f"{goal_progress['bar']} {goal_progress['display_pct']:.1f}%",
+                    (
+                        f"已超標 {format_signed_currency(goal_progress['surplus'])} 👑"
+                        if goal_progress["achieved"]
+                        else f"還差 {format_currency(goal_progress['remaining'])} 💪"
+                    ),
+                ]),
+                "inline": False
+            })
 
         if multi_day_stats and "daily_groups" in multi_day_stats:
             stats_lines = []

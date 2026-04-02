@@ -21,3 +21,6 @@ pip-delete-this-directory.txt
 .idea/
 monitor.log
 *.log
+
+# Local runtime state
+runtime/discord_goal_state.json

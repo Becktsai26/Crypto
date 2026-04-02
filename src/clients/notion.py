@@ -321,6 +321,24 @@ class NotionClient:
 
     # ── Phase 1: Trade Journal ──────────────────────────────────────
 
+    def get_monthly_total_pnl(self, monthly_db_id: str, month_key: str) -> Optional[float]:
+        """Queries a specific month's Total PnL from the monthly summary DB."""
+        try:
+            response = self._query_database_by_id(
+                monthly_db_id,
+                filter={"property": "Month", "title": {"equals": month_key}},
+                page_size=1,
+            )
+            time.sleep(NOTION_REQUEST_DELAY)
+        except Exception as e:
+            log.warning(f"Failed to query monthly total PnL for {month_key}: {e}")
+            return None
+
+        results = response.get("results", [])
+        if not results:
+            return None
+        return results[0]["properties"].get("Total PnL", {}).get("number")
+
     def create_journal_stubs(self, journal_db_id: str, created_pages: List[Dict[str, str]]) -> None:
         """
         Creates stub rows in Trade_Journal for newly created Main_Account pages.
