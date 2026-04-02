@@ -194,5 +194,16 @@ class SyncService:
         created_txids = set(p["transaction_id"] for p in created_pages) if created_pages else set()
         sync_result["created_records"] = [r for r in notion_records if r["id"] in created_txids]
 
+        # Find the page_id of the latest created trade (for Account Balance update)
+        if created_pages and sync_result["created_records"]:
+            latest_record = max(
+                sync_result["created_records"],
+                key=lambda r: r["timestamp"],
+            )
+            for p in created_pages:
+                if p["transaction_id"] == latest_record["id"]:
+                    sync_result["last_page_id"] = p["page_id"]
+                    break
+
         log.info("Synchronization process completed successfully.")
         return sync_result

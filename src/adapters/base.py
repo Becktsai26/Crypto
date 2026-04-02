@@ -101,3 +101,10 @@ class BaseExchangeAdapter(ABC):
             A list of subaccount details. Returns an empty list if not applicable.
         """
         pass
+
+    def get_wallet_balance(self, **kwargs) -> Optional[Dict[str, Any]]:
+        """
+        Fetches wallet balance. Override in subclasses that support it.
+        Returns None if not supported by this exchange.
+        """
+        return None

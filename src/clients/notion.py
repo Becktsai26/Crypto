@@ -280,10 +280,44 @@ class NotionClient:
             properties["Exchange"] = {"select": {"name": record["exchange"]}}
         if record.get("result"):
             properties["Result"] = {"select": {"name": record["result"]}}
+        if record.get("account_balance") is not None:
+            properties["Account Balance"] = {"number": record["account_balance"]}
 
         # Notion API does not accept None for number fields.
         # We filter out any properties where the number value is None.
         return {k: v for k, v in properties.items() if not (isinstance(v.get('number'), float) and v.get('number') is None)}
+
+    # ── Phase 1.5: Account Balance ────────────────────────────────
+
+    def update_page_balance(self, page_id: str, balance: float) -> None:
+        """Updates a single page's Account Balance field."""
+        try:
+            self.client.pages.update(
+                page_id=page_id,
+                properties={"Account Balance": {"number": balance}},
+            )
+            log.info(f"Updated Account Balance={balance} on page {page_id[:8]}...")
+            time.sleep(NOTION_REQUEST_DELAY)
+        except APIResponseError as e:
+            raise NotionApiException(f"Failed to update Account Balance: {e}")
+
+    def get_monthly_actual_end_balance(self, monthly_db_id: str, month_key: str) -> Optional[float]:
+        """Queries a specific month's Actual End Balance from the monthly summary DB."""
+        try:
+            response = self._query_database_by_id(
+                monthly_db_id,
+                filter={"property": "Month", "title": {"equals": month_key}},
+                page_size=1,
+            )
+            time.sleep(NOTION_REQUEST_DELAY)
+        except Exception as e:
+            log.warning(f"Failed to query previous month balance for {month_key}: {e}")
+            return None
+
+        results = response.get("results", [])
+        if not results:
+            return None
+        return results[0]["properties"].get("Actual End Balance", {}).get("number")
 
     # ── Phase 1: Trade Journal ──────────────────────────────────────
 
@@ -439,19 +473,28 @@ class NotionClient:
             "Max Single Loss": {"number": stats["max_single_loss"]},
         }
 
+        # Phase 1.5: Add balance fields if provided
+        if stats.get("actual_end_balance") is not None:
+            properties["Actual End Balance"] = {"number": stats["actual_end_balance"]}
+
         existing_pages = response.get("results", [])
 
         try:
             if existing_pages:
-                # Update existing row
                 page_id = existing_pages[0]["id"]
+                # Only write Start Balance if the existing row has it empty
+                existing_start = existing_pages[0]["properties"].get("Start Balance", {}).get("number")
+                if existing_start is None and stats.get("start_balance") is not None:
+                    properties["Start Balance"] = {"number": stats["start_balance"]}
                 self.client.pages.update(page_id=page_id, properties=properties)
                 log.info(f"Updated monthly summary for {month_key}.")
             else:
-                # Create new row
+                # Create new row — include Start Balance if available
                 properties["Month"] = {
                     "title": [{"type": "text", "text": {"content": month_key}}]
                 }
+                if stats.get("start_balance") is not None:
+                    properties["Start Balance"] = {"number": stats["start_balance"]}
                 self.client.pages.create(
                     parent={"database_id": monthly_db_id},
                     properties=properties,

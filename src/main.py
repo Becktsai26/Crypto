@@ -3,7 +3,7 @@ import sys
 import os
 import json
 import requests
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 
 # Adjust the Python path to include the project root
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
@@ -29,6 +29,8 @@ def main():
     # 2. Argument parsing
     if len(sys.argv) > 1 and (sys.argv[1] == '--report' or sys.argv[1] == '--report-excel'):
         run_reporter(output_format='excel' if sys.argv[1] == '--report-excel' else 'csv')
+    elif len(sys.argv) > 1 and sys.argv[1] == '--backfill-balance':
+        run_backfill_balance()
     else:
         run_sync()
 
@@ -78,6 +80,24 @@ def run_sync():
                 for r in result["created_records"]:
                     r["_exchange"] = exchange_name
                 all_new_records.extend(result["created_records"])
+
+            # Fetch wallet balance and update last trade's Account Balance
+            try:
+                balance_data = adapter.get_wallet_balance(account_type="UNIFIED", coin="USDT")
+                if balance_data:
+                    wallet_list = balance_data.get("result", {}).get("list", [])
+                    if wallet_list:
+                        equity = round(float(wallet_list[0].get("totalWalletBalance", 0)), 2)
+                        ex_config["_current_balance"] = equity
+                        log.info(f"[{exchange_name}] Wallet balance: {equity} USDT")
+
+                        # Update last created trade page with balance
+                        last_page_id = result.get("last_page_id") if result else None
+                        if last_page_id:
+                            notion_client.update_page_balance(last_page_id, equity)
+            except Exception as e:
+                log.error(f"[{exchange_name}] Failed to fetch/update wallet balance (non-fatal): {e}")
+
             log.info(f"=== {exchange_name.upper()} sync complete ===")
 
         except (ApiException, NotionApiException) as e:
@@ -172,6 +192,16 @@ def _update_monthly_summary(configured_exchanges: dict, monthly_db_id: str) -> d
         "max_single_loss": round(max_loss, 2),
     }
 
+    # Phase 1.5: Add Actual End Balance (sum of all exchange balances)
+    portfolio_balance = sum(
+        ex.get("_current_balance", 0)
+        for ex in configured_exchanges.values()
+        if ex.get("_current_balance")
+    )
+    if portfolio_balance > 0:
+        stats["actual_end_balance"] = portfolio_balance
+        log.info(f"Portfolio balance: {portfolio_balance} USDT")
+
     log.info(f"Portfolio {month_key}: PnL={stats['total_pnl']}, W={wins}, L={losses}")
 
     # Use any NotionClient to call upsert (only needs token, not a specific DB)
@@ -180,6 +210,15 @@ def _update_monthly_summary(configured_exchanges: dict, monthly_db_id: str) -> d
         token=settings["notion_token"],
         database_id=first_ex["notion_db_id"],
     )
+
+    # Phase 1.5: Auto-fill Start Balance from previous month's Actual End Balance
+    prev_month = month_start - timedelta(days=1)
+    prev_month_key = prev_month.strftime("%Y-%m %B")
+    prev_end_balance = notion_client.get_monthly_actual_end_balance(monthly_db_id, prev_month_key)
+    if prev_end_balance is not None:
+        stats["start_balance"] = prev_end_balance
+        log.info(f"Previous month ({prev_month_key}) Actual End Balance: {prev_end_balance}")
+
     notion_client.upsert_monthly_summary(monthly_db_id, month_key, stats)
     log.info(f"=== Monthly summary for {month_key} updated ===")
 
@@ -241,6 +280,11 @@ def _send_sync_discord_summary(new_records: list, monthly_stats: dict = None):
         fields.append({"name": "月 PnL", "value": f"**{m_pnl:+.2f} U**", "inline": True})
         fields.append({"name": "月勝率", "value": f"{m_wr} ({m_wins}W / {m_losses}L)", "inline": True})
 
+        # Show portfolio balance if available
+        balance = monthly_stats.get("actual_end_balance")
+        if balance:
+            fields.append({"name": "💰 帳戶餘額", "value": f"**{balance:,.2f} U**", "inline": True})
+
     embed = {
         "title": f"{emoji} Notion Sync 完成",
         "description": f"同步時間：{now_str}",
@@ -258,6 +302,83 @@ def _send_sync_discord_summary(new_records: list, monthly_stats: dict = None):
         log.info("Discord sync summary sent.")
     except Exception as e:
         log.error(f"Failed to send Discord summary: {e}")
+
+
+def run_backfill_balance():
+    """
+    Backfills Monthly Performance Tracker Start Balance by chaining
+    each month's Actual End Balance to the next month's Start Balance.
+    Run this after manually filling in Actual End Balance values.
+    """
+    log.info("-----------------------------------------")
+    log.info("--- Backfill Monthly Start Balance ---")
+    log.info("-----------------------------------------")
+
+    monthly_db_id = settings.get("notion_monthly_db_id")
+    if not monthly_db_id:
+        log.error("NOTION_MONTHLY_DB_ID not configured. Cannot backfill.")
+        return
+
+    first_ex = next(iter(settings.get("exchanges", {}).values()), None)
+    if not first_ex:
+        log.error("No exchange configured. Cannot backfill.")
+        return
+
+    notion_client = NotionClient(
+        token=settings["notion_token"],
+        database_id=first_ex["notion_db_id"],
+    )
+
+    # Define months to chain (Jan 2026 through current month)
+    now = datetime.now(timezone.utc)
+    months = []
+    current = datetime(2026, 1, 1, tzinfo=timezone.utc)
+    while current <= now:
+        months.append(current.strftime("%Y-%m %B"))
+        if current.month == 12:
+            current = current.replace(year=current.year + 1, month=1)
+        else:
+            current = current.replace(month=current.month + 1)
+
+    log.info(f"Chaining Start Balance for {len(months)} months...")
+
+    prev_end_balance = None
+    for month_key in months:
+        # Get this month's Actual End Balance
+        actual_end = notion_client.get_monthly_actual_end_balance(monthly_db_id, month_key)
+
+        if prev_end_balance is not None:
+            # Set this month's Start Balance = previous month's Actual End Balance
+            stats = {"start_balance": prev_end_balance}
+            # We need to do a targeted update — use upsert with minimal stats
+            try:
+                response = notion_client._query_database_by_id(
+                    monthly_db_id,
+                    filter={"property": "Month", "title": {"equals": month_key}},
+                    page_size=1,
+                )
+                results = response.get("results", [])
+                if results:
+                    existing_start = results[0]["properties"].get("Start Balance", {}).get("number")
+                    if existing_start is None:
+                        notion_client.client.pages.update(
+                            page_id=results[0]["id"],
+                            properties={"Start Balance": {"number": prev_end_balance}},
+                        )
+                        log.info(f"  {month_key}: Set Start Balance = {prev_end_balance}")
+                    else:
+                        log.info(f"  {month_key}: Start Balance already set ({existing_start}), skipping")
+            except Exception as e:
+                log.error(f"  {month_key}: Failed to update Start Balance: {e}")
+
+        if actual_end is not None:
+            log.info(f"  {month_key}: Actual End Balance = {actual_end}")
+            prev_end_balance = actual_end
+        else:
+            log.info(f"  {month_key}: No Actual End Balance found")
+            prev_end_balance = None
+
+    log.info("Backfill complete.")
 
 
 def run_reporter(output_format: str):
