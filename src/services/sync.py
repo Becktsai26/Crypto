@@ -136,19 +136,25 @@ class SyncService:
         notion_records = []
 
         for key, agg in aggregated_data.items():
-            final_pnl = agg["pnl"]
+            gross_pnl = agg["pnl"]  # change + fee (used for opening trade detection)
 
-            # Skip opening trades (PnL=0 means change=-fee, no realized PnL)
-            # and apply threshold filter on the AGGREGATED PnL
-            if final_pnl == 0 or abs(final_pnl) < self.pnl_threshold:
+            # Skip opening trades (gross PnL=0 means change=-fee, no realized PnL)
+            if gross_pnl == 0:
+                continue
+
+            # Net PnL = gross - fee = sum(change) = actual wallet impact
+            net_pnl = gross_pnl - agg["fee"]
+
+            # Apply threshold on net PnL
+            if abs(net_pnl) < self.pnl_threshold:
                 continue
 
             avg_price = agg["total_value"] / agg["size"] if agg["size"] > 0 else 0.0
 
-            # Determine Result
-            if final_pnl > 0:
+            # Determine Result based on net PnL
+            if net_pnl > 0:
                 result = "Win"
-            elif final_pnl < 0:
+            elif net_pnl < 0:
                 result = "Loss"
             else:
                 result = "BE"
@@ -159,7 +165,7 @@ class SyncService:
                 "size": agg["size"],
                 "price": avg_price,
                 "fee": agg["fee"],
-                "pnl": final_pnl,
+                "pnl": net_pnl,
                 "timestamp": agg["timestamp"],
                 "subaccount": "Main Account",
                 "id": agg["id"],

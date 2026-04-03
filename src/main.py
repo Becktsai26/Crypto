@@ -122,6 +122,24 @@ def run_sync():
         except Exception as e:
             log.error(f"Monthly summary update failed (non-fatal): {e}")
 
+    # Update Trade main page callout with portfolio balance
+    trade_page_id = settings.get("notion_trade_page_id")
+    portfolio_balance = sum(
+        ex.get("_current_balance", 0)
+        for ex in configured_exchanges.values()
+        if ex.get("_current_balance")
+    )
+    if trade_page_id and portfolio_balance > 0:
+        try:
+            first_ex = next(iter(configured_exchanges.values()))
+            callout_client = NotionClient(
+                token=settings["notion_token"],
+                database_id=first_ex["notion_db_id"],
+            )
+            callout_client.update_trade_page_callout(trade_page_id, portfolio_balance)
+        except Exception as e:
+            log.error(f"Failed to update Trade page callout (non-fatal): {e}")
+
     # Send Discord summary
     _send_sync_discord_summary(all_new_records, monthly_stats)
 
@@ -219,6 +237,12 @@ def _update_monthly_summary(configured_exchanges: dict, monthly_db_id: str) -> d
         stats["start_balance"] = prev_end_balance
         log.info(f"Previous month ({prev_month_key}) Actual End Balance: {prev_end_balance}")
 
+    # Query Target PnL for motivational Discord message
+    target_pnl = notion_client.get_monthly_target_pnl(monthly_db_id, month_key)
+    if target_pnl is not None:
+        stats["target_pnl"] = target_pnl
+        log.info(f"Target PnL for {month_key}: {target_pnl}")
+
     notion_client.upsert_monthly_summary(monthly_db_id, month_key, stats)
     log.info(f"=== Monthly summary for {month_key} updated ===")
 
@@ -284,6 +308,32 @@ def _send_sync_discord_summary(new_records: list, monthly_stats: dict = None):
         balance = monthly_stats.get("actual_end_balance")
         if balance:
             fields.append({"name": "💰 帳戶餘額", "value": f"**{balance:,.2f} U**", "inline": True})
+
+        # Motivational progress toward monthly target
+        target_pnl = monthly_stats.get("target_pnl")
+        if target_pnl is not None and target_pnl > 0:
+            remaining = target_pnl - m_pnl
+            progress_pct = (m_pnl / target_pnl * 100) if target_pnl > 0 else 0
+
+            if remaining <= 0:
+                # Target achieved!
+                excess = abs(remaining)
+                progress_msg = f"🏆 **已達成月目標！** 超額 **+{excess:,.2f} U**"
+            elif progress_pct >= 75:
+                progress_msg = f"🔥 進度 {progress_pct:.0f}%！只差 **{remaining:,.2f} U** 就達標！衝刺！"
+            elif progress_pct >= 50:
+                progress_msg = f"💪 進度 {progress_pct:.0f}%，還差 **{remaining:,.2f} U**，穩紮穩打！"
+            elif progress_pct >= 25:
+                progress_msg = f"📊 進度 {progress_pct:.0f}%，距離目標還有 **{remaining:,.2f} U**，保持節奏！"
+            else:
+                progress_msg = f"🚀 進度 {progress_pct:.0f}%，距離月目標 **{target_pnl:,.2f} U** 還差 **{remaining:,.2f} U**，加油！"
+
+            # Progress bar visualization
+            filled = int(progress_pct / 10)
+            bar = "█" * min(filled, 10) + "░" * max(10 - filled, 0)
+            progress_msg += f"\n`[{bar}]` {progress_pct:.1f}%"
+
+            fields.append({"name": "🎯 月目標進度", "value": progress_msg, "inline": False})
 
     embed = {
         "title": f"{emoji} Notion Sync 完成",

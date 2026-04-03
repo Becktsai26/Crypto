@@ -15,10 +15,17 @@ cp .env.example .env  # then fill in credentials
 
 # Run sync (all configured exchanges → Notion)
 python src/main.py
+# or use the batch file:
+run_all.bat
 
 # Generate PnL reports
 python src/main.py --report          # CSV
 python src/main.py --report-excel    # Excel
+
+# Start Discord slash command bot (persistent, keep running)
+python start_bot.py
+# or use the batch file:
+start_bot.bat
 
 # Start real-time WebSocket monitor (Bybit only)
 python start_monitor.py
@@ -60,7 +67,7 @@ SyncService (src/services/sync.py)
                        uses direct HTTP (not SDK) for Windows compatibility
 ```
 
-**Entry points**: `src/main.py` (sync/report CLI — all exchanges), `start_monitor.py` (WebSocket monitor — Bybit only)
+**Entry points**: `src/main.py` (sync/report CLI — all exchanges), `start_monitor.py` (WebSocket monitor — Bybit only), `start_bot.py` (Discord slash command bot — persistent)
 
 **Config**: `src/config.py` loads from `.env`. Per-exchange: `{PREFIX}_API_KEY`, `{PREFIX}_API_SECRET`, `{PREFIX}_NOTION_DB_ID`, `{PREFIX}_API_PASSPHRASE` (OKX/Bitget). Global: `NOTION_TOKEN`, `DISCORD_WEBHOOK_URL`. Backward compatible with legacy `BYBIT_API_KEY` + `NOTION_DB_ID`.
 
@@ -75,6 +82,7 @@ SyncService (src/services/sync.py)
 - **TP/SL debounce** — 5-second window suppresses transient glitches (A→B→A reverts); also 60-minute cooldown on redundant PnL updates
 - **Ghost signal prevention** — on WebSocket connect, active orders/positions are prefetched so reconnection doesn't generate false "new order" notifications
 - **Error isolation** — one exchange sync failure doesn't block others
+- **Discord Bot** uses `discord.Client` + `app_commands.CommandTree` (slash commands only, no prefix commands, no `message_content` intent). All synchronous service calls are wrapped in `asyncio.to_thread()` to avoid blocking the event loop. Commands: `/mgoal`, `/balance`, `/today`, `/positions`, `/week`, `/month`, `/lasttrade`, `/orders`, `/sync`
 
 ## Notion Database Schema
 

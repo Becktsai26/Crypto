@@ -444,6 +444,145 @@ class NotionClient:
         log.info(f"Queried {len(all_results)} trades for monthly summary.")
         return all_results
 
+    def update_trade_page_callout(self, page_id: str, balance: float) -> None:
+        """
+        Updates the 帳戶餘額 callout on the Trade main page with the current balance.
+        Traverses: page → column_list → first column → callout (💰 icon).
+        """
+        headers = {
+            "Authorization": f"Bearer {self.token}",
+            "Notion-Version": "2022-06-28",
+            "Content-Type": "application/json",
+        }
+
+        try:
+            # Step 1: Get page children → find column_list
+            resp = requests.get(
+                f"https://api.notion.com/v1/blocks/{page_id}/children?page_size=10",
+                headers=headers,
+            )
+            resp.raise_for_status()
+            blocks = resp.json().get("results", [])
+            time.sleep(NOTION_REQUEST_DELAY)
+
+            column_list = None
+            for block in blocks:
+                if block["type"] == "column_list":
+                    column_list = block
+                    break
+
+            if not column_list:
+                log.warning("Could not find column_list block on Trade page.")
+                return
+
+            # Step 2: Get column_list children → find first column
+            resp = requests.get(
+                f"https://api.notion.com/v1/blocks/{column_list['id']}/children?page_size=10",
+                headers=headers,
+            )
+            resp.raise_for_status()
+            columns = resp.json().get("results", [])
+            time.sleep(NOTION_REQUEST_DELAY)
+
+            if not columns:
+                log.warning("No columns found in column_list.")
+                return
+
+            first_column = columns[0]
+
+            # Step 3: Get first column children → find callout with 💰
+            resp = requests.get(
+                f"https://api.notion.com/v1/blocks/{first_column['id']}/children?page_size=10",
+                headers=headers,
+            )
+            resp.raise_for_status()
+            col_blocks = resp.json().get("results", [])
+            time.sleep(NOTION_REQUEST_DELAY)
+
+            callout_block = None
+            for block in col_blocks:
+                if block["type"] == "callout":
+                    icon = block.get("callout", {}).get("icon", {})
+                    if icon.get("type") == "emoji" and icon.get("emoji") == "\U0001f4b0":
+                        callout_block = block
+                        break
+
+            if not callout_block:
+                log.warning("Could not find 💰 callout block.")
+                return
+
+            # Step 4: Delete existing child blocks of the callout (old balance text)
+            resp = requests.get(
+                f"https://api.notion.com/v1/blocks/{callout_block['id']}/children?page_size=50",
+                headers=headers,
+            )
+            resp.raise_for_status()
+            child_blocks = resp.json().get("results", [])
+            time.sleep(NOTION_REQUEST_DELAY)
+
+            for child in child_blocks:
+                requests.delete(
+                    f"https://api.notion.com/v1/blocks/{child['id']}",
+                    headers=headers,
+                )
+                time.sleep(NOTION_REQUEST_DELAY)
+
+            # Step 5: Update the callout rich_text with both title and balance
+            balance_str = f"${balance:,.2f}"
+            new_rich_text = [
+                {
+                    "type": "text",
+                    "text": {"content": "帳戶餘額"},
+                    "annotations": {"bold": True, "italic": False, "strikethrough": False,
+                                    "underline": False, "code": False, "color": "default"},
+                },
+                {
+                    "type": "text",
+                    "text": {"content": "\n"},
+                },
+                {
+                    "type": "text",
+                    "text": {"content": balance_str},
+                    "annotations": {"bold": True, "italic": False, "strikethrough": False,
+                                    "underline": False, "code": False, "color": "default"},
+                },
+                {
+                    "type": "text",
+                    "text": {"content": " USDT"},
+                },
+            ]
+
+            resp = requests.patch(
+                f"https://api.notion.com/v1/blocks/{callout_block['id']}",
+                headers=headers,
+                json={"callout": {"rich_text": new_rich_text}},
+            )
+            resp.raise_for_status()
+            time.sleep(NOTION_REQUEST_DELAY)
+
+            log.info(f"Updated Trade page callout balance to {balance_str} USDT")
+
+        except Exception as e:
+            log.error(f"Failed to update Trade page callout: {e}")
+
+    def get_monthly_target_pnl(self, monthly_db_id: str, month_key: str) -> Optional[float]:
+        """Queries a specific month's Target PnL from the monthly summary DB."""
+        try:
+            response = self._query_database_by_id(
+                monthly_db_id,
+                filter={"property": "Month", "title": {"equals": month_key}},
+                page_size=1,
+            )
+            time.sleep(NOTION_REQUEST_DELAY)
+        except Exception as e:
+            log.warning(f"Failed to query Target PnL for {month_key}: {e}")
+            return None
+
+        results = response.get("results", [])
+        if not results:
+            return None
+        return results[0]["properties"].get("Target PnL", {}).get("number")
+
     def upsert_monthly_summary(self, monthly_db_id: str, month_key: str, stats: Dict[str, float]) -> None:
         """
         Upserts a row in the monthly summary DB (資產成長追蹤).
