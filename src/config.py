@@ -31,6 +31,8 @@ def load_config():
         "notion_monthly_db_id": os.getenv("NOTION_MONTHLY_DB_ID"),
         "pnl_threshold": float(os.getenv("PNL_THRESHOLD", "0")),
         "notion_trade_page_id": os.getenv("NOTION_TRADE_PAGE_ID"),
+        "phase_target": float(os.getenv("PHASE_TARGET", "15000")),
+        "kill_switch_threshold": float(os.getenv("KILL_SWITCH_THRESHOLD", "5000")),
         "exchanges": {},
     }
 

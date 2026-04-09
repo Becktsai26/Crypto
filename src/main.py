@@ -122,7 +122,7 @@ def run_sync():
         except Exception as e:
             log.error(f"Monthly summary update failed (non-fatal): {e}")
 
-    # Update Trade main page callout with portfolio balance
+    # Update Trade main page callouts (balance, phase progress, monthly goal, kill switch)
     trade_page_id = settings.get("notion_trade_page_id")
     portfolio_balance = sum(
         ex.get("_current_balance", 0)
@@ -136,9 +136,17 @@ def run_sync():
                 token=settings["notion_token"],
                 database_id=first_ex["notion_db_id"],
             )
-            callout_client.update_trade_page_callout(trade_page_id, portfolio_balance)
+            callout_client.update_trade_page_callouts(
+                trade_page_id,
+                balance=portfolio_balance,
+                start_balance=monthly_stats.get("start_balance") if monthly_stats else None,
+                total_pnl=monthly_stats.get("total_pnl") if monthly_stats else None,
+                target_pnl=monthly_stats.get("target_pnl") if monthly_stats else None,
+                phase_target=settings.get("phase_target", 15000),
+                kill_switch_threshold=settings.get("kill_switch_threshold", 5000),
+            )
         except Exception as e:
-            log.error(f"Failed to update Trade page callout (non-fatal): {e}")
+            log.error(f"Failed to update Trade page callouts (non-fatal): {e}")
 
     # Send Discord summary
     _send_sync_discord_summary(all_new_records, monthly_stats)

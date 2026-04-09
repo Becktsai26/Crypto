@@ -444,10 +444,16 @@ class NotionClient:
         log.info(f"Queried {len(all_results)} trades for monthly summary.")
         return all_results
 
-    def update_trade_page_callout(self, page_id: str, balance: float) -> None:
+    def update_trade_page_callouts(
+        self, page_id: str, balance: float,
+        start_balance: float = None, total_pnl: float = None,
+        target_pnl: float = None, phase_target: float = 15000,
+        kill_switch_threshold: float = 5000,
+    ) -> None:
         """
-        Updates the 帳戶餘額 callout on the Trade main page with the current balance.
-        Traverses: page → column_list → first column → callout (💰 icon).
+        Updates all dashboard callouts on the Trade main page.
+        Traverses: page → column_list → columns → callouts (💰 🎯 📈) by emoji.
+        Also updates 🚨 Kill Switch callout at page level.
         """
         headers = {
             "Authorization": f"Bearer {self.token}",
@@ -455,27 +461,58 @@ class NotionClient:
             "Content-Type": "application/json",
         }
 
-        try:
-            # Step 1: Get page children → find column_list
+        def _progress_bar(pct, length=15):
+            filled = int(max(0, min(pct, 100)) / 100 * length)
+            return "\u2593" * filled + "\u2591" * (length - filled)
+
+        def _patch_callout(block_id, rich_text):
+            """Delete child blocks then patch callout rich_text."""
             resp = requests.get(
-                f"https://api.notion.com/v1/blocks/{page_id}/children?page_size=10",
+                f"https://api.notion.com/v1/blocks/{block_id}/children?page_size=50",
                 headers=headers,
             )
             resp.raise_for_status()
-            blocks = resp.json().get("results", [])
+            for child in resp.json().get("results", []):
+                requests.delete(
+                    f"https://api.notion.com/v1/blocks/{child['id']}",
+                    headers=headers,
+                )
+                time.sleep(NOTION_REQUEST_DELAY)
+            time.sleep(NOTION_REQUEST_DELAY)
+
+            resp = requests.patch(
+                f"https://api.notion.com/v1/blocks/{block_id}",
+                headers=headers,
+                json={"callout": {"rich_text": rich_text}},
+            )
+            resp.raise_for_status()
+            time.sleep(NOTION_REQUEST_DELAY)
+
+        try:
+            # Step 1: Get page children → find column_list + 🚨 callout
+            resp = requests.get(
+                f"https://api.notion.com/v1/blocks/{page_id}/children?page_size=20",
+                headers=headers,
+            )
+            resp.raise_for_status()
+            page_blocks = resp.json().get("results", [])
             time.sleep(NOTION_REQUEST_DELAY)
 
             column_list = None
-            for block in blocks:
-                if block["type"] == "column_list":
+            kill_switch_block = None
+            for block in page_blocks:
+                if block["type"] == "column_list" and not column_list:
                     column_list = block
-                    break
+                elif block["type"] == "callout":
+                    icon = block.get("callout", {}).get("icon", {})
+                    if icon.get("type") == "emoji" and icon.get("emoji") == "\U0001f6a8":
+                        kill_switch_block = block
 
             if not column_list:
                 log.warning("Could not find column_list block on Trade page.")
                 return
 
-            # Step 2: Get column_list children → find first column
+            # Step 2: Get all columns
             resp = requests.get(
                 f"https://api.notion.com/v1/blocks/{column_list['id']}/children?page_size=10",
                 headers=headers,
@@ -484,86 +521,111 @@ class NotionClient:
             columns = resp.json().get("results", [])
             time.sleep(NOTION_REQUEST_DELAY)
 
-            if not columns:
-                log.warning("No columns found in column_list.")
-                return
-
-            first_column = columns[0]
-
-            # Step 3: Get first column children → find callout with 💰
-            resp = requests.get(
-                f"https://api.notion.com/v1/blocks/{first_column['id']}/children?page_size=10",
-                headers=headers,
-            )
-            resp.raise_for_status()
-            col_blocks = resp.json().get("results", [])
-            time.sleep(NOTION_REQUEST_DELAY)
-
-            callout_block = None
-            for block in col_blocks:
-                if block["type"] == "callout":
-                    icon = block.get("callout", {}).get("icon", {})
-                    if icon.get("type") == "emoji" and icon.get("emoji") == "\U0001f4b0":
-                        callout_block = block
-                        break
-
-            if not callout_block:
-                log.warning("Could not find 💰 callout block.")
-                return
-
-            # Step 4: Delete existing child blocks of the callout (old balance text)
-            resp = requests.get(
-                f"https://api.notion.com/v1/blocks/{callout_block['id']}/children?page_size=50",
-                headers=headers,
-            )
-            resp.raise_for_status()
-            child_blocks = resp.json().get("results", [])
-            time.sleep(NOTION_REQUEST_DELAY)
-
-            for child in child_blocks:
-                requests.delete(
-                    f"https://api.notion.com/v1/blocks/{child['id']}",
+            # Step 3: Find callouts in each column by emoji
+            callout_map = {}  # emoji → block
+            for col in columns:
+                resp = requests.get(
+                    f"https://api.notion.com/v1/blocks/{col['id']}/children?page_size=10",
                     headers=headers,
                 )
+                resp.raise_for_status()
+                for block in resp.json().get("results", []):
+                    if block["type"] == "callout":
+                        icon = block.get("callout", {}).get("icon", {})
+                        if icon.get("type") == "emoji":
+                            callout_map[icon["emoji"]] = block
                 time.sleep(NOTION_REQUEST_DELAY)
 
-            # Step 5: Update the callout rich_text with both title and balance
-            balance_str = f"${balance:,.2f}"
-            new_rich_text = [
-                {
-                    "type": "text",
-                    "text": {"content": "帳戶餘額"},
-                    "annotations": {"bold": True, "italic": False, "strikethrough": False,
-                                    "underline": False, "code": False, "color": "default"},
-                },
-                {
-                    "type": "text",
-                    "text": {"content": "\n"},
-                },
-                {
-                    "type": "text",
-                    "text": {"content": balance_str},
-                    "annotations": {"bold": True, "italic": False, "strikethrough": False,
-                                    "underline": False, "code": False, "color": "default"},
-                },
-                {
-                    "type": "text",
-                    "text": {"content": " USDT"},
-                },
-            ]
+            # ── 💰 帳戶餘額 ──
+            if "\U0001f4b0" in callout_map:
+                rich_text = [
+                    {"type": "text", "text": {"content": "帳戶餘額"},
+                     "annotations": {"bold": True}},
+                    {"type": "text", "text": {"content": "\n"}},
+                    {"type": "text", "text": {"content": f"${balance:,.0f}"},
+                     "annotations": {"bold": True}},
+                    {"type": "text", "text": {"content": " USDT"}},
+                ]
+                if start_balance is not None:
+                    diff = balance - start_balance
+                    arrow = "\u2191" if diff >= 0 else "\u2193"
+                    rich_text.append(
+                        {"type": "text", "text": {"content": f"\n\u8f03\u4e0a\u6708 {diff:+,.0f} {arrow}"}}
+                    )
+                _patch_callout(callout_map["\U0001f4b0"]["id"], rich_text)
+                log.info(f"Updated \U0001f4b0 callout: ${balance:,.0f} USDT")
 
-            resp = requests.patch(
-                f"https://api.notion.com/v1/blocks/{callout_block['id']}",
-                headers=headers,
-                json={"callout": {"rich_text": new_rich_text}},
-            )
-            resp.raise_for_status()
-            time.sleep(NOTION_REQUEST_DELAY)
+            # ── 🎯 Phase 1 ──
+            if "\U0001f3af" in callout_map:
+                phase_pct = (balance / phase_target * 100) if phase_target > 0 else 0
+                bar = _progress_bar(phase_pct)
+                rich_text = [
+                    {"type": "text", "text": {"content": "Phase 1"},
+                     "annotations": {"bold": True}},
+                    {"type": "text", "text": {"content": " \u00b7 Survival"}},
+                    {"type": "text", "text": {"content": f"\n${balance:,.0f} / ${phase_target:,.0f}"}},
+                    {"type": "text", "text": {"content": f"\n{bar} {phase_pct:.1f}%"}},
+                ]
+                _patch_callout(callout_map["\U0001f3af"]["id"], rich_text)
+                log.info(f"Updated \U0001f3af callout: {phase_pct:.1f}%")
 
-            log.info(f"Updated Trade page callout balance to {balance_str} USDT")
+            # ── 📈 月目標 PnL ──
+            if "\U0001f4c8" in callout_map and total_pnl is not None:
+                month_num = datetime.now(timezone.utc).month
+                month_label = f"{month_num}\u6708\u76ee\u6a19 PnL"
+                pnl_str = f"+${total_pnl:,.0f}" if total_pnl >= 0 else f"-${abs(total_pnl):,.0f}"
+
+                if target_pnl is not None and target_pnl > 0:
+                    progress_pct = (total_pnl / target_pnl * 100)
+                    bar = _progress_bar(progress_pct)
+                    remaining = target_pnl - total_pnl
+
+                    rich_text = [
+                        {"type": "text", "text": {"content": month_label},
+                         "annotations": {"bold": True}},
+                        {"type": "text", "text": {"content": f"\n{pnl_str} / ${target_pnl:,.0f} \u76ee\u6a19"}},
+                        {"type": "text", "text": {"content": f"\n{bar} {progress_pct:.1f}%"}},
+                    ]
+                    if remaining > 0:
+                        rich_text.append(
+                            {"type": "text", "text": {"content": f"\n\u9084\u5dee ${remaining:,.0f} \U0001f4aa"}}
+                        )
+                    else:
+                        rich_text.append(
+                            {"type": "text", "text": {"content": f"\n\U0001f389 \u9054\u6a19\uff01\u8d85\u51fa ${abs(remaining):,.0f}"}}
+                        )
+                else:
+                    rich_text = [
+                        {"type": "text", "text": {"content": month_label},
+                         "annotations": {"bold": True}},
+                        {"type": "text", "text": {"content": f"\n{pnl_str}"}},
+                    ]
+                _patch_callout(callout_map["\U0001f4c8"]["id"], rich_text)
+                log.info(f"Updated \U0001f4c8 callout: PnL {pnl_str}")
+
+            # ── 🚨 Kill Switch ──
+            if kill_switch_block:
+                safety_margin = balance - kill_switch_threshold
+                rich_text = [
+                    {"type": "text", "text": {"content": "Kill Switch"},
+                     "annotations": {"bold": True}},
+                    {"type": "text", "text": {"content": f" ${kill_switch_threshold:,.0f} \u2192 \u66ab\u505c 2 \u9031 \u00b7 "}},
+                    {"type": "text", "text": {"content": "\u55ae\u65e5\u4e0a\u9650"},
+                     "annotations": {"bold": True}},
+                    {"type": "text", "text": {"content": " -$750 \u00b7 "}},
+                    {"type": "text", "text": {"content": "\u55ae\u9031\u4e0a\u9650"},
+                     "annotations": {"bold": True}},
+                    {"type": "text", "text": {"content": " -$1,250 \u00b7 "}},
+                    {"type": "text", "text": {"content": "\u6bcf\u7b46\u98a8\u96aa"},
+                     "annotations": {"bold": True}},
+                    {"type": "text", "text": {"content": " $250-$500"}},
+                    {"type": "text", "text": {"content": f"\n\U0001f4cd \u8ddd Kill Switch \u9084\u6709 ${safety_margin:,.0f} \u5b89\u5168\u7a7a\u9593"}},
+                ]
+                _patch_callout(kill_switch_block["id"], rich_text)
+                log.info(f"Updated \U0001f6a8 callout: safety margin ${safety_margin:,.0f}")
 
         except Exception as e:
-            log.error(f"Failed to update Trade page callout: {e}")
+            log.error(f"Failed to update Trade page callouts: {e}")
 
     def get_monthly_target_pnl(self, monthly_db_id: str, month_key: str) -> Optional[float]:
         """Queries a specific month's Target PnL from the monthly summary DB."""
